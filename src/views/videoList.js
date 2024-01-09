@@ -150,7 +150,7 @@ class VideoList extends Component {
       this.props.checkRenewPrompt(user.user_id);
 
       this.props.getAllExerciseActivity(user.user_id);
-      this.props.createBraveAndBurnChallenge(user.user_id);
+      //this.props.createBraveAndBurnChallenge(user.user_id);
     }
     if (this.props.user && this.props.user.other_attributes) {
       this.props.videoListForUser(
@@ -268,26 +268,26 @@ class VideoList extends Component {
 
     if (prevProps.statusGetCheckRenewPrompt !== statusGetCheckRenewPrompt && statusGetCheckRenewPrompt === "success") {
       if (!statusCheckRenewPrompt && (user && user.other_attributes)) { //ย้าย videoListForUserLastWeek จาก componentDidMount มาไว้ตรงนี้เพราะไปสร้าง week ย้อนหลังทุกครั้ง ทำให้ checkRenewPrompt ผิดพลาด
-        this.props.videoListForUserLastWeek(
+        /* this.props.videoListForUserLastWeek(
           this.props.user.user_id,
           // this.props.user.other_attributes = "{"age": 32, "hip": 41, "sex": "female", "chest": 38, "waist": 31, "height": 175, "weight": 79}"
           (this.isJson(user.other_attributes) ? user.other_attributes.weight : JSON.parse(user.other_attributes).weight),
           this.props.user.start_date,
           this.props.user.expire_date,
           this.props.user.offset
-        );
+        ); */
       }
     }
     if (prevProps.statusUpdateProgramPromptLog !== statusUpdateProgramPromptLog && statusUpdateProgramPromptLog === "success") {
       this.setState({ step4WeeksPrompt: 4 })
-      this.props.videoListForUserLastWeek(
+      /* this.props.videoListForUserLastWeek(
         this.props.user.user_id,
         // this.props.user.other_attributes = "{"age": 32, "hip": 41, "sex": "female", "chest": 38, "waist": 31, "height": 175, "weight": 79}"
         (this.isJson(user.other_attributes) ? user.other_attributes.weight : JSON.parse(user.other_attributes).weight),
         this.props.user.start_date,
         this.props.user.expire_date,
         this.props.user.offset
-      );
+      ); */
     }
     if (prevProps.statusPostDailyWeighChallenge !== statusPostDailyWeighChallenge && statusPostDailyWeighChallenge === "success") {
       this.props.history.push('/challenges');
@@ -303,13 +303,13 @@ class VideoList extends Component {
         this.props.user.expire_date,
         this.props.user.offset
       );
-      this.props.videoListForUserLastWeek(
+      /* this.props.videoListForUserLastWeek(
         this.props.user.user_id,
         user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
         this.props.user.start_date,
         this.props.user.expire_date,
         this.props.user.offset
-      );
+      ); */
       if (this.props.user.other_attributes && this.props.statusVideoList !== "no_video") {
         this.addEventToVideo();
       }
@@ -381,13 +381,13 @@ class VideoList extends Component {
         this.props.user.expire_date,
         this.props.user.offset
       );
-      this.props.videoListForUserLastWeek(
+     /*  this.props.videoListForUserLastWeek(
         this.props.user.user_id,
         user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
         this.props.user.start_date,
         this.props.user.expire_date,
         this.props.user.offset
-      );
+      ); */
       this.addEventToVideo();
     }
 
