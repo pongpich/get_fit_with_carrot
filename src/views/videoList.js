@@ -2783,9 +2783,9 @@ class VideoList extends Component {
         <div className="main main-raised" style={{ backgroundColor: ((user && user.other_attributes) && (statusVideoList !== "no_video")) ? "white" : "#F0EEF3" }}>
           <div className="container">
             <div className="">
-              <Modal show={this.state.show} handleClose={this.hideModal} handleForm={this.showModalForm} />
+              {/* <Modal show={this.state.show} handleClose={this.hideModal} handleForm={this.showModalForm} />
               <Modal_Form modal_show={this.state.modal_show} handleClose={this.hideModalForm} handleSuccess={this.showSuccessModal} />
-              <Success_Modal success_modal_show={this.state.success_modal_show} handleClose={this.hideSuccessModal} />
+              <Success_Modal success_modal_show={this.state.success_modal_show} handleClose={this.hideSuccessModal} /> */}
 
               {
                 ((this.props.user && this.props.user.other_attributes) && (this.props.statusVideoList !== "no_video")) ?
