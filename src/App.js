@@ -19,6 +19,7 @@ import Login from "./views/login";
 import Register from "./views/register";
 import ForgotPassword from "./views/forgotPassword";
 import VideoList from "./views/videoList";
+import VideoList2 from "./views/videoList2";
 import Platform from "./views/platform";
 import Package from "./views/package";
 import ImportMembers from "./views/importMembers";
@@ -27,6 +28,7 @@ import Dashboard from "./views/dashboard";
 import TestGPS from "./views/test_gps";
 import TestGPS_GG from "./views/test_gps_gg";
 import TestGPS_Permission from "./views/test_gps_permission";
+import BonusChallenge from "./views/bonus_challenge";
 
 import { awsConfig } from "./constants/defaultValues";
 
@@ -73,7 +75,7 @@ class App extends Component {
         week = calculateWeekInProgram(user.start_date);
       }
       if (!statusCheckQuestionnaireLog && ((week >= 6) && (week <= 8))) {
-        this.toggle('popupQuestionnaire');
+        //this.toggle('popupQuestionnaire');
       }
     }
 
@@ -106,6 +108,7 @@ class App extends Component {
     }
     return (
       <nav className="navbar navbar-expand" style={{ backgroundColor: "#F45197", fontFamily: "'Prompt', sans-serif" }}>
+        <div style={{ color: "white", position: "absolute", left: 20, bottom: 0, fontSize: 12 }}>(updated: 08-01-2024)</div>
         <a className="navbar-brand" href="/#" onClick={() => this.props.history.push('/')} style={{ color: "white", cursor: "pointer" }}>
           <img className="mr-3" src="/assets/img/logo_g3.png" alt="" />
         </a>
@@ -140,7 +143,7 @@ class App extends Component {
                 </a>
               </li>
             }
-            {
+            {/* {
               ((this.props.user !== null) && (week >= 6 && week <= 8)) &&
               <li className="nav-item">
                 {
@@ -154,7 +157,7 @@ class App extends Component {
                     </div>
                 }
               </li>
-            }
+            } */}
             {
               (this.props.user !== null) &&
               <li className="nav-item">
@@ -189,10 +192,10 @@ class App extends Component {
       var video = document.getElementById(`introVDO`);
       video.play();
     }
-    if (popupName === "popupQuestionnaire") {
-      document.getElementById("popupQuestionnaire").classList.toggle("active");
-      this.setState({ overlay: true });
-    }
+     if (popupName === "popupQuestionnaire") {
+       document.getElementById("popupQuestionnaire").classList.toggle("active");
+       this.setState({ overlay: true });
+     }
     if (popupName === "popupNews") {
       if (document.getElementById("popupNews")) {
         document.getElementById("popupNews").classList.toggle("active");
@@ -300,6 +303,8 @@ class App extends Component {
           <Route path='/Challenges' component={Challenges} />
           <Route path='/Dashboard' component={Dashboard} />
           <Route path='/VideoList' component={VideoList} />
+          <Route path='/VideoList2' component={VideoList2} />
+          <Route path='/BonusChallenge' component={BonusChallenge} />
           {/* <Route path='/platform' component={Platform} />
           <Route path='/package' component={Package} /> */}
           <Route path='*'>

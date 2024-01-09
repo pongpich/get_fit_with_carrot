@@ -43,7 +43,71 @@ export const types = {
   GET_ALL_EXERCISE_ACTIVITY: "GET_ALL_EXERCISE_ACTIVITY",
   GET_ALL_EXERCISE_ACTIVITY_SUCCESS: "GET_ALL_EXERCISE_ACTIVITY_SUCCESS",
   GET_ALL_EXERCISE_ACTIVITY_FAIL: "GET_ALL_EXERCISE_ACTIVITY_FAIL",
+  HIDE_POPUP_VIDEO_PLAYER: "HIDE_POPUP_VIDEO_PLAYER",
+  HIDE_POPUP_VIDEO_PLAYER_LIST: "HIDE_POPUP_VIDEO_PLAYER_LIST",
+  SET_ENDED_VIDEO_PLAYER_LIST: "SET_ENDED_VIDEO_PLAYER_LIST",
+  CREATE_BRAVE_AND_BURN_CHALLENGE: "CREATE_BRAVE_AND_BURN_CHALLENGE",
+  CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS: "CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS",
+  CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL: "CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL",
+  GET_BRAVE_AND_BURN_CHALLENGE: "GET_BRAVE_AND_BURN_CHALLENGE",
+  GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS: "GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS",
+  GET_BRAVE_AND_BURN_CHALLENGE_FAIL: "GET_BRAVE_AND_BURN_CHALLENGE_FAIL",
+  UPDATE_VIDEO_STATUS_BRAVE_AND_BURN: "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN",
+  UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS: "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS",
+  UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL: "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL",
+  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN",
+  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS",
+  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL"
 }
+
+export const updateFbShareStatusBraveAndBurn = (user_id) => ({
+  type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN,
+  payload: {
+    user_id
+  }
+});
+
+export const updateVideoStatusBraveAndBurn = (user_id) => ({
+  type: types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN,
+  payload: {
+    user_id
+  }
+});
+
+export const createBraveAndBurnChallenge = (user_id) => ({
+  type: types.CREATE_BRAVE_AND_BURN_CHALLENGE,
+  payload: {
+    user_id
+  }
+});
+
+export const getBraveAndBurnChallenge = (user_id) => ({
+  type: types.GET_BRAVE_AND_BURN_CHALLENGE,
+  payload: {
+    user_id
+  }
+});
+
+export const hidePopupVideoPlayer = (status) => ({
+  type: types.HIDE_POPUP_VIDEO_PLAYER,
+  payload: {
+    status
+  }
+});
+
+export const setHidePopupVideoPlayerList = (status) => ({
+  type: types.HIDE_POPUP_VIDEO_PLAYER_LIST,
+  payload: {
+    status
+  }
+});
+
+export const setEndedVideoPlayerList = (status) => ({
+  type: types.SET_ENDED_VIDEO_PLAYER_LIST,
+  payload: {
+    status
+  }
+});
 
 export const getAllExerciseActivity = (user_id) => ({
   type: types.GET_ALL_EXERCISE_ACTIVITY,
@@ -223,6 +287,66 @@ export const videoListForUser = (
 /* END OF ACTION Section */
 
 /* SAGA Section */
+
+const getBraveAndBurnChallengeSagaAsync = async (
+  user_id,
+) => {
+  try {
+    const apiResult = await API.get("bebe", "/getBraveAndBurnChallenge", {
+      queryStringParameters: {
+        user_id
+      }
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+const updateVideoStatusBraveAndBurnSagaAsync = async (
+  user_id,
+) => {
+  try {
+    const apiResult = await API.put("bebe", "/updateVideoStatusBraveAndBurn", {
+      body: {
+        user_id
+      }
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+const updateFbShareStatusBraveAndBurnSagaAsync = async (
+  user_id,
+) => {
+  try {
+    const apiResult = await API.put("bebe", "/updateFbShareStatusBraveAndBurn", {
+      body: {
+        user_id
+      }
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+const createBraveAndBurnChallengeSagaAsync = async (
+  user_id,
+) => {
+  try {
+    const apiResult = await API.post("bebe", "/createBraveAndBurnChallenge", {
+      body: {
+        user_id
+      }
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
 
 const updatePlaylistSagaAsync = async (
   user_id,
@@ -534,6 +658,100 @@ const createCustomWeekForUserSagaAsync = async (
       }
     });
     return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+function* updateVideoStatusBraveAndBurnSaga({ payload }) {
+  const {
+    user_id
+  } = payload
+
+  try {
+    const apiResult = yield call(
+      updateVideoStatusBraveAndBurnSagaAsync,
+      user_id
+    );
+    if (apiResult.results.message === "success") {
+      yield put({
+        type: types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS
+      });
+    }
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+function* updateFbShareStatusBraveAndBurnSaga({ payload }) {
+  const {
+    user_id
+  } = payload
+
+  try {
+    const apiResult = yield call(
+      updateFbShareStatusBraveAndBurnSagaAsync,
+      user_id
+    );
+    if (apiResult.results.message === "success") {
+      yield put({
+        type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS
+      });
+    }
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+function* getBraveAndBurnChallengeSaga({ payload }) {
+  const {
+    user_id
+  } = payload
+
+  try {
+    const apiResult = yield call(
+      getBraveAndBurnChallengeSagaAsync,
+      user_id
+    );
+    if (apiResult.results.message === "success") {
+      yield put({
+        type: types.GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS,
+        payload: apiResult.results.brave_and_burn_challenge
+      });
+    }
+    if (apiResult.results.message === "fail") {
+      yield put({
+        type: types.GET_BRAVE_AND_BURN_CHALLENGE_FAIL
+      });
+    }
+
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+function* createBraveAndBurnChallengeSaga({ payload }) {
+  const {
+    user_id
+  } = payload
+
+  try {
+    const apiResult = yield call(
+      createBraveAndBurnChallengeSagaAsync,
+      user_id
+    );
+
+    if (apiResult.results.message === "success") {
+      yield put({
+        type: types.CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS
+      });
+    }
+    if (apiResult.results.message === "fail") {
+      yield put({
+        type: types.CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL
+      });
+    }
+
   } catch (error) {
     return { error, messsage: error.message };
   }
@@ -1087,6 +1305,22 @@ export function* watchGetAllExerciseActivity() {
   yield takeEvery(types.GET_ALL_EXERCISE_ACTIVITY, getAllExerciseActivitySaga)
 }
 
+export function* watchCreateBraveAndBurnChallenge() {
+  yield takeEvery(types.CREATE_BRAVE_AND_BURN_CHALLENGE, createBraveAndBurnChallengeSaga)
+}
+
+export function* watchGetBraveAndBurnChallenge() {
+  yield takeEvery(types.GET_BRAVE_AND_BURN_CHALLENGE, getBraveAndBurnChallengeSaga)
+}
+
+export function* watchUpdateVideoStatusBraveAndBurn() {
+  yield takeEvery(types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN, updateVideoStatusBraveAndBurnSaga)
+}
+
+export function* watchUpdateFbShareStatusBraveAndBurn() {
+  yield takeEvery(types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN, updateFbShareStatusBraveAndBurnSaga)
+}
+
 export function* saga() {
   yield all([
     fork(watchUpdatePlaytime),
@@ -1104,6 +1338,10 @@ export function* saga() {
     fork(watchDeleteProgramInWeek),
     fork(watchGetAllExerciseActivity),
     fork(watchUpdatePlaytimeLastWeekSelectedSaga),
+    fork(watchCreateBraveAndBurnChallenge),
+    fork(watchGetBraveAndBurnChallenge),
+    fork(watchUpdateVideoStatusBraveAndBurn),
+    fork(watchUpdateFbShareStatusBraveAndBurn),
   ]);
 }
 
@@ -1127,11 +1365,85 @@ const INIT_STATE = {
   bodyInfo: [],
   statusGetAllExAct: "default",
   all_exercise_activity: [],
-  statusUpdatePlayTimeWeekAll: "default"
+  statusUpdatePlayTimeWeekAll: "default",
+  hidePopUpVideoPlayer: false,
+  hidePopUpVideoPlayerList: false,
+  endedVideoPlayerList: false,
+  statusCreateBraveAndBurn: "default",
+  statusGetBraveAndBurn: "default",
+  brave_and_burn_challenge: null,
+  status_update_video_brave_and_burn: "default",
+  status_update_fb_brave_and_burn: "default"
 };
 
 export function reducer(state = INIT_STATE, action) {
   switch (action.type) {
+    case types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN:
+      return {
+        ...state,
+        status_update_fb_brave_and_burn: "loading"
+      }
+    case types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS:
+      return {
+        ...state,
+        status_update_fb_brave_and_burn: "success",
+      }
+    case types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN:
+      return {
+        ...state,
+        status_update_video_brave_and_burn: "loading"
+      }
+    case types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS:
+      return {
+        ...state,
+        status_update_video_brave_and_burn: "success",
+      }
+    case types.GET_BRAVE_AND_BURN_CHALLENGE:
+      return {
+        ...state,
+        statusGetBraveAndBurn: "loading"
+      }
+    case types.GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS:
+      return {
+        ...state,
+        statusGetBraveAndBurn: "success",
+        brave_and_burn_challenge: action.payload
+      }
+    case types.GET_BRAVE_AND_BURN_CHALLENGE_FAIL:
+      return {
+        ...state,
+        statusGetBraveAndBurn: "fail"
+      }
+    case types.CREATE_BRAVE_AND_BURN_CHALLENGE:
+      return {
+        ...state,
+        statusCreateBraveAndBurn: "loading"
+      }
+    case types.CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS:
+      return {
+        ...state,
+        statusCreateBraveAndBurn: "success"
+      }
+    case types.CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL:
+      return {
+        ...state,
+        statusCreateBraveAndBurn: "fail"
+      }
+    case types.HIDE_POPUP_VIDEO_PLAYER:
+      return {
+        ...state,
+        hidePopUpVideoPlayer: action.payload
+      }
+    case types.HIDE_POPUP_VIDEO_PLAYER_LIST:
+      return {
+        ...state,
+        hidePopUpVideoPlayerList: action.payload.status
+      }
+    case types.SET_ENDED_VIDEO_PLAYER_LIST:
+      return {
+        ...state,
+        endedVideoPlayerList: action.payload.status
+      }
     case types.GET_ALL_EXERCISE_ACTIVITY:
       return {
         ...state,
