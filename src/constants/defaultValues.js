@@ -78,7 +78,7 @@ const prod = {
 
 const config = process.env.REACT_APP_STAGE === 'prod'
   ? prod
-  : prod; // แก้เป็น prod เพื่อทดสอบจาก data challenge จริงๆ
+  : dev; // แก้เป็น prod เพื่อทดสอบจาก data challenge จริงๆ
 
 export const awsConfig = {
   // Add common config values here

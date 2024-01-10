@@ -993,7 +993,7 @@ class VideoList extends Component {
 
                     <div className="playlistWrapper border shadow" >
                       <div className="">
-                        <SelectChangeVideoList thumbnail={item.thumbnail} category={item.category} url={item.url3} />
+                        <SelectChangeVideoList thumbnail={item.thumbnail} category={item.category} url={item.urln} />
                       </div>
                       <div className="mt-1 ml-3 mb-4">
                         <h6 style={{ color: "#F45197" }}><b> {item.name} </b></h6>
@@ -1183,10 +1183,6 @@ class VideoList extends Component {
                                 <div className="changeVideoBtn mb-2 btn col-lg-12 col-md-4 col-12" onClick={() => this.togglePopupSelectEditVideo(item.video_id, item.category, item.type, index)} >
                                   <img className="ml-3 mr-2" src={`../assets/img/shuffle.png`} style={{ float: "left" }} width="30px" height="30px" />
                                   เลือกวีดีโอใหม่
-                                </div>
-                                <div className="randomVideoBtn mt-2 btn col-lg-12 col-md-4 col-12" onClick={() => this.randomVideo(item.video_id, item.category, item.type, index)} >
-                                  <img className="ml-3 mr-2" src={`../assets/img/shuffle.png`} style={{ float: "left" }} width="30px" height="30px" />
-                                  สุ่มวีดีโอ
                                 </div>
                               </div>
                           )
@@ -2774,7 +2770,7 @@ class VideoList extends Component {
               <a className="nav-link disabled" id="profile-tab" data-toggle="tab" href="/#/VideoList" role="tab" aria-controls="profile" aria-selected="false">รวมคลิปออกกำลังกาย</a>
             </li> */}
           {
-            (this.props.user && this.props.user.fb_group && this.props.user.fb_group !== 404) &&
+            (this.props.user) &&
             <div className="">
               <a className="" id="contact-tab" data-toggle="tab" href="/#/challenges" role="tab" aria-controls="contact" aria-selected="false" style={{ color: "grey", textDecorationColor: "white" }}>ชาเลนจ์</a>
             </div>
