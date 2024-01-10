@@ -77,12 +77,12 @@
   /* transform: translate(-50%, -50%); */
 }
 
-.content img {
+/* .content img {
   position: absolute;
   top: 3px;
   right: 6px;
   cursor: pointer;
-}
+} */
 
 .click img {
   position: absolute;

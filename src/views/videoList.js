@@ -993,7 +993,7 @@ class VideoList extends Component {
 
                     <div className="playlistWrapper border shadow" >
                       <div className="">
-                        <SelectChangeVideoList thumbnail={item.thumbnail} category={item.category} url={item.urln} />
+                        <SelectChangeVideoList thumbnail={item.thumbnail} category={item.category} url={item.url} />
                       </div>
                       <div className="mt-1 ml-3 mb-4">
                         <h6 style={{ color: "#F45197" }}><b> {item.name} </b></h6>
