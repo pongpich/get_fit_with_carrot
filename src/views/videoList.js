@@ -381,13 +381,13 @@ class VideoList extends Component {
         this.props.user.expire_date,
         this.props.user.offset
       );
-     /*  this.props.videoListForUserLastWeek(
-        this.props.user.user_id,
-        user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
-        this.props.user.start_date,
-        this.props.user.expire_date,
-        this.props.user.offset
-      ); */
+      /*  this.props.videoListForUserLastWeek(
+         this.props.user.user_id,
+         user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
+         this.props.user.start_date,
+         this.props.user.expire_date,
+         this.props.user.offset
+       ); */
       this.addEventToVideo();
     }
 
@@ -486,12 +486,12 @@ class VideoList extends Component {
 
   }
 
-  togglePopupSelectEditVideo(video_id, category, type, index) {
+  togglePopupSelectEditVideo(video_id, category, type, index, exr_position) {
     document.getElementById("popupSelectEditVideo").classList.toggle("active");
     this.setState({
       indexPlaylist: index
     });
-    this.props.selectChangeVideo(video_id, category, type, (this.props.user && this.props.user.user_id));
+    this.props.selectChangeVideo(video_id, category, type, (this.props.user && this.props.user.user_id), exr_position);
     this.props.resetStatus();
     document.body.style.overflow = "hidden";
   }
@@ -1180,7 +1180,7 @@ class VideoList extends Component {
                               <div></div>
                               :
                               <div className="col-lg-2 col-md-12 col-8" style={{ top: "50%" }}>
-                                <div className="changeVideoBtn mb-2 btn col-lg-12 col-md-4 col-12" onClick={() => this.togglePopupSelectEditVideo(item.video_id, item.category, item.type, index)} >
+                                <div className="changeVideoBtn mb-2 btn col-lg-12 col-md-4 col-12" onClick={() => this.togglePopupSelectEditVideo(item.video_id, item.category, item.type, index, item.exr_position)} >
                                   <img className="ml-3 mr-2" src={`../assets/img/shuffle.png`} style={{ float: "left" }} width="30px" height="30px" />
                                   เลือกวีดีโอใหม่
                                 </div>

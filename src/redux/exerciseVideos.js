@@ -168,13 +168,14 @@ export const resetStatus = () => ({
   type: types.RESET_STATUS
 })
 
-export const selectChangeVideo = (video_id, category, type, user_id) => ({
+export const selectChangeVideo = (video_id, category, type, user_id, exr_position) => ({
   type: types.SELECT_CHANGE_VIDEO,
   payload: {
     video_id,
     category,
     type,
-    user_id
+    user_id,
+    exr_position
   }
 })
 
@@ -504,7 +505,8 @@ const selectChangeVideoSagaAsync = async (
   video_id,
   category,
   type,
-  user_id
+  user_id,
+  exr_position
 ) => {
   try {
     const apiResult = await API.get("bebe", "/selectChangeVideo", {
@@ -512,7 +514,8 @@ const selectChangeVideoSagaAsync = async (
         video_id,
         category,
         type,
-        user_id
+        user_id,
+        exr_position
       }
     });
     return apiResult;
@@ -762,7 +765,8 @@ function* selectChangeVideoSaga({ payload }) {
     video_id,
     category,
     type,
-    user_id
+    user_id,
+    exr_position
   } = payload
   try {
     const apiResult = yield call(
@@ -770,7 +774,8 @@ function* selectChangeVideoSaga({ payload }) {
       video_id,
       category,
       type,
-      user_id
+      user_id,
+      exr_position
     );
     if (apiResult.results.message === "no_video") {
       yield put({
