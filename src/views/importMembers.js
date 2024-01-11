@@ -27,8 +27,8 @@ class ImportMembers extends Component {
       phone: "",
       facebook: "",
       fb_group: 404,
-      member_type: "normal",
-      member_type2: "normal",
+      member_type: "bodyweight",
+      member_type2: "bodyweight",
       import_type: "import_members",
       editMemberType: false,
       editProgramLevel: false,
@@ -125,7 +125,7 @@ class ImportMembers extends Component {
       statusSubmitImportMembers: "default"
     })
 
-    if (member_type === "low_impact") {
+    if (member_type === "gym") {
       this.togglePopupConfirmLowimp(); //สั่งปิด popup ConfirmLowimp
     }
 
@@ -161,7 +161,7 @@ class ImportMembers extends Component {
       }
     ];
 
-    if (member_type2 === "low_impact") {
+    if (member_type2 === "gym") {
       this.togglePopupConfirmLowimp(); //สั่งปิด popup ConfirmLowimp
     }
 
@@ -244,7 +244,7 @@ class ImportMembers extends Component {
           <center>
             <h2 style={{ color: "red" }}>แน่ใจหรือไม่ ?</h2>
             <h2>คุณกำลังเลือก Import ผู้ใช้เป็นกลุ่ม</h2>
-            <h2 style={{ color: "orange" }}>"Low impact"</h2>
+            <h2 style={{ color: "orange" }}>"Gym"</h2>
           </center>
           <center style={{ display: "flex", justifyContent: "space-around", marginTop: 30 }}>
             <button
@@ -617,19 +617,19 @@ class ImportMembers extends Component {
               <input
                 id='member_type2'
                 type="radio"
-                value="normal"
-                checked={member_type2 === 'normal'}
+                value="bodyweight"
+                checked={member_type2 === 'bodyweight'}
                 onChange={(event) => this.handleChange(event)}
               />
-              <label className="ml-2" style={{ color: (member_type2 === 'normal') ? 'orange' : 'black', fontSize: (member_type2 === 'normal') ? 24 : 16 }}> ทั่วไป</label><br></br>
+              <label className="ml-2" style={{ color: (member_type2 === 'bodyweight') ? 'orange' : 'black', fontSize: (member_type2 === 'bodyweight') ? 24 : 16 }}> bodyweight</label><br></br>
               <input
                 id='member_type2'
                 type="radio"
-                value='low_impact'
-                checked={member_type2 === 'low_impact'}
+                value='gym'
+                checked={member_type2 === 'gym'}
                 onChange={(event) => this.handleChange(event)}
               />
-              <label className="ml-2" style={{ color: (member_type2 === 'low_impact') ? 'orange' : 'black', fontSize: (member_type2 === 'low_impact') ? 24 : 16 }}> Low impact</label><br></br>
+              <label className="ml-2" style={{ color: (member_type2 === 'gym') ? 'orange' : 'black', fontSize: (member_type2 === 'gym') ? 24 : 16 }}> gym</label><br></br>
             </div>
 
             <label for="fname">Email: </label>
@@ -697,7 +697,7 @@ class ImportMembers extends Component {
           ยกเลิก
         </button>
         {
-          (member_type2 === 'low_impact') ?
+          (member_type2 === 'gym') ?
             <button
               type="button"
               className="btn btn-success col-lg-1 col-md-6 "
@@ -806,19 +806,19 @@ class ImportMembers extends Component {
               <input
                 id='member_type'
                 type="radio"
-                value="normal"
-                checked={member_type === 'normal'}
+                value="bodyweight"
+                checked={member_type === 'bodyweight'}
                 onChange={(event) => this.handleChange(event)}
               />
-              <label className="ml-2" style={{ color: (member_type === 'normal') ? 'orange' : 'black', fontSize: (member_type === 'normal') ? 24 : 16 }}> ทั่วไป</label><br></br>
+              <label className="ml-2" style={{ color: (member_type === 'bodyweight') ? 'orange' : 'black', fontSize: (member_type === 'bodyweight') ? 24 : 16 }}> bodyweight</label><br></br>
               <input
                 id='member_type'
                 type="radio"
-                value='low_impact'
-                checked={member_type === 'low_impact'}
+                value='gym'
+                checked={member_type === 'gym'}
                 onChange={(event) => this.handleChange(event)}
               />
-              <label className="ml-2" style={{ color: (member_type === 'low_impact') ? 'orange' : 'black', fontSize: (member_type === 'low_impact') ? 24 : 16 }}> Low impact</label><br></br>
+              <label className="ml-2" style={{ color: (member_type === 'gym') ? 'orange' : 'black', fontSize: (member_type === 'gym') ? 24 : 16 }}> gym</label><br></br>
             </div>
 
             <section>
@@ -874,7 +874,7 @@ class ImportMembers extends Component {
           ยกเลิก
         </button>
         {
-          (member_type === 'low_impact') ?
+          (member_type === 'gym') ?
             <button
               type="button"
               className="btn btn-success col-lg-1 col-md-6 "
