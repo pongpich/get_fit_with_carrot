@@ -25,6 +25,7 @@ import TestGPS from "./views/test_gps";
 import TestGPS_GG from "./views/test_gps_gg";
 import TestGPS_Permission from "./views/test_gps_permission";
 import BonusChallenge from "./views/bonus_challenge";
+import Footer from "./views/footer";
 
 import { awsConfig } from "./constants/defaultValues";
 
@@ -448,6 +449,8 @@ class App extends Component {
             <Redirect to="/login" />
           </Route>
         </Switch>
+
+        <Footer />
       </div>
     );
   }
