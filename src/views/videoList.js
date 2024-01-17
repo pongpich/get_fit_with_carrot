@@ -2422,13 +2422,6 @@ class VideoList extends Component {
 
               <div className="row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
                 <h4 className="ml-4 mb-3" style={{ color: "#F45197" }}>โปรแกรมปัจจุบัน {this.props.user.fb_group !== 404 ? <span>(WEEK {this.props.week})</span> : <span></span>}</h4>
-                <div>
-                  <label for="playerDropdown">Video player:</label>
-                  <select id="playerDropdown" name="player" onChange={this.handlePlayerDropdownChange}>
-                    <option value="main">ตัวเล่นหลัก</option>
-                    <option value="backup">ตัวเล่นสำรอง</option>
-                  </select>
-                </div>
               </div>
 
               <nav className="nav">
@@ -2473,13 +2466,11 @@ class VideoList extends Component {
                   </a>
                 }
                 {
-                  ((this.props.week <= 8) && (this.props.statusGetBraveAndBurn !== "loading")) &&
                   <a
                     className="nav-link"
                     style={{ color: `${showBarveAndBurn ? "#F45197" : "grey"}`, cursor: "pointer" }}
-                    onClick={() => this.props.getBraveAndBurnChallenge(this.props.user && this.props.user.user_id)}
                   >
-                    <h5><b> Brave&Burn</b></h5>
+                    <h5><b> Random Exercise Snack</b></h5>
                   </a>
                 }
 
