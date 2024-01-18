@@ -11,7 +11,8 @@ export const types = {
   UPDATE_PLAYTIME_LASTWEEK: "UPDATE_PLAYTIME_LASTWEEK",
   UPDATE_PLAYTIME_LASTWEEK_SUCCESS: "UPDATE_PLAYTIME_LASTWEEK_SUCCESS",
   UPDATE_PLAYTIME_LASTWEEK_SELECTED: "UPDATE_PLAYTIME_LASTWEEK_SELECTED",
-  UPDATE_PLAYTIME_LASTWEEK_SELECTED_SUCCESS: "UPDATE_PLAYTIME_LASTWEEK_SELECTED_SUCCESS",
+  UPDATE_PLAYTIME_LASTWEEK_SELECTED_SUCCESS:
+    "UPDATE_PLAYTIME_LASTWEEK_SELECTED_SUCCESS",
   UPDATE_PLAYLIST: "UPDATE_PLAYLIST",
   UPDATE_PLAYLIST_SUCCESS: "UPDATE_PLAYLIST_SUCCESS",
   UPDATE_BODY_INFO: "UPDATE_BODY_INFO",
@@ -47,104 +48,123 @@ export const types = {
   HIDE_POPUP_VIDEO_PLAYER_LIST: "HIDE_POPUP_VIDEO_PLAYER_LIST",
   SET_ENDED_VIDEO_PLAYER_LIST: "SET_ENDED_VIDEO_PLAYER_LIST",
   CREATE_BRAVE_AND_BURN_CHALLENGE: "CREATE_BRAVE_AND_BURN_CHALLENGE",
-  CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS: "CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS",
+  CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS:
+    "CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS",
   CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL: "CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL",
   GET_BRAVE_AND_BURN_CHALLENGE: "GET_BRAVE_AND_BURN_CHALLENGE",
   GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS: "GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS",
   GET_BRAVE_AND_BURN_CHALLENGE_FAIL: "GET_BRAVE_AND_BURN_CHALLENGE_FAIL",
   UPDATE_VIDEO_STATUS_BRAVE_AND_BURN: "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN",
-  UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS: "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS",
-  UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL: "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL",
-  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN",
-  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS",
-  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL: "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL"
-}
+  UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS:
+    "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS",
+  UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL:
+    "UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_FAIL",
+  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN:
+    "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN",
+  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS:
+    "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS",
+  UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL:
+    "UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_FAIL",
+  CREATE_EXERCISE_SNACK: "CREATE_EXERCISE_SNACK",
+  CREATE_EXERCISE_SNACK_SUCCESS: "CREATE_EXERCISE_SNACK_SUCCESS",
+  CREATE_EXERCISE_SNACK_FALE: "CREATE_EXERCISE_SNACK_FALE",
+  GET_EXERCISE_SNACK: "GET_EXERCISE_SNACK",
+  GET_EXERCISE_SNACK_SUCCESS: "GET_EXERCISE_SNACK_SUCCESS",
+  GET_EXERCISE_SNACK_FALE: "GET_EXERCISE_SNACK_FALE",
+};
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
   type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN,
   payload: {
-    user_id
-  }
+    user_id,
+  },
 });
 
 export const updateVideoStatusBraveAndBurn = (user_id) => ({
   type: types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN,
   payload: {
-    user_id
-  }
+    user_id,
+  },
 });
 
 export const createBraveAndBurnChallenge = (user_id) => ({
   type: types.CREATE_BRAVE_AND_BURN_CHALLENGE,
   payload: {
-    user_id
-  }
+    user_id,
+  },
 });
 
 export const getBraveAndBurnChallenge = (user_id) => ({
   type: types.GET_BRAVE_AND_BURN_CHALLENGE,
   payload: {
-    user_id
-  }
+    user_id,
+  },
 });
 
 export const hidePopupVideoPlayer = (status) => ({
   type: types.HIDE_POPUP_VIDEO_PLAYER,
   payload: {
-    status
-  }
+    status,
+  },
 });
 
 export const setHidePopupVideoPlayerList = (status) => ({
   type: types.HIDE_POPUP_VIDEO_PLAYER_LIST,
   payload: {
-    status
-  }
+    status,
+  },
 });
 
 export const setEndedVideoPlayerList = (status) => ({
   type: types.SET_ENDED_VIDEO_PLAYER_LIST,
   payload: {
-    status
-  }
+    status,
+  },
 });
 
 export const getAllExerciseActivity = (user_id) => ({
   type: types.GET_ALL_EXERCISE_ACTIVITY,
   payload: {
-    user_id
-  }
+    user_id,
+  },
 });
 
 export const selectBodyInfo = (email) => ({
   type: types.SELECT_BODY_INFO,
   payload: {
-    email
-  }
+    email,
+  },
 });
 
 export const selectMemberInfo = (email) => ({
   type: types.SELECT_MEMBER_INFO,
   payload: {
-    email
-  }
+    email,
+  },
 });
 
 export const selectProgramInWeek = (email) => ({
   type: types.SELECT_PROGRAM_IN_WEEK,
   payload: {
-    email
-  }
+    email,
+  },
 });
 
 export const deleteProgramInWeek = (email) => ({
   type: types.DELETE_PROGRAM_IN_WEEK,
   payload: {
-    email
-  }
+    email,
+  },
 });
 
-export const createCustomWeekForUser = (user_id, weight, start_date, expire_date, offset, displayName) => ({
+export const createCustomWeekForUser = (
+  user_id,
+  weight,
+  start_date,
+  expire_date,
+  offset,
+  displayName
+) => ({
   type: types.CREATE_CUSTOM_WEEK_FOR_USER,
   payload: {
     user_id,
@@ -152,32 +172,38 @@ export const createCustomWeekForUser = (user_id, weight, start_date, expire_date
     start_date,
     expire_date,
     offset,
-    displayName
-  }
+    displayName,
+  },
 });
 
 export const clearVideoList = () => ({
-  type: types.CLEAR_VIDEO_LIST
-})
+  type: types.CLEAR_VIDEO_LIST,
+});
 
 export const clearVideos = () => ({
-  type: types.CLEAR_VIDEOS
-})
+  type: types.CLEAR_VIDEOS,
+});
 
 export const resetStatus = () => ({
-  type: types.RESET_STATUS
-})
+  type: types.RESET_STATUS,
+});
 
-export const selectChangeVideo = (video_id, category, type, user_id, exr_position) => ({
+export const selectChangeVideo = (
+  video_id,
+  category,
+  type,
+  user_id,
+  exr_position
+) => ({
   type: types.SELECT_CHANGE_VIDEO,
   payload: {
     video_id,
     category,
     type,
     user_id,
-    exr_position
-  }
-})
+    exr_position,
+  },
+});
 
 export const randomVideo = (video_id, category, type, user_id) => ({
   type: types.RANDOM_VIDEO,
@@ -185,32 +211,52 @@ export const randomVideo = (video_id, category, type, user_id) => ({
     video_id,
     category,
     type,
-    user_id
-  }
-})
+    user_id,
+  },
+});
 
-export const updateBodyInfo = (user_id, start_date, expire_date, other_attributes) => ({
+export const updateBodyInfo = (
+  user_id,
+  start_date,
+  expire_date,
+  other_attributes
+) => ({
   type: types.UPDATE_BODY_INFO,
   payload: {
     user_id,
     start_date,
     expire_date,
-    other_attributes
-  }
-})
+    other_attributes,
+  },
+});
 
-export const updatePlaylist = (user_id, start_date, day_number, playlist, exerciseVideo) => ({
+export const updatePlaylist = (
+  user_id,
+  start_date,
+  day_number,
+  playlist,
+  exerciseVideo
+) => ({
   type: types.UPDATE_PLAYLIST,
   payload: {
     user_id,
     start_date,
     day_number,
     playlist,
-    exerciseVideo
-  }
-})
+    exerciseVideo,
+  },
+});
 
-export const updatePlaytime = (user_id, start_date, expire_date, day_number, video_number, play_time, duration, exerciseVideo) => ({
+export const updatePlaytime = (
+  user_id,
+  start_date,
+  expire_date,
+  day_number,
+  video_number,
+  play_time,
+  duration,
+  exerciseVideo
+) => ({
   type: types.UPDATE_PLAYTIME,
   payload: {
     user_id,
@@ -220,11 +266,20 @@ export const updatePlaytime = (user_id, start_date, expire_date, day_number, vid
     video_number,
     play_time,
     duration,
-    exerciseVideo
-  }
-})
+    exerciseVideo,
+  },
+});
 
-export const updatePlaytimeLastWeek = (user_id, start_date, expire_date, day_number, video_number, play_time, duration, exerciseVideo) => ({
+export const updatePlaytimeLastWeek = (
+  user_id,
+  start_date,
+  expire_date,
+  day_number,
+  video_number,
+  play_time,
+  duration,
+  exerciseVideo
+) => ({
   type: types.UPDATE_PLAYTIME_LASTWEEK,
   payload: {
     user_id,
@@ -234,11 +289,21 @@ export const updatePlaytimeLastWeek = (user_id, start_date, expire_date, day_num
     video_number,
     play_time,
     duration,
-    exerciseVideo
-  }
-})
+    exerciseVideo,
+  },
+});
 
-export const updatePlaytimeLastWeekSelected = (user_id, start_date, expire_date, day_number, video_number, play_time, duration, exerciseVideo, week_in_program) => ({
+export const updatePlaytimeLastWeekSelected = (
+  user_id,
+  start_date,
+  expire_date,
+  day_number,
+  video_number,
+  play_time,
+  duration,
+  exerciseVideo,
+  week_in_program
+) => ({
   type: types.UPDATE_PLAYTIME_LASTWEEK_SELECTED,
   payload: {
     user_id,
@@ -249,105 +314,116 @@ export const updatePlaytimeLastWeekSelected = (user_id, start_date, expire_date,
     play_time,
     duration,
     exerciseVideo,
-    week_in_program
-  }
-})
+    week_in_program,
+  },
+});
 
 export const videoListForUserLastWeek = (
   user_id,
   weight,
   start_date,
   expire_date,
-  offset) => ({
-    type: types.VIDEO_LIST_FOR_USER_LASTWEEK,
-    payload: {
-      user_id,
-      weight,
-      start_date,
-      expire_date,
-      offset
-    }
-  });
+  offset
+) => ({
+  type: types.VIDEO_LIST_FOR_USER_LASTWEEK,
+  payload: {
+    user_id,
+    weight,
+    start_date,
+    expire_date,
+    offset,
+  },
+});
 
 export const videoListForUser = (
   user_id,
   weight,
   start_date,
   expire_date,
-  offset) => ({
-    type: types.VIDEO_LIST_FOR_USER,
-    payload: {
-      user_id,
-      weight,
-      start_date,
-      expire_date,
-      offset
-    }
-  });
+  offset
+) => ({
+  type: types.VIDEO_LIST_FOR_USER,
+  payload: {
+    user_id,
+    weight,
+    start_date,
+    expire_date,
+    offset,
+  },
+});
+
+export const createExerciseSnack = (user_id) => ({
+  type: types.CREATE_EXERCISE_SNACK, //createExerciseSnacksChallenge
+  payload: {
+    user_id,
+  },
+});
+export const getExerciseSnack = (user_id) => ({
+  type: types.GET_EXERCISE_SNACK,
+  payload: {
+    user_id,
+  },
+});
 
 /* END OF ACTION Section */
 
 /* SAGA Section */
 
-const getBraveAndBurnChallengeSagaAsync = async (
-  user_id,
-) => {
+const getBraveAndBurnChallengeSagaAsync = async (user_id) => {
   try {
     const apiResult = await API.get("bebe", "/getBraveAndBurnChallenge", {
       queryStringParameters: {
-        user_id
-      }
+        user_id,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const updateVideoStatusBraveAndBurnSagaAsync = async (
-  user_id,
-) => {
+const updateVideoStatusBraveAndBurnSagaAsync = async (user_id) => {
   try {
     const apiResult = await API.put("bebe", "/updateVideoStatusBraveAndBurn", {
       body: {
-        user_id
-      }
+        user_id,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const updateFbShareStatusBraveAndBurnSagaAsync = async (
-  user_id,
-) => {
+const updateFbShareStatusBraveAndBurnSagaAsync = async (user_id) => {
   try {
-    const apiResult = await API.put("bebe", "/updateFbShareStatusBraveAndBurn", {
-      body: {
-        user_id
+    const apiResult = await API.put(
+      "bebe",
+      "/updateFbShareStatusBraveAndBurn",
+      {
+        body: {
+          user_id,
+        },
       }
-    });
+    );
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const createBraveAndBurnChallengeSagaAsync = async (
-  user_id,
-) => {
+const createBraveAndBurnChallengeSagaAsync = async (user_id) => {
   try {
     const apiResult = await API.post("bebe", "/createBraveAndBurnChallenge", {
       body: {
-        user_id
-      }
+        user_id,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const updatePlaylistSagaAsync = async (
   user_id,
@@ -361,14 +437,14 @@ const updatePlaylistSagaAsync = async (
         user_id,
         start_date,
         day_number,
-        playlist
-      }
+        playlist,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const updatePlaytimeSagaAsync = async (
   user_id,
@@ -388,14 +464,14 @@ const updatePlaytimeSagaAsync = async (
         day_number,
         video_number,
         play_time,
-        duration
-      }
+        duration,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const updatePlaytimeLastWeekSagaAsync = async (
   user_id,
@@ -415,14 +491,14 @@ const updatePlaytimeLastWeekSagaAsync = async (
         day_number,
         video_number,
         play_time,
-        duration
-      }
+        duration,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const updatePlaytimeLastWeekSelectedSagaAsync = async (
   user_id,
@@ -444,14 +520,14 @@ const updatePlaytimeLastWeekSelectedSagaAsync = async (
         video_number,
         play_time,
         duration,
-        week_in_program
-      }
+        week_in_program,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const videoListForUserLastWeekSagaAsync = async (
   user_id,
@@ -467,15 +543,15 @@ const videoListForUserLastWeekSagaAsync = async (
         weight,
         start_date,
         expire_date,
-        offset
-      }
+        offset,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     console.log("error :", error);
-    return { error, messsage: error.message }
+    return { error, messsage: error.message };
   }
-}
+};
 
 const videoListForUserSagaAsync = async (
   user_id,
@@ -491,15 +567,15 @@ const videoListForUserSagaAsync = async (
         weight,
         start_date,
         expire_date,
-        offset
-      }
+        offset,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     console.log("error :", error);
-    return { error, messsage: error.message }
+    return { error, messsage: error.message };
   }
-}
+};
 
 const selectChangeVideoSagaAsync = async (
   video_id,
@@ -515,35 +591,28 @@ const selectChangeVideoSagaAsync = async (
         category,
         type,
         user_id,
-        exr_position
-      }
+        exr_position,
+      },
     });
     return apiResult;
-  } catch (error) {
+  } catch (error) {}
+};
 
-  }
-}
-
-const randomVideoSagaAsync = async (
-  video_id,
-  category,
-  type,
-  user_id
-) => {
+const randomVideoSagaAsync = async (video_id, category, type, user_id) => {
   try {
     const apiResult = await API.get("bebe", "/randomVideo", {
       queryStringParameters: {
         video_id,
         category,
         type,
-        user_id
-      }
+        user_id,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const updateBodyInfoSagaAsync = async (
   user_id,
@@ -557,89 +626,79 @@ const updateBodyInfoSagaAsync = async (
         user_id,
         start_date,
         expire_date,
-        other_attributes
-      }
+        other_attributes,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const selectProgramInWeekSagaAsync = async (
-  email
-) => {
+const selectProgramInWeekSagaAsync = async (email) => {
   try {
     const apiResult = await API.get("bebe", "/selectProgramInWeek", {
       queryStringParameters: {
-        email
-      }
+        email,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const selectMemberInfoSagaAsync = async (
-  email
-) => {
+const selectMemberInfoSagaAsync = async (email) => {
   try {
     const apiResult = await API.get("bebe", "/selectMemberInfo", {
       queryStringParameters: {
-        email
-      }
+        email,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const selectBodyInfoSagaAsync = async (
-  email
-) => {
+const selectBodyInfoSagaAsync = async (email) => {
   try {
     const apiResult = await API.get("bebe", "/selectBodyInfo", {
       queryStringParameters: {
-        email
-      }
+        email,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const deleteProgramInWeekSagaAsync = async (
-  email
-) => {
+const deleteProgramInWeekSagaAsync = async (email) => {
   try {
     const apiResult = await API.post("bebe", "/deleteProgramInWeek", {
       body: {
-        email
-      }
+        email,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const getAllExerciseActivitySagaAsync = async (
-  user_id
-) => {
+const getAllExerciseActivitySagaAsync = async (user_id) => {
   try {
     const apiResult = await API.get("bebe", "/getAllExerciseActivity", {
       queryStringParameters: {
-        user_id
-      }
+        user_id,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 const createCustomWeekForUserSagaAsync = async (
   user_id,
@@ -657,19 +716,43 @@ const createCustomWeekForUserSagaAsync = async (
         start_date,
         expire_date,
         offset,
-        displayName
-      }
+        displayName,
+      },
     });
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
+
+const getExerciseSnackSagaAsync = async (user_id) => {
+  try {
+    const apiResult = await API.get("bebe", "/getExerciseSnacksChallenge", {
+      queryStringParameters: {
+        user_id,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
+const createExerciseSnackSagaAsync = async (user_id) => {
+  try {
+    const apiResult = await API.get("bebe", "/createExerciseSnacksChallenge", {
+      queryStringParameters: {
+        user_id,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
 
 function* updateVideoStatusBraveAndBurnSaga({ payload }) {
-  const {
-    user_id
-  } = payload
+  const { user_id } = payload;
 
   try {
     const apiResult = yield call(
@@ -678,7 +761,7 @@ function* updateVideoStatusBraveAndBurnSaga({ payload }) {
     );
     if (apiResult.results.message === "success") {
       yield put({
-        type: types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS
+        type: types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS,
       });
     }
   } catch (error) {
@@ -687,9 +770,7 @@ function* updateVideoStatusBraveAndBurnSaga({ payload }) {
 }
 
 function* updateFbShareStatusBraveAndBurnSaga({ payload }) {
-  const {
-    user_id
-  } = payload
+  const { user_id } = payload;
 
   try {
     const apiResult = yield call(
@@ -698,7 +779,7 @@ function* updateFbShareStatusBraveAndBurnSaga({ payload }) {
     );
     if (apiResult.results.message === "success") {
       yield put({
-        type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS
+        type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS,
       });
     }
   } catch (error) {
@@ -707,67 +788,49 @@ function* updateFbShareStatusBraveAndBurnSaga({ payload }) {
 }
 
 function* getBraveAndBurnChallengeSaga({ payload }) {
-  const {
-    user_id
-  } = payload
+  const { user_id } = payload;
 
   try {
-    const apiResult = yield call(
-      getBraveAndBurnChallengeSagaAsync,
-      user_id
-    );
+    const apiResult = yield call(getBraveAndBurnChallengeSagaAsync, user_id);
     if (apiResult.results.message === "success") {
       yield put({
         type: types.GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS,
-        payload: apiResult.results.brave_and_burn_challenge
+        payload: apiResult.results.brave_and_burn_challenge,
       });
     }
     if (apiResult.results.message === "fail") {
       yield put({
-        type: types.GET_BRAVE_AND_BURN_CHALLENGE_FAIL
+        type: types.GET_BRAVE_AND_BURN_CHALLENGE_FAIL,
       });
     }
-
   } catch (error) {
     return { error, messsage: error.message };
   }
 }
 
 function* createBraveAndBurnChallengeSaga({ payload }) {
-  const {
-    user_id
-  } = payload
+  const { user_id } = payload;
 
   try {
-    const apiResult = yield call(
-      createBraveAndBurnChallengeSagaAsync,
-      user_id
-    );
+    const apiResult = yield call(createBraveAndBurnChallengeSagaAsync, user_id);
 
     if (apiResult.results.message === "success") {
       yield put({
-        type: types.CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS
+        type: types.CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS,
       });
     }
     if (apiResult.results.message === "fail") {
       yield put({
-        type: types.CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL
+        type: types.CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL,
       });
     }
-
   } catch (error) {
     return { error, messsage: error.message };
   }
 }
 
 function* selectChangeVideoSaga({ payload }) {
-  const {
-    video_id,
-    category,
-    type,
-    user_id,
-    exr_position
-  } = payload
+  const { video_id, category, type, user_id, exr_position } = payload;
   try {
     const apiResult = yield call(
       selectChangeVideoSagaAsync,
@@ -779,13 +842,13 @@ function* selectChangeVideoSaga({ payload }) {
     );
     if (apiResult.results.message === "no_video") {
       yield put({
-        type: types.SELECT_CHANGE_VIDEO_FAIL
-      })
+        type: types.SELECT_CHANGE_VIDEO_FAIL,
+      });
     } else {
       yield put({
         type: types.SELECT_CHANGE_VIDEO_SUCCESS,
-        payload: apiResult.results.videos
-      })
+        payload: apiResult.results.videos,
+      });
     }
   } catch (error) {
     return { error, messsage: error.message };
@@ -793,12 +856,7 @@ function* selectChangeVideoSaga({ payload }) {
 }
 
 function* randomVideoSaga({ payload }) {
-  const {
-    video_id,
-    category,
-    type,
-    user_id
-  } = payload
+  const { video_id, category, type, user_id } = payload;
   try {
     const apiResult = yield call(
       randomVideoSagaAsync,
@@ -811,12 +869,12 @@ function* randomVideoSaga({ payload }) {
       console.log("user :", apiResult.results);
       yield put({
         type: types.RANDOM_VIDEO_FAIL,
-      })
+      });
     } else {
       yield put({
         type: types.RANDOM_VIDEO_SUCCESS,
-        payload: apiResult.results.video
-      })
+        payload: apiResult.results.video,
+      });
     }
   } catch (error) {
     return { error, messsage: error.message };
@@ -824,13 +882,7 @@ function* randomVideoSaga({ payload }) {
 }
 
 function* updatePlaylistSaga({ payload }) {
-  const {
-    user_id,
-    start_date,
-    day_number,
-    playlist,
-    exerciseVideo
-  } = payload
+  const { user_id, start_date, day_number, playlist, exerciseVideo } = payload;
   try {
     const apiResult = yield call(
       updatePlaylistSagaAsync,
@@ -858,7 +910,7 @@ function* updatePlaylistSaga({ payload }) {
     }
     yield put({
       type: types.UPDATE_PLAYLIST_SUCCESS,
-      payload: exerciseVideo
+      payload: exerciseVideo,
     });
     return apiResult;
   } catch (error) {
@@ -867,12 +919,7 @@ function* updatePlaylistSaga({ payload }) {
 }
 
 function* updateBodyInfoSaga({ payload }) {
-  const {
-    user_id,
-    start_date,
-    expire_date,
-    other_attributes
-  } = payload
+  const { user_id, start_date, expire_date, other_attributes } = payload;
   try {
     yield call(
       updateBodyInfoSagaAsync,
@@ -882,26 +929,21 @@ function* updateBodyInfoSaga({ payload }) {
       other_attributes
     );
     yield put({
-      type: types.UPDATE_BODY_INFO_SUCCESS
-    })
+      type: types.UPDATE_BODY_INFO_SUCCESS,
+    });
   } catch (error) {
     console.log("error from updateBodyInfo :", error);
   }
 }
 
 function* selectProgramInWeekSaga({ payload }) {
-  const {
-    email
-  } = payload
+  const { email } = payload;
   try {
-    const apiResult = yield call(
-      selectProgramInWeekSagaAsync,
-      email
-    );
+    const apiResult = yield call(selectProgramInWeekSagaAsync, email);
 
     yield put({
       type: types.SELECT_PROGRAM_IN_WEEK_SUCCESS,
-      payload: apiResult.results
+      payload: apiResult.results,
     });
 
     return apiResult;
@@ -911,18 +953,13 @@ function* selectProgramInWeekSaga({ payload }) {
 }
 
 function* selectMemberInfoSaga({ payload }) {
-  const {
-    email
-  } = payload
+  const { email } = payload;
   try {
-    const apiResult = yield call(
-      selectMemberInfoSagaAsync,
-      email
-    );
+    const apiResult = yield call(selectMemberInfoSagaAsync, email);
 
     yield put({
       type: types.SELECT_MEMBER_INFO_SUCCESS,
-      payload: apiResult.results.memberInfo
+      payload: apiResult.results.memberInfo,
     });
 
     return apiResult;
@@ -932,18 +969,13 @@ function* selectMemberInfoSaga({ payload }) {
 }
 
 function* selectBodyInfoSaga({ payload }) {
-  const {
-    email
-  } = payload
+  const { email } = payload;
   try {
-    const apiResult = yield call(
-      selectBodyInfoSagaAsync,
-      email
-    );
+    const apiResult = yield call(selectBodyInfoSagaAsync, email);
 
     yield put({
       type: types.SELECT_BODY_INFO_SUCCESS,
-      payload: apiResult.results.bodyInfo
+      payload: apiResult.results.bodyInfo,
     });
 
     return apiResult;
@@ -953,14 +985,9 @@ function* selectBodyInfoSaga({ payload }) {
 }
 
 function* deleteProgramInWeekSaga({ payload }) {
-  const {
-    email
-  } = payload
+  const { email } = payload;
   try {
-    const apiResult = yield call(
-      deleteProgramInWeekSagaAsync,
-      email
-    );
+    const apiResult = yield call(deleteProgramInWeekSagaAsync, email);
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
@@ -968,23 +995,18 @@ function* deleteProgramInWeekSaga({ payload }) {
 }
 
 function* getAllExerciseActivitySaga({ payload }) {
-  const {
-    user_id
-  } = payload
+  const { user_id } = payload;
   try {
-    const apiResult = yield call(
-      getAllExerciseActivitySagaAsync,
-      user_id
-    );
+    const apiResult = yield call(getAllExerciseActivitySagaAsync, user_id);
 
     if (apiResult.results && apiResult.results.all_exercise_activity) {
       yield put({
         type: types.GET_ALL_EXERCISE_ACTIVITY_SUCCESS,
-        payload: apiResult.results.all_exercise_activity
+        payload: apiResult.results.all_exercise_activity,
       });
     } else {
       yield put({
-        type: types.GET_ALL_EXERCISE_ACTIVITY_FAIL
+        type: types.GET_ALL_EXERCISE_ACTIVITY_FAIL,
       });
     }
 
@@ -1003,8 +1025,8 @@ function* updatePlaytimeSaga({ payload }) {
     video_number,
     play_time,
     duration,
-    exerciseVideo
-  } = payload
+    exerciseVideo,
+  } = payload;
   try {
     const apiResult = yield call(
       updatePlaytimeSagaAsync,
@@ -1035,7 +1057,7 @@ function* updatePlaytimeSaga({ payload }) {
     }
     yield put({
       type: types.UPDATE_PLAYTIME_SUCCESS,
-      payload: exerciseVideo
+      payload: exerciseVideo,
     });
     return apiResult;
   } catch (error) {
@@ -1052,8 +1074,8 @@ function* updatePlaytimeLastWeekSaga({ payload }) {
     video_number,
     play_time,
     duration,
-    exerciseVideo
-  } = payload
+    exerciseVideo,
+  } = payload;
   try {
     const apiResult = yield call(
       updatePlaytimeLastWeekSagaAsync,
@@ -1063,7 +1085,7 @@ function* updatePlaytimeLastWeekSaga({ payload }) {
       day_number,
       video_number,
       play_time,
-      duration,
+      duration
     );
     let keyDay = "";
     switch (day_number) {
@@ -1084,7 +1106,7 @@ function* updatePlaytimeLastWeekSaga({ payload }) {
     }
     yield put({
       type: types.UPDATE_PLAYTIME_LASTWEEK_SUCCESS,
-      payload: exerciseVideo
+      payload: exerciseVideo,
     });
     return apiResult;
   } catch (error) {
@@ -1101,8 +1123,8 @@ function* updatePlaytimeLastWeekSelectedSaga({ payload }) {
     play_time,
     duration,
     exerciseVideo,
-    week_in_program
-  } = payload
+    week_in_program,
+  } = payload;
   try {
     const apiResult = yield call(
       updatePlaytimeLastWeekSelectedSagaAsync,
@@ -1134,7 +1156,7 @@ function* updatePlaytimeLastWeekSelectedSaga({ payload }) {
     }
     yield put({
       type: types.UPDATE_PLAYTIME_LASTWEEK_SELECTED_SUCCESS,
-      payload: exerciseVideo
+      payload: exerciseVideo,
     });
     return apiResult;
   } catch (error) {
@@ -1142,15 +1164,8 @@ function* updatePlaytimeLastWeekSelectedSaga({ payload }) {
   }
 }
 
-
 function* videoListForUserLastWeekSaga({ payload }) {
-  const {
-    user_id,
-    weight,
-    start_date,
-    expire_date,
-    offset
-  } = payload
+  const { user_id, weight, start_date, expire_date, offset } = payload;
   try {
     const apiResult = yield call(
       videoListForUserLastWeekSagaAsync,
@@ -1163,20 +1178,21 @@ function* videoListForUserLastWeekSaga({ payload }) {
     if (apiResult.results.length > 0) {
       const activities = JSON.parse(apiResult.results[0].activities);
       const lastweek = JSON.parse(apiResult.results[0].week_in_program);
-      if (lastweek > 0) { // lastweek > 0 คือ ไม่ใช่สัปดาห์ที่ 1
+      if (lastweek > 0) {
+        // lastweek > 0 คือ ไม่ใช่สัปดาห์ที่ 1
         yield put({
           type: types.VIDEO_LIST_FOR_USER_LASTWEEK_SUCCESS,
-          payload: activities
-        })
+          payload: activities,
+        });
         yield put({
           type: types.GET_LASTWEEK,
-          payload: lastweek
-        })
-
+          payload: lastweek,
+        });
       } else {
-        yield put({ // lastweek <= 0 กำหนด isFirstWeek = true
-          type: types.VIDEO_LIST_FOR_USER_LASTWEEK_FAIL
-        })
+        yield put({
+          // lastweek <= 0 กำหนด isFirstWeek = true
+          type: types.VIDEO_LIST_FOR_USER_LASTWEEK_FAIL,
+        });
       }
     }
   } catch (error) {
@@ -1185,13 +1201,7 @@ function* videoListForUserLastWeekSaga({ payload }) {
 }
 
 function* videoListForUserSaga({ payload }) {
-  const {
-    user_id,
-    weight,
-    start_date,
-    expire_date,
-    offset
-  } = payload
+  const { user_id, weight, start_date, expire_date, offset } = payload;
   try {
     const apiResult = yield call(
       videoListForUserSagaAsync,
@@ -1206,16 +1216,16 @@ function* videoListForUserSaga({ payload }) {
       const week = JSON.parse(apiResult.results[0].week_in_program);
       yield put({
         type: types.VIDEO_LIST_FOR_USER_SUCCESS,
-        payload: activities
-      })
+        payload: activities,
+      });
       yield put({
         type: types.GET_WEEK,
-        payload: week
-      })
-    } else if (apiResult.results.message === 'no_video') {
+        payload: week,
+      });
+    } else if (apiResult.results.message === "no_video") {
       yield put({
-        type: types.VIDEO_LIST_FOR_USER_FAIL
-      })
+        type: types.VIDEO_LIST_FOR_USER_FAIL,
+      });
     }
   } catch (error) {
     console.log("error form videoListForUserSaga", error);
@@ -1223,14 +1233,8 @@ function* videoListForUserSaga({ payload }) {
 }
 
 function* createCustomWeekForUserSaga({ payload }) {
-  const {
-    user_id,
-    weight,
-    start_date,
-    expire_date,
-    offset,
-    displayName
-  } = payload
+  const { user_id, weight, start_date, expire_date, offset, displayName } =
+    payload;
 
   try {
     yield call(
@@ -1243,87 +1247,142 @@ function* createCustomWeekForUserSaga({ payload }) {
       displayName
     );
     yield put({
-      type: types.CREATE_CUSTOM_WEEK_FOR_USER_SUCCESS
-    })
+      type: types.CREATE_CUSTOM_WEEK_FOR_USER_SUCCESS,
+    });
   } catch (error) {
     console.log("error from createCustomWeekForUser :", error);
   }
 }
 
+function* createExerciseSnackSaga({ payload }) {
+  const { user_id } = payload;
+  const apiResult = yield call(createExerciseSnackSagaAsync, user_id);
+
+  try {
+    yield put({
+      type: types.CREATE_EXERCISE_SNACK_SUCCESS,
+      payload: apiResult.results,
+    });
+  } catch (error) {
+    console.log("error from updateDisplayNameSaga :", error);
+  }
+}
+function* getExerciseSnackSaga({ payload }) {
+  const { user_id } = payload;
+  const apiResult = yield call(getExerciseSnackSagaAsync, user_id);
+
+  try {
+    yield put({
+      type: types.GET_EXERCISE_SNACK_SUCCESS,
+      payload: apiResult.results,
+    });
+  } catch (error) {
+    console.log("error from updateDisplayNameSaga :", error);
+  }
+}
+
 export function* watchUpdatePlaytime() {
-  yield takeEvery(types.UPDATE_PLAYTIME, updatePlaytimeSaga)
+  yield takeEvery(types.UPDATE_PLAYTIME, updatePlaytimeSaga);
 }
 
 export function* watchUpdatePlaytimeLastWeek() {
-  yield takeEvery(types.UPDATE_PLAYTIME_LASTWEEK, updatePlaytimeLastWeekSaga)
+  yield takeEvery(types.UPDATE_PLAYTIME_LASTWEEK, updatePlaytimeLastWeekSaga);
 }
 
 export function* watchUpdatePlaytimeLastWeekSelectedSaga() {
-  yield takeEvery(types.UPDATE_PLAYTIME_LASTWEEK_SELECTED, updatePlaytimeLastWeekSelectedSaga)
+  yield takeEvery(
+    types.UPDATE_PLAYTIME_LASTWEEK_SELECTED,
+    updatePlaytimeLastWeekSelectedSaga
+  );
 }
 
 export function* watchUpdatePlaylist() {
-  yield takeEvery(types.UPDATE_PLAYLIST, updatePlaylistSaga)
+  yield takeEvery(types.UPDATE_PLAYLIST, updatePlaylistSaga);
 }
 
 export function* watchVideoListForUser() {
-  yield takeEvery(types.VIDEO_LIST_FOR_USER, videoListForUserSaga)
+  yield takeEvery(types.VIDEO_LIST_FOR_USER, videoListForUserSaga);
 }
 
 export function* watchVideoListForUserLastWeek() {
-  yield takeEvery(types.VIDEO_LIST_FOR_USER_LASTWEEK, videoListForUserLastWeekSaga)
+  yield takeEvery(
+    types.VIDEO_LIST_FOR_USER_LASTWEEK,
+    videoListForUserLastWeekSaga
+  );
 }
 
 export function* watchRandomVideo() {
-  yield takeEvery(types.RANDOM_VIDEO, randomVideoSaga)
+  yield takeEvery(types.RANDOM_VIDEO, randomVideoSaga);
 }
 
 export function* watchSelectChangeVideo() {
-  yield takeEvery(types.SELECT_CHANGE_VIDEO, selectChangeVideoSaga)
+  yield takeEvery(types.SELECT_CHANGE_VIDEO, selectChangeVideoSaga);
 }
 
 export function* watchCreateCustomWeekForUser() {
-  yield takeEvery(types.CREATE_CUSTOM_WEEK_FOR_USER, createCustomWeekForUserSaga)
+  yield takeEvery(
+    types.CREATE_CUSTOM_WEEK_FOR_USER,
+    createCustomWeekForUserSaga
+  );
 }
 
 export function* watchUpdateBodyInfo() {
-  yield takeEvery(types.UPDATE_BODY_INFO, updateBodyInfoSaga)
+  yield takeEvery(types.UPDATE_BODY_INFO, updateBodyInfoSaga);
 }
 
 export function* watchSelectProgramInWeek() {
-  yield takeEvery(types.SELECT_PROGRAM_IN_WEEK, selectProgramInWeekSaga)
+  yield takeEvery(types.SELECT_PROGRAM_IN_WEEK, selectProgramInWeekSaga);
 }
 
 export function* watchSelectMemberInfo() {
-  yield takeEvery(types.SELECT_MEMBER_INFO, selectMemberInfoSaga)
+  yield takeEvery(types.SELECT_MEMBER_INFO, selectMemberInfoSaga);
 }
 
 export function* watchSelectBodyInfo() {
-  yield takeEvery(types.SELECT_BODY_INFO, selectBodyInfoSaga)
+  yield takeEvery(types.SELECT_BODY_INFO, selectBodyInfoSaga);
 }
 
 export function* watchDeleteProgramInWeek() {
-  yield takeEvery(types.DELETE_PROGRAM_IN_WEEK, deleteProgramInWeekSaga)
+  yield takeEvery(types.DELETE_PROGRAM_IN_WEEK, deleteProgramInWeekSaga);
 }
 
 export function* watchGetAllExerciseActivity() {
-  yield takeEvery(types.GET_ALL_EXERCISE_ACTIVITY, getAllExerciseActivitySaga)
+  yield takeEvery(types.GET_ALL_EXERCISE_ACTIVITY, getAllExerciseActivitySaga);
 }
 
 export function* watchCreateBraveAndBurnChallenge() {
-  yield takeEvery(types.CREATE_BRAVE_AND_BURN_CHALLENGE, createBraveAndBurnChallengeSaga)
+  yield takeEvery(
+    types.CREATE_BRAVE_AND_BURN_CHALLENGE,
+    createBraveAndBurnChallengeSaga
+  );
 }
 
 export function* watchGetBraveAndBurnChallenge() {
-  yield takeEvery(types.GET_BRAVE_AND_BURN_CHALLENGE, getBraveAndBurnChallengeSaga)
+  yield takeEvery(
+    types.GET_BRAVE_AND_BURN_CHALLENGE,
+    getBraveAndBurnChallengeSaga
+  );
 }
 
 export function* watchUpdateVideoStatusBraveAndBurn() {
-  yield takeEvery(types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN, updateVideoStatusBraveAndBurnSaga)
+  yield takeEvery(
+    types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN,
+    updateVideoStatusBraveAndBurnSaga
+  );
 }
 
 export function* watchUpdateFbShareStatusBraveAndBurn() {
-  yield takeEvery(types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN, updateFbShareStatusBraveAndBurnSaga)
+  yield takeEvery(
+    types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN,
+    updateFbShareStatusBraveAndBurnSaga
+  );
+}
+
+export function* watchCreateExerciseSnackSaga() {
+  yield takeEvery(types.CREATE_EXERCISE_SNACK, createExerciseSnackSaga);
+}
+export function* watchGetExerciseSnackSaga() {
+  yield takeEvery(types.GET_EXERCISE_SNACK, getExerciseSnackSaga);
 }
 
 export function* saga() {
@@ -1347,6 +1406,8 @@ export function* saga() {
     fork(watchGetBraveAndBurnChallenge),
     fork(watchUpdateVideoStatusBraveAndBurn),
     fork(watchUpdateFbShareStatusBraveAndBurn),
+    fork(watchCreateExerciseSnackSaga),
+    fork(watchGetExerciseSnackSaga),
   ]);
 }
 
@@ -1378,7 +1439,10 @@ const INIT_STATE = {
   statusGetBraveAndBurn: "default",
   brave_and_burn_challenge: null,
   status_update_video_brave_and_burn: "default",
-  status_update_fb_brave_and_burn: "default"
+  status_update_fb_brave_and_burn: "default",
+  statsCreateExerciseSnack: "default",
+  statsGetExerciseSnack: "default",
+  videoExerciseSnack: null,
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1386,196 +1450,227 @@ export function reducer(state = INIT_STATE, action) {
     case types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN:
       return {
         ...state,
-        status_update_fb_brave_and_burn: "loading"
-      }
+        status_update_fb_brave_and_burn: "loading",
+      };
     case types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS:
       return {
         ...state,
         status_update_fb_brave_and_burn: "success",
-      }
+      };
     case types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN:
       return {
         ...state,
-        status_update_video_brave_and_burn: "loading"
-      }
+        status_update_video_brave_and_burn: "loading",
+      };
     case types.UPDATE_VIDEO_STATUS_BRAVE_AND_BURN_SUCCESS:
       return {
         ...state,
         status_update_video_brave_and_burn: "success",
-      }
+      };
     case types.GET_BRAVE_AND_BURN_CHALLENGE:
       return {
         ...state,
-        statusGetBraveAndBurn: "loading"
-      }
+        statusGetBraveAndBurn: "loading",
+      };
     case types.GET_BRAVE_AND_BURN_CHALLENGE_SUCCESS:
       return {
         ...state,
         statusGetBraveAndBurn: "success",
-        brave_and_burn_challenge: action.payload
-      }
+        brave_and_burn_challenge: action.payload,
+      };
     case types.GET_BRAVE_AND_BURN_CHALLENGE_FAIL:
       return {
         ...state,
-        statusGetBraveAndBurn: "fail"
-      }
+        statusGetBraveAndBurn: "fail",
+      };
     case types.CREATE_BRAVE_AND_BURN_CHALLENGE:
       return {
         ...state,
-        statusCreateBraveAndBurn: "loading"
-      }
+        statusCreateBraveAndBurn: "loading",
+      };
     case types.CREATE_BRAVE_AND_BURN_CHALLENGE_SUCCESS:
       return {
         ...state,
-        statusCreateBraveAndBurn: "success"
-      }
+        statusCreateBraveAndBurn: "success",
+      };
     case types.CREATE_BRAVE_AND_BURN_CHALLENGE_FAIL:
       return {
         ...state,
-        statusCreateBraveAndBurn: "fail"
-      }
+        statusCreateBraveAndBurn: "fail",
+      };
     case types.HIDE_POPUP_VIDEO_PLAYER:
       return {
         ...state,
-        hidePopUpVideoPlayer: action.payload
-      }
+        hidePopUpVideoPlayer: action.payload,
+      };
     case types.HIDE_POPUP_VIDEO_PLAYER_LIST:
       return {
         ...state,
-        hidePopUpVideoPlayerList: action.payload.status
-      }
+        hidePopUpVideoPlayerList: action.payload.status,
+      };
     case types.SET_ENDED_VIDEO_PLAYER_LIST:
       return {
         ...state,
-        endedVideoPlayerList: action.payload.status
-      }
+        endedVideoPlayerList: action.payload.status,
+      };
     case types.GET_ALL_EXERCISE_ACTIVITY:
       return {
         ...state,
-        statusGetAllExAct: "loading"
-      }
+        statusGetAllExAct: "loading",
+      };
     case types.GET_ALL_EXERCISE_ACTIVITY_SUCCESS:
       return {
         ...state,
         statusGetAllExAct: "success",
-        all_exercise_activity: action.payload
-      }
+        all_exercise_activity: action.payload,
+      };
     case types.GET_ALL_EXERCISE_ACTIVITY_FAIL:
       return {
         ...state,
-        statusGetAllExAct: "fail"
-      }
+        statusGetAllExAct: "fail",
+      };
     case types.UPDATE_BODY_INFO_SUCCESS:
       return {
         ...state,
-        statusUpdateBodyInfo: "success"
-      }
+        statusUpdateBodyInfo: "success",
+      };
     case types.CREATE_CUSTOM_WEEK_FOR_USER_SUCCESS:
       return {
         ...state,
         statusVideoList: "default",
-        statusUpdateBodyInfo: "default"
-      }
+        statusUpdateBodyInfo: "default",
+      };
     case types.UPDATE_PLAYLIST:
       return {
         ...state,
-        status: "processing"
+        status: "processing",
       };
     case types.UPDATE_PLAYLIST_SUCCESS:
       return {
         ...state,
         exerciseVideo: action.payload,
-        status: "success"
+        status: "success",
       };
     case types.UPDATE_PLAYTIME_SUCCESS:
       return {
         ...state,
-        exerciseVideo: action.payload
+        exerciseVideo: action.payload,
       };
     case types.UPDATE_PLAYTIME_LASTWEEK_SUCCESS:
       return {
         ...state,
-        exerciseVideoLastWeek: action.payload
+        exerciseVideoLastWeek: action.payload,
       };
     case types.UPDATE_PLAYTIME_LASTWEEK_SELECTED:
       return {
         ...state,
-        statusUpdatePlayTimeWeekAll: "loading"
+        statusUpdatePlayTimeWeekAll: "loading",
       };
     case types.UPDATE_PLAYTIME_LASTWEEK_SELECTED_SUCCESS:
       return {
         ...state,
         all_exercise_activity: action.payload,
-        statusUpdatePlayTimeWeekAll: "success"
+        statusUpdatePlayTimeWeekAll: "success",
       };
     case types.VIDEO_LIST_FOR_USER_LASTWEEK_SUCCESS:
       return {
         ...state,
         exerciseVideoLastWeek: action.payload,
-        isFirstWeek: false
+        isFirstWeek: false,
       };
     case types.GET_LASTWEEK:
       return {
         ...state,
-        lastweek: action.payload
+        lastweek: action.payload,
       };
     case types.VIDEO_LIST_FOR_USER_LASTWEEK_FAIL:
       return {
         ...state,
-        isFirstWeek: true
-      }
+        isFirstWeek: true,
+      };
     case types.VIDEO_LIST_FOR_USER_SUCCESS:
       return {
         ...state,
-        exerciseVideo: action.payload
+        exerciseVideo: action.payload,
       };
     case types.GET_WEEK:
       return {
         ...state,
-        week: action.payload
+        week: action.payload,
       };
     case types.VIDEO_LIST_FOR_USER_FAIL:
       return {
         ...state,
-        statusVideoList: "no_video"
-      }
+        statusVideoList: "no_video",
+      };
     case types.RANDOM_VIDEO_SUCCESS:
       return {
         ...state,
-        video: action.payload
+        video: action.payload,
       };
     case types.SELECT_CHANGE_VIDEO_SUCCESS:
       return {
         ...state,
-        videos: action.payload
+        videos: action.payload,
       };
     case types.SELECT_PROGRAM_IN_WEEK_SUCCESS:
       return {
         ...state,
-        programInWeek: JSON.stringify(action.payload)
+        programInWeek: JSON.stringify(action.payload),
       };
     case types.SELECT_MEMBER_INFO_SUCCESS:
       return {
         ...state,
-        memberInfo: action.payload
+        memberInfo: action.payload,
       };
     case types.SELECT_BODY_INFO_SUCCESS:
       return {
         ...state,
-        bodyInfo: action.payload
+        bodyInfo: action.payload,
       };
     case types.RESET_STATUS:
       return {
         ...state,
-        status: "default"
+        status: "default",
       };
     case types.CLEAR_VIDEOS:
       return {
         ...state,
-        videos: []
+        videos: [],
       };
     case types.CLEAR_VIDEO_LIST:
       return INIT_STATE;
+    case types.CREATE_EXERCISE_SNACK:
+      return {
+        ...state,
+        statsCreateExerciseSnack: "loading",
+      };
+    case types.CREATE_EXERCISE_SNACK_SUCCESS:
+      return {
+        ...state,
+        statsCreateExerciseSnack: "success",
+      };
+    case types.CREATE_EXERCISE_SNACK_FALE:
+      return {
+        ...state,
+        statsCreateExerciseSnack: "fail",
+      };
+    case types.GET_EXERCISE_SNACK:
+      return {
+        ...state,
+        statsGetExerciseSnack: "loading",
+      };
+    case types.GET_EXERCISE_SNACK_SUCCESS:
+      return {
+        ...state,
+        videoExerciseSnack: action.payload.exerciseSnack,
+        statsGetExerciseSnack: "success",
+      };
+    case types.GET_EXERCISE_SNACK_FALE:
+      return {
+        ...state,
+        statsGetExerciseSnack: "fail",
+      };
     default:
       return { ...state };
   }
