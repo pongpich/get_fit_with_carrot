@@ -185,7 +185,7 @@ class VideoList extends Component {
   }
 
   async componentDidMount() {
-    const { user } = this.props;
+    const { user, statsCreateExerciseSnack } = this.props;
 
     this.props.setEndedVideoPlayerList(false);
 
@@ -196,8 +196,12 @@ class VideoList extends Component {
       this.props.checkRenewPrompt(user.user_id);
 
       this.props.getAllExerciseActivity(user.user_id);
-      this.props.createExerciseSnack(user.user_id);
-      this.props.getExerciseSnack(user.user_id);
+      this.props.createExerciseSnack(user && user.user_id);
+      if (statsCreateExerciseSnack == "success") {
+        console.log("getExerciseSnack");
+        this.props.getExerciseSnack(user.user_id);
+      }
+      /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
     }
     if (this.props.user && this.props.user.other_attributes) {
@@ -276,7 +280,7 @@ class VideoList extends Component {
       videoExerciseSnack,
     } = this.props;
 
-    console.log("videoExerciseSnack", videoExerciseSnack);
+    console.log("statsCreateExerciseSnack", statsCreateExerciseSnack);
 
     if (
       prevProps.statusGetBraveAndBurn !== statusGetBraveAndBurn &&

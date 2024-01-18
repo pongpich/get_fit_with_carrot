@@ -740,8 +740,8 @@ const getExerciseSnackSagaAsync = async (user_id) => {
 
 const createExerciseSnackSagaAsync = async (user_id) => {
   try {
-    const apiResult = await API.get("bebe", "/createExerciseSnacksChallenge", {
-      queryStringParameters: {
+    const apiResult = await API.post("bebe", "/createExerciseSnacksChallenge", {
+      body: {
         user_id,
       },
     });
@@ -1257,7 +1257,7 @@ function* createCustomWeekForUserSaga({ payload }) {
 function* createExerciseSnackSaga({ payload }) {
   const { user_id } = payload;
   const apiResult = yield call(createExerciseSnackSagaAsync, user_id);
-
+  console.log("apiResult Saga", apiResult, user_id);
   try {
     yield put({
       type: types.CREATE_EXERCISE_SNACK_SUCCESS,
