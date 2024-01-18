@@ -385,43 +385,29 @@ class ImportMembers extends Component {
                 </h5>
                 <h5>{"วันเริ่มต้น : " + this.props.memberInfo.start_date}</h5>
                 <h5>{"วันสิ้นสุด : " + this.props.memberInfo.expire_date}</h5>
-                <h5>{`ประเภทผู้ใช้ : ${(this.props.memberInfo.low_impact === 'no') ? 'ทั่วไป' : 'low impact'}`}
+                <h5>{`ประเภทผู้ใช้ : ${(this.props.memberInfo.exercise_type === 'bodyweight') ? 'bodyweight' : 'gym'}`}
                   <span style={{ color: "red", marginLeft: 30, cursor: "pointer" }} onClick={() => this.onEditMemberType()}>แก้ไข</span>
                 </h5>
                 {
                   (editMemberType && (statusUpdateLowImpact !== "loading")) &&
                   (
-                    (this.props.memberInfo.low_impact === 'no') ?
+                    (this.props.memberInfo.exercise_type === 'bodyweight') ?
                       <div>
                         <h6>
-                          ต้องการปรับเป็นประเภท <span style={{ color: "red" }}>"low impact"</span> ใช่หรือไม่?
+                          ต้องการปรับเป็นประเภท <span style={{ color: "red" }}>"gym"</span> ใช่หรือไม่?
                         </h6>
-                        <span style={{ color: "green", marginLeft: 30, cursor: "pointer" }} onClick={() => this.props.updateStatusLowImpact((memberInfo && memberInfo.user_id), 'yes')}>ยืนยัน</span>
+                        <span style={{ color: "green", marginLeft: 30, cursor: "pointer" }} onClick={() => this.props.updateStatusLowImpact((memberInfo && memberInfo.user_id), 'gym')}>ยืนยัน</span>
                         <span style={{ color: "red", marginLeft: 30, cursor: "pointer" }} onClick={() => this.onEditMemberType()}>ยกเลิก</span>
                       </div>
                       :
                       <div>
                         <h6>
-                          ต้องการปรับเป็นประเภท  <span style={{ color: "red" }}>"ทั่วไป"</span> ใช่หรือไม่?
+                          ต้องการปรับเป็นประเภท  <span style={{ color: "red" }}>"bodyweight"</span> ใช่หรือไม่?
                         </h6>
-                        <span style={{ color: "green", marginLeft: 30, cursor: "pointer" }} onClick={() => this.props.updateStatusLowImpact((memberInfo && memberInfo.user_id), 'no')}>ยืนยัน</span>
+                        <span style={{ color: "green", marginLeft: 30, cursor: "pointer" }} onClick={() => this.props.updateStatusLowImpact((memberInfo && memberInfo.user_id), 'bodyweight')}>ยืนยัน</span>
                         <span style={{ color: "red", marginLeft: 30, cursor: "pointer" }} onClick={() => this.onEditMemberType()}>ยกเลิก</span>
                       </div>
                   )
-                }
-                {
-                  (memberInfo.low_impact === 'no') &&
-                  <h5>ระดับโปรแกรม :
-                    <span>
-                      {(memberInfo.program_level === 'bfr_lv1') && ' bfr_lv1 (Beginner)'}
-                      {(memberInfo.program_level === 'bfr_lv1.5') && ' bfr_lv1.5'}
-                      {(memberInfo.program_level === 'bfr_lv2') && ' bfr_lv2 (Standard)'}
-                    </span>
-                    {
-                      (memberInfo.low_impact === 'no') &&
-                      <span style={{ color: "red", marginLeft: 30, cursor: "pointer" }} onClick={() => this.onEditProgramLevel()}>แก้ไข</span>
-                    }
-                  </h5>
                 }
                 {
                   (editProgramLevel && (statusUpdateProgramLevel !== "loading")) &&
@@ -906,9 +892,6 @@ class ImportMembers extends Component {
           </div>
           <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderChangeEmail", email: "" })} style={{}}>เปลี่ยนอีเมล</a>
-          </div>
-          <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
-            <a className="" onClick={() => this.setState({ selectedRenderPage: "renderDeleteProgramInWeek", email: "" })} style={{}}>ProgramInWeek</a>
           </div>
           <div className="mr-4 mb-3" style={{ cursor: "pointer" }}>
             <a className="" onClick={() => this.setState({ selectedRenderPage: "renderMemberInfo", email: "" })} style={{}}>ข้อมูลผู้ใช้</a>
