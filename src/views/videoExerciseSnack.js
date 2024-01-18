@@ -15,16 +15,17 @@ const VideoExerciseSnack = () => {
   );
 
   const [exerciseSnack, setExerciseSnack] = useState(
-    videoExerciseSnack.filter((item) => item.week === week)
+    videoExerciseSnack && JSON.parse(videoExerciseSnack[0].video)
   );
   const [weekSnack, setWeekSnack] = useState(week);
 
   useEffect(() => {
-    const week3Data = videoExerciseSnack.filter(
-      (item) => item.week === weekSnack
+    setExerciseSnack(
+      videoExerciseSnack && JSON.parse(videoExerciseSnack[0].video)
     );
-    setExerciseSnack(week3Data);
   }, [videoExerciseSnack]);
+
+  console.log("exerciseSnack", exerciseSnack);
 
   return (
     <>
@@ -177,14 +178,11 @@ const VideoExerciseSnack = () => {
           <tbody>
             {exerciseSnack &&
               exerciseSnack.map((item, index) => {
-                let itemVideo = JSON.parse(item.video);
-
                 /*          const minuteLabel =
                   item.duration < 20
                     ? convertFormatTime(item.duration)
                     : convertSecondsToMinutes(item.duration);
  */
-                console.log("itemVideo", itemVideo[index].thumbnail);
 
                 return (
                   <div className="row" key={index}>
@@ -257,7 +255,7 @@ const VideoExerciseSnack = () => {
                           <div className="containerThumb">
                             <img
                               className="img-fluid"
-                              src={`${itemVideo[index].thumbnail}`}
+                              src={`${item.thumbnail}`}
                               alt=""
                             />
                           </div>
