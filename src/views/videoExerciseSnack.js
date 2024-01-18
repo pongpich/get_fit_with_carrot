@@ -2,12 +2,29 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createExerciseSnack } from "../redux/exerciseVideos";
+import {
+  convertSecondsToMinutes,
+  convertFormatTime,
+  calculateWeekInProgram,
+} from "../helpers/utils";
 
 const VideoExerciseSnack = () => {
   const dispatch = useDispatch();
-  const { videoExerciseSnack } = useSelector(({ exerciseVideos }) =>
+  const { videoExerciseSnack, week } = useSelector(({ exerciseVideos }) =>
     exerciseVideos ? exerciseVideos : ""
   );
+
+  const [exerciseSnack, setExerciseSnack] = useState(
+    videoExerciseSnack.filter((item) => item.week === week)
+  );
+  const [weekSnack, setWeekSnack] = useState(week);
+
+  useEffect(() => {
+    const week3Data = videoExerciseSnack.filter(
+      (item) => item.week === weekSnack
+    );
+    setExerciseSnack(week3Data);
+  }, [videoExerciseSnack]);
 
   return (
     <>
@@ -158,19 +175,24 @@ const VideoExerciseSnack = () => {
           </div>
 
           <tbody>
-            {videoExerciseSnack &&
-              videoExerciseSnack.map((item, index) => {
-                /*   const minuteLabel =
+            {exerciseSnack &&
+              exerciseSnack.map((item, index) => {
+                let itemVideo = JSON.parse(item.video);
+
+                /*          const minuteLabel =
                   item.duration < 20
                     ? convertFormatTime(item.duration)
-                    : convertSecondsToMinutes(item.duration); */
+                    : convertSecondsToMinutes(item.duration);
+ */
+                console.log("itemVideo", itemVideo[index].thumbnail);
+
                 return (
                   <div className="row" key={index}>
                     <div className="checkCompleteVideo mt-3 col-lg-2 col-md-1 col-2">
                       {index === 0 && (
                         <h6 className="firstVideoStartText">เริ่มกันเลย!</h6>
                       )}
-                      {/*   {item.play_time &&
+                      {/* {item.play_time &&
                       item.duration &&
                       item.play_time / item.duration >=
                         completeVideoPlayPercentage ? (
@@ -203,8 +225,8 @@ const VideoExerciseSnack = () => {
                             {index + 1}
                           </h3>
                         </span>
-                      )} */}
-                      {/*   {index === todayExercise.length - 1 ? (
+                      )}
+                      {index === todayExercise.length - 1 ? (
                         <div className="vl" style={{ height: "0%" }}></div>
                       ) : (
                         <div className="vl"></div>
@@ -235,7 +257,7 @@ const VideoExerciseSnack = () => {
                           <div className="containerThumb">
                             <img
                               className="img-fluid"
-                              src={`${item.thumbnail}`}
+                              src={`${itemVideo[index].thumbnail}`}
                               alt=""
                             />
                           </div>

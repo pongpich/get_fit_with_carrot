@@ -358,10 +358,11 @@ export const createExerciseSnack = (user_id) => ({
     user_id,
   },
 });
-export const getExerciseSnack = (user_id) => ({
+export const getExerciseSnack = (user_id, week) => ({
   type: types.GET_EXERCISE_SNACK,
   payload: {
     user_id,
+    week,
   },
 });
 
@@ -725,11 +726,12 @@ const createCustomWeekForUserSagaAsync = async (
   }
 };
 
-const getExerciseSnackSagaAsync = async (user_id) => {
+const getExerciseSnackSagaAsync = async (user_id, week) => {
   try {
     const apiResult = await API.get("bebe", "/getExerciseSnacksChallenge", {
       queryStringParameters: {
         user_id,
+        week,
       },
     });
     return apiResult;
@@ -1268,8 +1270,8 @@ function* createExerciseSnackSaga({ payload }) {
   }
 }
 function* getExerciseSnackSaga({ payload }) {
-  const { user_id } = payload;
-  const apiResult = yield call(getExerciseSnackSagaAsync, user_id);
+  const { user_id, week } = payload;
+  const apiResult = yield call(getExerciseSnackSagaAsync, user_id, week);
 
   try {
     yield put({

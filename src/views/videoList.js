@@ -185,7 +185,7 @@ class VideoList extends Component {
   }
 
   async componentDidMount() {
-    const { user, statsCreateExerciseSnack } = this.props;
+    const { user, statsCreateExerciseSnack, week } = this.props;
 
     this.props.setEndedVideoPlayerList(false);
 
@@ -198,7 +198,7 @@ class VideoList extends Component {
       this.props.getAllExerciseActivity(user.user_id);
       this.props.createExerciseSnack(user && user.user_id);
       if (statsCreateExerciseSnack == "success") {
-        this.props.getExerciseSnack(user.user_id);
+        this.props.getExerciseSnack(user.user_id, week);
       }
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
