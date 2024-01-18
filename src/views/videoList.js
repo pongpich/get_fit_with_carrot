@@ -198,7 +198,6 @@ class VideoList extends Component {
       this.props.getAllExerciseActivity(user.user_id);
       this.props.createExerciseSnack(user && user.user_id);
       if (statsCreateExerciseSnack == "success") {
-        console.log("getExerciseSnack");
         this.props.getExerciseSnack(user.user_id);
       }
       /*  */
@@ -279,8 +278,6 @@ class VideoList extends Component {
       statsCreateExerciseSnack,
       videoExerciseSnack,
     } = this.props;
-
-    console.log("statsCreateExerciseSnack", statsCreateExerciseSnack);
 
     if (
       prevProps.statusGetBraveAndBurn !== statusGetBraveAndBurn &&

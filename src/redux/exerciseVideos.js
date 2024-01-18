@@ -1257,7 +1257,7 @@ function* createCustomWeekForUserSaga({ payload }) {
 function* createExerciseSnackSaga({ payload }) {
   const { user_id } = payload;
   const apiResult = yield call(createExerciseSnackSagaAsync, user_id);
-  console.log("apiResult Saga", apiResult, user_id);
+
   try {
     yield put({
       type: types.CREATE_EXERCISE_SNACK_SUCCESS,
