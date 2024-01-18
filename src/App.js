@@ -236,7 +236,7 @@ class App extends Component {
                   className="nav-link"
                   href="/#"
                   onClick={() => this.onUserLogout()}
-                  style={{ color: "white", cursor: "pointer" }}
+                  style={{ color: "#F45197", cursor: "pointer" }}
                 >
                   ออกจากระบบ
                 </a>
