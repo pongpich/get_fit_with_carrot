@@ -53,14 +53,17 @@ const VideoExerciseSnack = () => {
     trailer.classList.add("active_list");
   };
 
-  const totalDuration = exerciseSnack.reduce(
-    (total, exerciseSnack) => total + exerciseSnack.duration,
-    0
-  );
-  const totalDurationInMinutes = Math.floor(totalDuration / 60); // จำนวนนาที
-  const remainingSeconds = totalDuration % 60; // จำนวนวินาทีที่เหลือ
+  const totalTime = () => {
+    const totalDuration = exerciseSnack.reduce(
+      (total, exerciseSnack) => total + exerciseSnack.duration,
+      0
+    );
 
-  console.log(`Total Duration: ${totalDuration} seconds`);
+    const totalDurationInMinutes = Math.floor(totalDuration / 60); // จำนวนนาที
+    const remainingSeconds = totalDuration % 60; // จำนวนวินาทีที่เหลือ
+    const formattedDuration = `${totalDurationInMinutes}:${remainingSeconds}`;
+    return formattedDuration;
+  };
 
   return (
     <>
@@ -87,7 +90,7 @@ const VideoExerciseSnack = () => {
                       }}
                     >
                       {" "}
-                      รวมเวลาฝึกทั้งหมด {remainingSeconds} นาที
+                      รวมเวลาฝึกทั้งหมด {totalTime()} นาที
                     </span>
                     {/* {todayExercise && this.checkDayPlaytime(todayExercise) && (
                       <div
