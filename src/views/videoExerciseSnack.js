@@ -1,23 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { createExerciseSnack } from "../redux/exerciseVideos";
+import {
+  createExerciseSnack,
+  hidePopupVideoPlayer,
+  setHidePopupVideoPlayerSnack,
+} from "../redux/exerciseVideos";
 import {
   convertSecondsToMinutes,
   convertFormatTime,
   calculateWeekInProgram,
 } from "../helpers/utils";
+import VideoPlayerSnack from "../components/VideoPlayerSnack";
 
 const VideoExerciseSnack = () => {
   const dispatch = useDispatch();
-  const { videoExerciseSnack, week } = useSelector(({ exerciseVideos }) =>
-    exerciseVideos ? exerciseVideos : ""
+  const { videoExerciseSnack, week, hideVideoPopUpSnack } = useSelector(
+    ({ exerciseVideos }) => (exerciseVideos ? exerciseVideos : "")
   );
 
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && JSON.parse(videoExerciseSnack[0].video)
   );
   const [weekSnack, setWeekSnack] = useState(week);
+  const [autoPlayCheck, setAutoPlayCheck] = useState(true);
+
+  const [url, setUrl] = useState(null);
+  const [selectedVDO, setSelectedVDO] = useState(null);
+
+  useEffect(() => {
+    dispatch(setHidePopupVideoPlayerSnack(false));
+  }, []);
 
   useEffect(() => {
     setExerciseSnack(
@@ -25,84 +38,39 @@ const VideoExerciseSnack = () => {
     );
   }, [videoExerciseSnack]);
 
-  console.log("exerciseSnack", exerciseSnack);
+  useEffect(() => {
+    if (hideVideoPopUpSnack) {
+      var trailer = document.getElementById(`popupVDOSnack`);
+      trailer.classList.remove("active_list");
+      dispatch(setHidePopupVideoPlayerSnack(false));
+    }
+  }, [hideVideoPopUpSnack]);
+
+  const toggleList = (url) => {
+    setUrl(url);
+
+    var trailer = document.getElementById(`popupVDOSnack`);
+    trailer.classList.add("active_list");
+  };
+
+  const totalDuration = exerciseSnack.reduce(
+    (total, exerciseSnack) => total + exerciseSnack.duration,
+    0
+  );
+  const totalDurationInMinutes = Math.floor(totalDuration / 60); // จำนวนนาที
+  const remainingSeconds = totalDuration % 60; // จำนวนวินาทีที่เหลือ
+
+  console.log(`Total Duration: ${totalDuration} seconds`);
 
   return (
     <>
       <div className="">
-        {/*  {this.state.autoPlayCheck ? (
-                <div className="trailer" id={`popupVDOList`}>
-                  <div>
-                    {videoUrl3 ? (
-                      <VideoPlayerListByteArk
-                        url={videoUrl3}
-                        day_number={focusDay}
-                        video_number={selectedVDO && selectedVDO.order}
-                        selectedVDO={selectedVDO}
-                        lastWeekVDO_click={lastWeekVDO_click}
-                        lastWeekVDOAll={lastWeekVDOAll}
-                        lastWeekStart={lastWeekStart}
-                        selectExerciseVideoLastWeek={
-                          selectExerciseVideoLastWeek
-                        }
-                      />
-                    ) : (
-                      <>
-                        <video
-                          ref="videoPlayerList"
-                          src={videoUrl}
-                          id="videoPlayerList"
-                          controls
-                          controlsList="nodownload"
-                          disablePictureInPicture
-                        ></video>
-                        <img
-                          alt=""
-                          src="../assets/img/thumb/close.png"
-                          className="close"
-                          onClick={() => this.closeList()}
-                        ></img>
-                      </>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <div className="trailer" id={`popupVDO`}>
-                  <div>
-                    {videoUrl3 ? (
-                      <VideoPlayerByteArk
-                        url={videoUrl3}
-                        day_number={focusDay}
-                        video_number={selectedVDO && selectedVDO.order}
-                        selectedVDO={selectedVDO}
-                        lastWeekVDO_click={lastWeekVDO_click}
-                        lastWeekVDOAll={lastWeekVDOAll}
-                        lastWeekStart={lastWeekStart}
-                        selectExerciseVideoLastWeek={
-                          selectExerciseVideoLastWeek
-                        }
-                      />
-                    ) : (
-                      <>
-                        <video
-                          ref="videoPlayer"
-                          src={videoUrl}
-                          id="videoPlayer"
-                          controls
-                          controlsList="nodownload"
-                          disablePictureInPicture
-                        ></video>
-                        <img
-                          alt=""
-                          src="../assets/img/thumb/close.png"
-                          className="close"
-                          onClick={() => this.toggle()}
-                        ></img>
-                      </>
-                    )}
-                  </div>
-                </div>
-              )} */}
+        <div className="trailer" id={`popupVDOSnack`}>
+          <div>
+            {" "}
+            <VideoPlayerSnack url={url} />
+          </div>
+        </div>
 
         <table className="table table-responsive">
           <div>
@@ -119,7 +87,7 @@ const VideoExerciseSnack = () => {
                       }}
                     >
                       {" "}
-                      รวมเวลาฝึกทั้งหมด {/* {timesExercise} */} นาที
+                      รวมเวลาฝึกทั้งหมด {remainingSeconds} นาที
                     </span>
                     {/* {todayExercise && this.checkDayPlaytime(todayExercise) && (
                       <div
@@ -178,19 +146,18 @@ const VideoExerciseSnack = () => {
           <tbody>
             {exerciseSnack &&
               exerciseSnack.map((item, index) => {
-                /*          const minuteLabel =
+                const minuteLabel =
                   item.duration < 20
                     ? convertFormatTime(item.duration)
                     : convertSecondsToMinutes(item.duration);
- */
 
                 return (
                   <div className="row" key={index}>
                     <div className="checkCompleteVideo mt-3 col-lg-2 col-md-1 col-2">
-                      {index === 0 && (
+                      {/*      {index === 0 && (
                         <h6 className="firstVideoStartText">เริ่มกันเลย!</h6>
                       )}
-                      {/* {item.play_time &&
+                      {item.play_time &&
                       item.duration &&
                       item.play_time / item.duration >=
                         completeVideoPlayPercentage ? (
@@ -235,22 +202,22 @@ const VideoExerciseSnack = () => {
                     </div>
                     <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                       <div className="videoItem border shadow">
-                        {/*  {this.state.autoPlayCheck && (
+                        {autoPlayCheck && (
                           <img
                             className="play_button"
                             src="../assets/img/thumb/play_button2.png"
                             width="100px"
-                            onClick={() => this.toggleList(index)}
+                            onClick={() => toggleList(item.url)}
                           ></img>
                         )}
-                        {!this.state.autoPlayCheck && (
+                        {!autoPlayCheck && (
                           <img
                             className="play_button"
                             src="../assets/img/thumb/play_button2.png"
                             width="100px"
-                            onClick={() => this.toggle(item)}
+                            onClick={() => toggleList(item.url)}
                           ></img>
-                        )} */}
+                        )}
                         <div className="videoThumb">
                           <div className="containerThumb">
                             <img
@@ -267,7 +234,7 @@ const VideoExerciseSnack = () => {
                                 className="fa fa-clock-o fa-1x mr-2"
                                 aria-hidden="true"
                               ></i>
-                              {/*   {minuteLabel} */} นาที
+                              {minuteLabel} นาที
                             </h6>
                           </div>
                           <hr
@@ -283,6 +250,26 @@ const VideoExerciseSnack = () => {
                               }}
                             >
                               {" "}
+                              {item.category}{" "}
+                            </p>
+                            {item.name.length < 17 ? (
+                              <h4 style={{ color: "#F45197" }}>
+                                <b>{item.name}</b>
+                              </h4>
+                            ) : (
+                              <h6 style={{ color: "#F45197" }}>
+                                <b>{item.name}</b>
+                              </h6>
+                            )}
+                            <p
+                              style={{
+                                color: "grey",
+                                marginBottom: "0px",
+                                marginTop: "0px",
+                              }}
+                            >
+                              อุปกรณ์ :{" "}
+                              {item.equipment ? item.equipment : "ไม่มี"}{" "}
                             </p>
                           </div>
                         </div>

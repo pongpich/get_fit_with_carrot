@@ -71,6 +71,7 @@ export const types = {
   GET_EXERCISE_SNACK: "GET_EXERCISE_SNACK",
   GET_EXERCISE_SNACK_SUCCESS: "GET_EXERCISE_SNACK_SUCCESS",
   GET_EXERCISE_SNACK_FALE: "GET_EXERCISE_SNACK_FALE",
+  HIDE_POPUP_VIDEO_PLAYER_SNACK: "HIDE_POPUP_VIDEO_PLAYER_SNACK",
 };
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
@@ -110,6 +111,12 @@ export const hidePopupVideoPlayer = (status) => ({
 
 export const setHidePopupVideoPlayerList = (status) => ({
   type: types.HIDE_POPUP_VIDEO_PLAYER_LIST,
+  payload: {
+    status,
+  },
+});
+export const setHidePopupVideoPlayerSnack = (status) => ({
+  type: types.HIDE_POPUP_VIDEO_PLAYER_SNACK,
   payload: {
     status,
   },
@@ -1445,6 +1452,7 @@ const INIT_STATE = {
   statsCreateExerciseSnack: "default",
   statsGetExerciseSnack: "default",
   videoExerciseSnack: null,
+  hideVideoPopUpSnack: false,
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1672,6 +1680,11 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         statsGetExerciseSnack: "fail",
+      };
+    case types.HIDE_POPUP_VIDEO_PLAYER_SNACK:
+      return {
+        ...state,
+        hideVideoPopUpSnack: action.payload.status,
       };
     default:
       return { ...state };
