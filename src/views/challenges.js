@@ -292,6 +292,7 @@ class Challenges extends Component {
                     <p className="card-text">น้ำหนักลดลงจากสัปดาห์ก่อน<span style={{ float: "right", color: "#F45197" }}>{isReducedWeight ? 1 : 0}/1</span></p>
                     <p className="card-text">รอบเอวลดลงจากสัปดาห์ก่อน<span style={{ float: "right", color: "#F45197" }}>{waistInWeekResult}/1</span></p>
                     <p className="card-text">ออกกำลังกายครบทุกวันในสัปดาห์<span style={{ float: "right", color: "#F45197" }}>{(this.props.statusVideoList !== 'no_video') ? isExerciseCompleted : 0}/{exerciseVideo.length}</span></p>
+                    <p className="card-text">ทำ Random Exercise Snacks สำเร็จ<span style={{ float: "right", color: "#F45197" }}>0/4</span></p>
                   </div>
                 </div>
                 <p className="card-text" style={{ float: "right", fontSize: "15px", color: "red" }}>*รายการจะถูก Reset และสรุปคะแนนทุกวันอาทิตย์ เพื่อคำนวณ Rank</p>
@@ -2204,6 +2205,10 @@ class Challenges extends Component {
           <h6><b>น้ำหนักลดลงจากสัปดาห์ก่อน</b> จะได้รับ 10 คะแนน</h6>
           <h6><b>รอบเอวลดลงจากสัปดาห์ก่อน</b> จะได้รับ 10 คะแนน</h6>
           <h6><b>ออกกำลังกายครบทุกวันในสัปดาห์</b> จะได้รับ 10 คะแนน</h6>
+          <h6><b>ทำ Random Exercise Snacks 4 ครั้ง</b> จะได้รับ 10 คะแนน</h6>
+          <h6><b>ทำ Random Exercise Snacks 5 ครั้ง</b> จะได้รับคะแนนพิเศษ x คะแนน</h6>
+          <h6><b>ทำ Random Exercise Snacks 6 ครั้ง</b> จะได้รับคะแนนพิเศษ y คะแนน</h6>
+          <h6><b>ทำ Random Exercise Snacks 7 ครั้ง</b> จะได้รับคะแนนพิเศษ z คะแนน</h6>
           <br></br>
           <h5 style={{ color: "#F45197" }}><b>• รายการชาเลนจ์แบบทีม</b></h5>
           <h6><b>สมาชิกทุกคนชั่งน้ำหนักครบ 2 ครั้ง</b> ทั้งทีมจะได้รับ คนละ 10 คะแนน</h6>
