@@ -467,6 +467,11 @@ class ImportMembers extends Component {
                 <td style={{ border: '1px solid black' }}><h6>{"ได้รับ 10 คะแนน ทันที (สูงสุด 70 คะแนน ต่อ สัปดาห์)"}</h6></td>
               </tr>
               <tr style={{ border: '4px solid black', backgroundColor: '#ECF0F1' }}>
+                <td style={{ border: '1px solid black' }}><h6>{"reduced waist"}</h6></td>
+                <td style={{ border: '1px solid black' }}><h6>{"รอบเอวลดลงจากสัปดาห์ก่อน"}</h6></td>
+                <td style={{ border: '1px solid black' }}><h6>{"ได้รับ 10 คะแนน ทันที"}</h6></td>
+              </tr>
+              <tr style={{ border: '4px solid black', backgroundColor: '#ECF0F1' }}>
                 <td style={{ border: '1px solid black' }}><h6>{"reduced weight"}</h6></td>
                 <td style={{ border: '1px solid black' }}><h6>{"น้ำหนักลดลงจากสัปดาห์ก่อน"}</h6></td>
                 <td style={{ border: '1px solid black' }}><h6>{"ได้รับ 10 คะแนน วัน อา. เวลา 23:30:XX"}</h6></td>
