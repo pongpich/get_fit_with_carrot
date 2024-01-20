@@ -92,54 +92,6 @@ const VideoExerciseSnack = () => {
                       {" "}
                       รวมเวลาฝึกทั้งหมด {totalTime()} นาที
                     </span>
-                    {/* {todayExercise && this.checkDayPlaytime(todayExercise) && (
-                      <div
-                        className="mb-3"
-                        style={{
-                          fontSize: "16px",
-                          cursor: "pointer",
-                          color: "#F45197",
-                          textDecoration: "underline",
-                        }}
-                        onClick={() => this.editVDO()}
-                        aria-hidden="true"
-                      >
-                        <img
-                          className="mr-2"
-                          src={`../assets/img/edit.png`}
-                          width="30px"
-                          height="30px"
-                        />
-                        แก้ไขวีดีโอ
-                      </div>
-                    )} */}
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="col-lg-12 col-md-4 col-12">
-                    <div className="mt-1" style={{ float: "right" }}>
-                      <span
-                        className="mr-2"
-                        style={{
-                          fontSize: "18px",
-                          fontWeight: "bold",
-                          color: "grey",
-                        }}
-                      >
-                        เล่นอัตโนมัติ
-                      </span>
-                      <label
-                        className="switch"
-                        /*  onClick={() => this.autoPlayCheck()} */
-                      >
-                        <input
-                          type="checkbox"
-                          className="danger"
-                          id="autoPlayCheck"
-                        ></input>
-                        <span className="slider round"></span>
-                      </label>
-                    </div>
                   </div>
                 </div>
               </div>
