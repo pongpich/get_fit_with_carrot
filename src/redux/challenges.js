@@ -13,6 +13,8 @@ export const types = {
   GET_NUMBER_OF_MEMBERS_TEAM: "GET_NUMBER_OF_MEMBERS_TEAM",
   GET_IS_REDUCED_WEIGHT: "GET_IS_REDUCED_WEIGHT",
   GET_IS_REDUCED_WEIGHT_SUCCESS: "GET_IS_REDUCED_WEIGHT_SUCCESS",
+  GET_IS_REDUCED_WAIST: "GET_IS_REDUCED_WAIST",
+  GET_IS_REDUCED_WAIST_SUCCESS: "GET_IS_REDUCED_WAIST_SUCCESS",
   GET_DAILY_TEAM_WEIGHT_BONUS: "GET_DAILY_TEAM_WEIGHT_BONUS",
   GET_DAILY_TEAM_WEIGHT_BONUS_SUCCESS: "GET_DAILY_TEAM_WEIGHT_BONUS_SUCCESS",
   GET_DAILY_WEIGH_CHALLENGE: "GET_DAILY_WEIGH_CHALLENGE",
@@ -368,6 +370,13 @@ export const getLogWeightTeam = (group_id) => ({
 
 export const getIsReducedWeight = (user_id) => ({
   type: types.GET_IS_REDUCED_WEIGHT,
+  payload: {
+    user_id
+  }
+});
+
+export const getIsReducedWaist = (user_id) => ({
+  type: types.GET_IS_REDUCED_WAIST,
   payload: {
     user_id
   }
@@ -802,6 +811,22 @@ const getIsReducedWeightSagaAsync = async (
 ) => {
   try {
     const apiResult = await API.get("bebe", "/getIsReducedWeight", {
+      queryStringParameters: {
+        user_id
+      }
+    });
+    return apiResult
+  } catch (error) {
+    console.log("error :", error);
+    return { error, messsage: error.message }
+  }
+}
+
+const getIsReducedWaistSagaAsync = async (
+  user_id
+) => {
+  try {
+    const apiResult = await API.get("bebe", "/getIsReducedWaist", {
       queryStringParameters: {
         user_id
       }
@@ -1587,6 +1612,24 @@ function* getIsReducedWeightSaga({ payload }) {
   }
 }
 
+function* getIsReducedWaistSaga({ payload }) {
+  const {
+    user_id
+  } = payload
+  try {
+    const apiResult = yield call(
+      getIsReducedWaistSagaAsync,
+      user_id
+    );
+    yield put({
+      type: types.GET_IS_REDUCED_WAIST_SUCCESS,
+      payload: (apiResult.results.waistInWeekResult)
+    })
+  } catch (error) {
+    console.log("error from getIsReducedWaistSaga :", error);
+  }
+}
+
 function* getDailyWeighChallengeSaga({ payload }) {
   const {
     user_id
@@ -1781,6 +1824,10 @@ export function* watchGetIsReducedWeight() {
   yield takeEvery(types.GET_IS_REDUCED_WEIGHT, getIsReducedWeightSaga)
 }
 
+export function* watchGetIsReducedWaist() {
+  yield takeEvery(types.GET_IS_REDUCED_WAIST, getIsReducedWaistSaga)
+}
+
 export function* watchGetDailyWeighChallenge() {
   yield takeEvery(types.GET_DAILY_WEIGH_CHALLENGE, getDailyWeighChallengeSaga)
 }
@@ -1915,6 +1962,7 @@ export function* saga() {
     fork(watchGetLogWeight),
     fork(watchGetLogWeightTeam),
     fork(watchGetIsReducedWeight),
+    fork(watchGetIsReducedWaist),
     fork(watchGetDailyWeighChallenge),
     fork(watchGetDailyTeamWeightBonus),
     fork(watchPostDailyWeighChallenge),
@@ -1958,6 +2006,7 @@ const INIT_STATE = {
   rank: null,
   logWeightCount: 0,
   isReducedWeight: false,
+  waistInWeekResult: 0,
   logWeightTeamCount: 0,
   numberOfMembers: 0,
   dailyTeamWeightBonusCount: 0,
@@ -2369,6 +2418,11 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         isReducedWeight: action.payload
+      }
+    case types.GET_IS_REDUCED_WAIST_SUCCESS:
+      return {
+        ...state,
+        waistInWeekResult: action.payload
       }
     case types.GET_DAILY_WEIGH_CHALLENGE_SUCCESS:
       return {
