@@ -217,7 +217,7 @@ class VideoList extends Component {
         this.addEventToVideo();
       }
       this.props.getDailyWeighChallenge(user.user_id);
-      this.props.checkUpdateMaxFriends(user.user_id);
+      /*  this.props.checkUpdateMaxFriends(user.user_id); */
       this.setState({
         sex: this.isJson(user.other_attributes)
           ? user.other_attributes.sex
@@ -2220,7 +2220,7 @@ class VideoList extends Component {
             </center>
           </div>
           <div className="centerForm">
-            <div class="mb-3 row">
+            <div className="mb-3 row">
               <label for="staticEmail" className="col-sm-6 col-form-label">
                 เพศ
               </label>
@@ -3261,7 +3261,7 @@ class VideoList extends Component {
                 โปรแกรมสัปดาห์ที่ผ่านมา
               </h4>
               <select
-                class="form-control ml-3 mb-3  col-10  col-sm-10 col-md-4"
+                className="form-control ml-3 mb-3  col-10  col-sm-10 col-md-4"
                 aria-label="Default select example"
                 onChange={(event) =>
                   this.setState({ lastWeekStart: event.target.value })
@@ -4325,7 +4325,7 @@ class VideoList extends Component {
               <b>กรุณากรอกน้ำหนักปัจจุบันของคุณ</b>
             </h5>
           </center>
-          <div class="input-group mb-4">
+          <div className="input-group mb-4">
             <input
               type="number"
               className="form-control"

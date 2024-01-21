@@ -31,13 +31,14 @@ const VideoPlayerSnack = ({ url, videoId }) => {
       ? JSON.parse(videoExerciseSnack[0].video)
       : null
   );
-  useEffect(() => {
+  console.log("videoExerciseSnack", videoExerciseSnack);
+  /*  useEffect(() => {
     setExerciseSnack(
       videoExerciseSnack && videoExerciseSnack.length > 0
         ? JSON.parse(videoExerciseSnack[0].video)
         : null
     );
-  }, [videoExerciseSnack]);
+  }, [videoExerciseSnack]); */
   const [videoEnded, setVideoEnded] = useState(false); // เพิ่ม state สำหรับตรวจสอบว่าวีดีโอถูกดูจบหรือไม่
   const [videoCurrDuration, setVideoCurrDuration] = useState(0); // เพิ่ม state สำหรับเก็บระยะเวลาที่เล่นไปของวีดีโอ
   const [videoDuration, setVideoDuration] = useState(0); // เพิ่ม state สำหรับเก็บความยาวของวีดีโอ
@@ -82,22 +83,26 @@ const VideoPlayerSnack = ({ url, videoId }) => {
 
   useEffect(() => {
     let playTime = false;
-    const updatedExerciseSnack = exerciseSnack.map((exercise) => {
-      if (exercise.play_time == 0) {
-        if (exercise.video_id === videoId) {
-          const newDuration =
-            videoCurrDuration > 0.7 * exercise.duration ? exercise.duration : 0;
+    const updatedExerciseSnack =
+      exerciseSnack &&
+      exerciseSnack.map((exercise) => {
+        if (exercise.play_time == 0) {
+          if (exercise.video_id === videoId) {
+            const newDuration =
+              videoCurrDuration > 0.7 * exercise.duration
+                ? exercise.duration
+                : 0;
 
-          playTime = videoCurrDuration > 0.7 * exercise.duration && true;
+            playTime = videoCurrDuration > 0.7 * exercise.duration && true;
 
-          // Update the duration property
-          return { ...exercise, play_time: newDuration };
+            // Update the duration property
+            return { ...exercise, play_time: newDuration };
+          }
+
+          return exercise;
         }
-
         return exercise;
-      }
-      return exercise;
-    });
+      });
 
     if (playTime == true) {
       const targetIndex = 0; // Assuming you want to update the first item in the array

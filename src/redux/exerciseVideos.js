@@ -778,7 +778,7 @@ const updateVideoSnackSagaAsync = async (data, id) => {
         id,
       },
     });
-    console.log("apiResult", apiResult);
+
     return apiResult;
   } catch (error) {
     console.log("error");
@@ -1320,6 +1320,7 @@ function* getExerciseSnackSaga({ payload }) {
   const { user_id, week } = payload;
   const apiResult = yield call(getExerciseSnackSagaAsync, user_id, week);
 
+  console.log("apiResult", apiResult);
   try {
     yield put({
       type: types.GET_EXERCISE_SNACK_SUCCESS,
@@ -1724,6 +1725,22 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         statsUpdateVideoSnack: "fail",
+      };
+    case types.GET_EXERCISE_SNACK:
+      return {
+        ...state,
+        statsGetExerciseSnack: "loading",
+      };
+    case types.GET_EXERCISE_SNACK_SUCCESS:
+      return {
+        ...state,
+        videoExerciseSnack: action.payload.exerciseSnack,
+        statsGetExerciseSnack: "success",
+      };
+    case types.GET_EXERCISE_SNACK_FALE:
+      return {
+        ...state,
+        statsGetExerciseSnack: "fail",
       };
     case types.HIDE_POPUP_VIDEO_PLAYER_SNACK:
       return {
