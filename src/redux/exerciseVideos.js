@@ -1320,7 +1320,7 @@ function* getExerciseSnackSaga({ payload }) {
   const { user_id, week } = payload;
   const apiResult = yield call(getExerciseSnackSagaAsync, user_id, week);
 
-  console.log("apiResult", apiResult);
+
   try {
     yield put({
       type: types.GET_EXERCISE_SNACK_SUCCESS,

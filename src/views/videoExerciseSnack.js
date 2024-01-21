@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   createExerciseSnack,
   hidePopupVideoPlayer,
+  getExerciseSnack,
   setHidePopupVideoPlayerSnack,
 } from "../redux/exerciseVideos";
 import {
@@ -15,9 +16,15 @@ import VideoPlayerSnack from "../components/VideoPlayerSnack";
 
 const VideoExerciseSnack = () => {
   const dispatch = useDispatch();
-  const { videoExerciseSnack, week, hideVideoPopUpSnack } = useSelector(
-    ({ exerciseVideos }) => (exerciseVideos ? exerciseVideos : "")
+  const {
+    videoExerciseSnack,
+    week,
+    hideVideoPopUpSnack,
+    statsUpdateVideoSnack,
+  } = useSelector(({ exerciseVideos }) =>
+    exerciseVideos ? exerciseVideos : ""
   );
+  const { user } = useSelector(({ authUser }) => (authUser ? authUser : ""));
 
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && videoExerciseSnack.length > 0
@@ -72,6 +79,12 @@ const VideoExerciseSnack = () => {
     return formattedDuration;
   };
 
+  useEffect(() => {
+    if (statsUpdateVideoSnack == "success") {
+      dispatch(getExerciseSnack(user.user_id, week));
+    }
+  }, [statsUpdateVideoSnack]);
+
   return (
     <>
       <div className="">
@@ -116,13 +129,10 @@ const VideoExerciseSnack = () => {
                 return (
                   <div className="row" key={index}>
                     <div className="checkCompleteVideo mt-3 col-lg-2 col-md-1 col-2">
-                      {/*      {index === 0 && (
+                      {index === 0 && (
                         <h6 className="firstVideoStartText">เริ่มกันเลย!</h6>
                       )}
-                      {item.play_time &&
-                      item.duration &&
-                      item.play_time / item.duration >=
-                        completeVideoPlayPercentage ? (
+                      {item.play_time && item.play_time > 0 ? (
                         <span
                           className="dot"
                           style={{ backgroundColor: "#F45197" }}
@@ -153,14 +163,18 @@ const VideoExerciseSnack = () => {
                           </h3>
                         </span>
                       )}
-                      {index === todayExercise.length - 1 ? (
-                        <div className="vl" style={{ height: "0%" }}></div>
-                      ) : (
-                        <div className="vl"></div>
+
+                      {index + 1 < exerciseSnack.length && (
+                        <>
+                          <div className="vl" style={{ height: "0%" }}></div>
+                          <div className="vl"></div>
+                        </>
                       )}
-                      {index === todayExercise.length - 1 && (
-                        <h6 className="lastVideoEndText">สำเร็จแล้ว!</h6>
-                      )} */}
+                      {index + 1 == exerciseSnack.length && (
+                        <>
+                          <h6 className="lastVideoEndText">สำเร็จแล้ว!</h6>
+                        </>
+                      )}
                     </div>
                     <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                       <div className="videoItem border shadow">

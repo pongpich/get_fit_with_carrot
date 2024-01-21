@@ -7,6 +7,7 @@ import {
   setHidePopupVideoPlayerSnack,
   updatePlaytimeLastWeek,
   updateVideoSnack,
+  getExerciseSnack,
   updatePlaytimeLastWeekSelected,
 } from "../redux/exerciseVideos";
 import {
@@ -26,19 +27,26 @@ const VideoPlayerSnack = ({ url, videoId }) => {
   } = useSelector(({ exerciseVideos }) =>
     exerciseVideos ? exerciseVideos : ""
   );
+  const { user } = useSelector(({ authUser }) => (authUser ? authUser : ""));
+
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && videoExerciseSnack.length > 0
       ? JSON.parse(videoExerciseSnack[0].video)
       : null
   );
-  console.log("videoExerciseSnack", videoExerciseSnack);
-  /*  useEffect(() => {
+  const [videoSnack, setVideoSnack] = useState(
+    videoExerciseSnack ? videoExerciseSnack : null
+  );
+
+  useEffect(() => {
     setExerciseSnack(
       videoExerciseSnack && videoExerciseSnack.length > 0
         ? JSON.parse(videoExerciseSnack[0].video)
         : null
     );
-  }, [videoExerciseSnack]); */
+    setVideoSnack(videoExerciseSnack);
+  }, [videoExerciseSnack]);
+  
   const [videoEnded, setVideoEnded] = useState(false); // เพิ่ม state สำหรับตรวจสอบว่าวีดีโอถูกดูจบหรือไม่
   const [videoCurrDuration, setVideoCurrDuration] = useState(0); // เพิ่ม state สำหรับเก็บระยะเวลาที่เล่นไปของวีดีโอ
   const [videoDuration, setVideoDuration] = useState(0); // เพิ่ม state สำหรับเก็บความยาวของวีดีโอ
@@ -76,10 +84,6 @@ const VideoPlayerSnack = ({ url, videoId }) => {
       });
     }
   }, [url]);
-
-  useEffect(() => {
-    /* console.log("statsUpdateVideoSnack", statsUpdateVideoSnack); */
-  }, [statsUpdateVideoSnack]);
 
   useEffect(() => {
     let playTime = false;
@@ -124,7 +128,8 @@ const VideoPlayerSnack = ({ url, videoId }) => {
       // และอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อปิดวีดีโอ
     }
     //สั่ง set ตัวแปรใน redux และให้หน้า videoList ไปเช็ีคจากตัวแปรนั้นเพื่อซ่อน popup
-    dispatch(setHidePopupVideoPlayerSnack(true));
+    /*     dispatch(getExerciseSnack(user.user_id, week));
+     */ dispatch(setHidePopupVideoPlayerSnack(true));
   };
 
   return (
