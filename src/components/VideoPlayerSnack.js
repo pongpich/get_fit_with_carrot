@@ -6,6 +6,7 @@ import {
   updatePlaytime,
   setHidePopupVideoPlayerSnack,
   updatePlaytimeLastWeek,
+  updateVideoSnack,
   updatePlaytimeLastWeekSelected,
 } from "../redux/exerciseVideos";
 import {
@@ -14,9 +15,29 @@ import {
   updateFrequency,
 } from "../constants/defaultValues";
 
-const VideoPlayerSnack = ({ url }) => {
+const VideoPlayerSnack = ({ url, videoId }) => {
   const dispatch = useDispatch();
   const videoRef = useRef(null);
+  const {
+    videoExerciseSnack,
+    week,
+    hideVideoPopUpSnack,
+    statsUpdateVideoSnack,
+  } = useSelector(({ exerciseVideos }) =>
+    exerciseVideos ? exerciseVideos : ""
+  );
+  const [exerciseSnack, setExerciseSnack] = useState(
+    videoExerciseSnack && videoExerciseSnack.length > 0
+      ? JSON.parse(videoExerciseSnack[0].video)
+      : null
+  );
+  useEffect(() => {
+    setExerciseSnack(
+      videoExerciseSnack && videoExerciseSnack.length > 0
+        ? JSON.parse(videoExerciseSnack[0].video)
+        : null
+    );
+  }, [videoExerciseSnack]);
   const [videoEnded, setVideoEnded] = useState(false); // เพิ่ม state สำหรับตรวจสอบว่าวีดีโอถูกดูจบหรือไม่
   const [videoCurrDuration, setVideoCurrDuration] = useState(0); // เพิ่ม state สำหรับเก็บระยะเวลาที่เล่นไปของวีดีโอ
   const [videoDuration, setVideoDuration] = useState(0); // เพิ่ม state สำหรับเก็บความยาวของวีดีโอ
@@ -54,6 +75,42 @@ const VideoPlayerSnack = ({ url }) => {
       });
     }
   }, [url]);
+
+  useEffect(() => {
+    /* console.log("statsUpdateVideoSnack", statsUpdateVideoSnack); */
+  }, [statsUpdateVideoSnack]);
+
+  useEffect(() => {
+    let playTime = false;
+    const updatedExerciseSnack = exerciseSnack.map((exercise) => {
+      if (exercise.play_time == 0) {
+        if (exercise.video_id === videoId) {
+          const newDuration =
+            videoCurrDuration > 0.7 * exercise.duration ? exercise.duration : 0;
+
+          playTime = videoCurrDuration > 0.7 * exercise.duration && true;
+
+          // Update the duration property
+          return { ...exercise, play_time: newDuration };
+        }
+
+        return exercise;
+      }
+      return exercise;
+    });
+
+    if (playTime == true) {
+      const targetIndex = 0; // Assuming you want to update the first item in the array
+
+      const jsonString = JSON.stringify(updatedExerciseSnack);
+
+      const diffTime = Math.abs(videoCurrDuration - prevPlayTime);
+      /*  console.log("videoExerciseSnack", videoExerciseSnack[0].id); */
+      dispatch(
+        updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id)
+      );
+    }
+  }, [videoCurrDuration]);
 
   const handleVideoClose = () => {
     const video = videoRef.current;

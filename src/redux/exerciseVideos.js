@@ -71,6 +71,9 @@ export const types = {
   GET_EXERCISE_SNACK: "GET_EXERCISE_SNACK",
   GET_EXERCISE_SNACK_SUCCESS: "GET_EXERCISE_SNACK_SUCCESS",
   GET_EXERCISE_SNACK_FALE: "GET_EXERCISE_SNACK_FALE",
+  UPDATE_VIDEO_SNACK: "UPDATE_VIDEO_SNACK",
+  UPDATE_VIDEO_SNACK_SUCCESS: "UPDATE_VIDEO_SNACK_SUCCESS",
+  UPDATE_VIDEO_SNACK_FALE: "UPDATE_VIDEO_SNACK_FALE",
   HIDE_POPUP_VIDEO_PLAYER_SNACK: "HIDE_POPUP_VIDEO_PLAYER_SNACK",
 };
 
@@ -370,6 +373,14 @@ export const getExerciseSnack = (user_id, week) => ({
   payload: {
     user_id,
     week,
+  },
+});
+
+export const updateVideoSnack = (data, id) => ({
+  type: types.UPDATE_VIDEO_SNACK, //updateVideoSnack
+  payload: {
+    data,
+    id,
   },
 });
 
@@ -756,6 +767,21 @@ const createExerciseSnackSagaAsync = async (user_id) => {
     });
     return apiResult;
   } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+const updateVideoSnackSagaAsync = async (data, id) => {
+  try {
+    const apiResult = await API.put("bebe", "/updateVideoSnack", {
+      body: {
+        data,
+        id,
+      },
+    });
+    console.log("apiResult", apiResult);
+    return apiResult;
+  } catch (error) {
+    console.log("error");
     return { error, messsage: error.message };
   }
 };
@@ -1276,6 +1302,20 @@ function* createExerciseSnackSaga({ payload }) {
     console.log("error from updateDisplayNameSaga :", error);
   }
 }
+function* updateVideoSnackSaga({ payload }) {
+  const { data, id } = payload;
+  const apiResult = yield call(updateVideoSnackSagaAsync, data, id);
+
+  console.log("apiResult  555");
+  try {
+    yield put({
+      type: types.UPDATE_VIDEO_SNACK_SUCCESS,
+      payload: apiResult.results,
+    });
+  } catch (error) {
+    console.log("error from updateDisplayNameSaga :", error);
+  }
+}
 function* getExerciseSnackSaga({ payload }) {
   const { user_id, week } = payload;
   const apiResult = yield call(getExerciseSnackSagaAsync, user_id, week);
@@ -1393,6 +1433,9 @@ export function* watchCreateExerciseSnackSaga() {
 export function* watchGetExerciseSnackSaga() {
   yield takeEvery(types.GET_EXERCISE_SNACK, getExerciseSnackSaga);
 }
+export function* watchUpdateVideoSnackSaga() {
+  yield takeEvery(types.UPDATE_VIDEO_SNACK, updateVideoSnackSaga);
+}
 
 export function* saga() {
   yield all([
@@ -1417,6 +1460,7 @@ export function* saga() {
     fork(watchUpdateFbShareStatusBraveAndBurn),
     fork(watchCreateExerciseSnackSaga),
     fork(watchGetExerciseSnackSaga),
+    fork(watchUpdateVideoSnackSaga),
   ]);
 }
 
@@ -1451,6 +1495,7 @@ const INIT_STATE = {
   status_update_fb_brave_and_burn: "default",
   statsCreateExerciseSnack: "default",
   statsGetExerciseSnack: "default",
+  statsUpdateVideoSnack: "default",
   videoExerciseSnack: null,
   hideVideoPopUpSnack: false,
 };
@@ -1665,21 +1710,20 @@ export function reducer(state = INIT_STATE, action) {
         ...state,
         statsCreateExerciseSnack: "fail",
       };
-    case types.GET_EXERCISE_SNACK:
+    case types.UPDATE_VIDEO_SNACK:
       return {
         ...state,
-        statsGetExerciseSnack: "loading",
+        statsUpdateVideoSnack: "loading",
       };
-    case types.GET_EXERCISE_SNACK_SUCCESS:
+    case types.UPDATE_VIDEO_SNACK_SUCCESS:
       return {
         ...state,
-        videoExerciseSnack: action.payload.exerciseSnack,
-        statsGetExerciseSnack: "success",
+        statsUpdateVideoSnack: "success",
       };
-    case types.GET_EXERCISE_SNACK_FALE:
+    case types.UPDATE_VIDEO_SNACK_FALE:
       return {
         ...state,
-        statsGetExerciseSnack: "fail",
+        statsUpdateVideoSnack: "fail",
       };
     case types.HIDE_POPUP_VIDEO_PLAYER_SNACK:
       return {

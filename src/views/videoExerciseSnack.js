@@ -20,13 +20,15 @@ const VideoExerciseSnack = () => {
   );
 
   const [exerciseSnack, setExerciseSnack] = useState(
-    videoExerciseSnack && JSON.parse(videoExerciseSnack[0].video)
+    videoExerciseSnack && videoExerciseSnack.length > 0
+      ? JSON.parse(videoExerciseSnack[0].video)
+      : null
   );
   const [weekSnack, setWeekSnack] = useState(week);
   const [autoPlayCheck, setAutoPlayCheck] = useState(true);
 
   const [url, setUrl] = useState(null);
-  const [selectedVDO, setSelectedVDO] = useState(null);
+  const [videoId, setVideoId] = useState(null);
 
   useEffect(() => {
     dispatch(setHidePopupVideoPlayerSnack(false));
@@ -34,7 +36,9 @@ const VideoExerciseSnack = () => {
 
   useEffect(() => {
     setExerciseSnack(
-      videoExerciseSnack && JSON.parse(videoExerciseSnack[0].video)
+      videoExerciseSnack && videoExerciseSnack.length > 0
+        ? JSON.parse(videoExerciseSnack[0].video)
+        : null
     );
   }, [videoExerciseSnack]);
 
@@ -46,18 +50,21 @@ const VideoExerciseSnack = () => {
     }
   }, [hideVideoPopUpSnack]);
 
-  const toggleList = (url) => {
+  const toggleList = (url, video_id) => {
     setUrl(url);
+    setVideoId(video_id);
 
     var trailer = document.getElementById(`popupVDOSnack`);
     trailer.classList.add("active_list");
   };
 
   const totalTime = () => {
-    const totalDuration = exerciseSnack.reduce(
-      (total, exerciseSnack) => total + exerciseSnack.duration,
-      0
-    );
+    const totalDuration =
+      exerciseSnack &&
+      exerciseSnack.reduce(
+        (total, exerciseSnack) => total + exerciseSnack.duration,
+        0
+      );
 
     const totalDurationInMinutes = Math.floor(totalDuration / 60); // จำนวนนาที
     const remainingSeconds = totalDuration % 60; // จำนวนวินาทีที่เหลือ
@@ -71,7 +78,7 @@ const VideoExerciseSnack = () => {
         <div className="trailer" id={`popupVDOSnack`}>
           <div>
             {" "}
-            <VideoPlayerSnack url={url} />
+            <VideoPlayerSnack url={url} videoId={videoId} />
           </div>
         </div>
 
@@ -157,22 +164,13 @@ const VideoExerciseSnack = () => {
                     </div>
                     <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
                       <div className="videoItem border shadow">
-                        {autoPlayCheck && (
-                          <img
-                            className="play_button"
-                            src="../assets/img/thumb/play_button2.png"
-                            width="100px"
-                            onClick={() => toggleList(item.url)}
-                          ></img>
-                        )}
-                        {!autoPlayCheck && (
-                          <img
-                            className="play_button"
-                            src="../assets/img/thumb/play_button2.png"
-                            width="100px"
-                            onClick={() => toggleList(item.url)}
-                          ></img>
-                        )}
+                        <img
+                          className="play_button"
+                          src="../assets/img/thumb/play_button2.png"
+                          width="100px"
+                          onClick={() => toggleList(item.url, item.video_id)}
+                        ></img>
+
                         <div className="videoThumb">
                           <div className="containerThumb">
                             <img
@@ -223,6 +221,7 @@ const VideoExerciseSnack = () => {
                                 marginTop: "0px",
                               }}
                             >
+                              {item.video_id}
                               อุปกรณ์ :{" "}
                               {item.equipment ? item.equipment : "ไม่มี"}{" "}
                             </p>
