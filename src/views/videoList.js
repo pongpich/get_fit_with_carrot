@@ -217,7 +217,7 @@ class VideoList extends Component {
         this.addEventToVideo();
       }
       this.props.getDailyWeighChallenge(user.user_id);
-      /*  this.props.checkUpdateMaxFriends(user.user_id); */
+      this.props.checkUpdateMaxFriends(user.user_id);
       this.setState({
         sex: this.isJson(user.other_attributes)
           ? user.other_attributes.sex
