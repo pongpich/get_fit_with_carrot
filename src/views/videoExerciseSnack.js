@@ -5,6 +5,7 @@ import {
   createExerciseSnack,
   hidePopupVideoPlayer,
   getExerciseSnack,
+  clearExerciseSnack,
   setHidePopupVideoPlayerSnack,
 } from "../redux/exerciseVideos";
 import {
@@ -21,6 +22,8 @@ const VideoExerciseSnack = () => {
     week,
     hideVideoPopUpSnack,
     statsUpdateVideoSnack,
+    statsGetExerciseSnack,
+    videoExerciseSnackAll,
   } = useSelector(({ exerciseVideos }) =>
     exerciseVideos ? exerciseVideos : ""
   );
@@ -85,14 +88,19 @@ const VideoExerciseSnack = () => {
     }
   }, [statsUpdateVideoSnack]);
 
+  useEffect(() => {
+    if (statsGetExerciseSnack == "success") {
+      dispatch(clearExerciseSnack());
+    }
+  }, [statsGetExerciseSnack]);
+
+  console.log("111");
+
   return (
     <>
       <div className="">
         <div className="trailer" id={`popupVDOSnack`}>
-          <div>
-            {" "}
-            <VideoPlayerSnack url={url} videoId={videoId} />
-          </div>
+          <div> {/*  <VideoPlayerSnack url={url} videoId={videoId} /> */}</div>
         </div>
 
         <table className="table table-responsive">

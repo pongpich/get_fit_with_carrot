@@ -44,6 +44,7 @@ import {
   getBraveAndBurnChallenge,
   createExerciseSnack,
   getExerciseSnack,
+  getVideoSnack,
 } from "../redux/exerciseVideos";
 import {
   completeVideoPlayPercentage,
@@ -197,6 +198,7 @@ class VideoList extends Component {
 
       this.props.getAllExerciseActivity(user.user_id);
       this.props.createExerciseSnack(user && user.user_id);
+      this.props.getVideoSnack();
 
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
@@ -4604,6 +4606,7 @@ const mapActionsToProps = {
   getBraveAndBurnChallenge,
   createExerciseSnack,
   getExerciseSnack,
+  getVideoSnack,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(VideoList);

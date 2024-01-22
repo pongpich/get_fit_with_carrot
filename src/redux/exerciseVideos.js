@@ -75,6 +75,10 @@ export const types = {
   UPDATE_VIDEO_SNACK_SUCCESS: "UPDATE_VIDEO_SNACK_SUCCESS",
   UPDATE_VIDEO_SNACK_FALE: "UPDATE_VIDEO_SNACK_FALE",
   HIDE_POPUP_VIDEO_PLAYER_SNACK: "HIDE_POPUP_VIDEO_PLAYER_SNACK",
+  GET_VIDEO_SNACK: "GET_VIDEO_SNACK",
+  GET_VIDEO_SNACK_SUCCESS: "GET_VIDEO_SNACK_SUCCESS",
+  GET_VIDEO_SNACK_FALE: "GET_VIDEO_SNACK_FALE",
+  CLEAR_EXERCISE_SNACK: "CLEAR_EXERCISE_SNACK",
 };
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
@@ -382,6 +386,16 @@ export const updateVideoSnack = (data, id) => ({
     data,
     id,
   },
+});
+
+export const getVideoSnack = () => ({
+  type: types.GET_VIDEO_SNACK,
+  payload: {},
+});
+
+export const clearExerciseSnack = () => ({
+  type: types.CLEAR_EXERCISE_SNACK,
+  payload: {},
 });
 
 /* END OF ACTION Section */
@@ -747,6 +761,20 @@ const createCustomWeekForUserSagaAsync = async (
 const getExerciseSnackSagaAsync = async (user_id, week) => {
   try {
     const apiResult = await API.get("bebe", "/getExerciseSnacksChallenge", {
+      queryStringParameters: {
+        user_id,
+        week,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
+const getVideoSnackSagaAsync = async (user_id, week) => {
+  try {
+    const apiResult = await API.get("bebe", "/getVideoSnack", {
       queryStringParameters: {
         user_id,
         week,
@@ -1320,10 +1348,23 @@ function* getExerciseSnackSaga({ payload }) {
   const { user_id, week } = payload;
   const apiResult = yield call(getExerciseSnackSagaAsync, user_id, week);
 
-
   try {
     yield put({
       type: types.GET_EXERCISE_SNACK_SUCCESS,
+      payload: apiResult.results,
+    });
+  } catch (error) {
+    console.log("error from updateDisplayNameSaga :", error);
+  }
+}
+
+function* getVideoSnackSaga({ payload }) {
+  const { user_id, week } = payload;
+  const apiResult = yield call(getVideoSnackSagaAsync, user_id, week);
+
+  try {
+    yield put({
+      type: types.GET_VIDEO_SNACK_SUCCESS,
       payload: apiResult.results,
     });
   } catch (error) {
@@ -1434,6 +1475,9 @@ export function* watchCreateExerciseSnackSaga() {
 export function* watchGetExerciseSnackSaga() {
   yield takeEvery(types.GET_EXERCISE_SNACK, getExerciseSnackSaga);
 }
+export function* watchGetVideoSnackSaga() {
+  yield takeEvery(types.GET_VIDEO_SNACK, getVideoSnackSaga);
+}
 export function* watchUpdateVideoSnackSaga() {
   yield takeEvery(types.UPDATE_VIDEO_SNACK, updateVideoSnackSaga);
 }
@@ -1462,6 +1506,7 @@ export function* saga() {
     fork(watchCreateExerciseSnackSaga),
     fork(watchGetExerciseSnackSaga),
     fork(watchUpdateVideoSnackSaga),
+    fork(watchGetVideoSnackSaga),
   ]);
 }
 
@@ -1499,6 +1544,8 @@ const INIT_STATE = {
   statsUpdateVideoSnack: "default",
   videoExerciseSnack: null,
   hideVideoPopUpSnack: false,
+  statsVideoExerciseSnackAl: "default",
+  videoExerciseSnackAll: null,
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1742,11 +1789,35 @@ export function reducer(state = INIT_STATE, action) {
         ...state,
         statsGetExerciseSnack: "fail",
       };
+    case types.GET_VIDEO_SNACK:
+      return {
+        ...state,
+        statsVideoExerciseSnackAll: "loading",
+      };
+    case types.GET_VIDEO_SNACK_SUCCESS:
+      return {
+        ...state,
+        videoExerciseSnackAll: action.payload.exerciseSnack,
+        statsVideoExerciseSnackAl: "success",
+      };
+    case types.GET_VIDEO_SNACK_FALE:
+      return {
+        ...state,
+        statsVideoExerciseSnackAll: "fail",
+      };
     case types.HIDE_POPUP_VIDEO_PLAYER_SNACK:
       return {
         ...state,
         hideVideoPopUpSnack: action.payload.status,
       };
+    case types.CLEAR_EXERCISE_SNACK:
+      return {
+        ...state,
+        statsGetExerciseSnack: "default",
+        statsUpdateVideoSnack: "default",
+        statsCreateExerciseSnack: "default",
+      };
+
     default:
       return { ...state };
   }

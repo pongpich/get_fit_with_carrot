@@ -46,7 +46,7 @@ const VideoPlayerSnack = ({ url, videoId }) => {
     );
     setVideoSnack(videoExerciseSnack);
   }, [videoExerciseSnack]);
-  
+
   const [videoEnded, setVideoEnded] = useState(false); // เพิ่ม state สำหรับตรวจสอบว่าวีดีโอถูกดูจบหรือไม่
   const [videoCurrDuration, setVideoCurrDuration] = useState(0); // เพิ่ม state สำหรับเก็บระยะเวลาที่เล่นไปของวีดีโอ
   const [videoDuration, setVideoDuration] = useState(0); // เพิ่ม state สำหรับเก็บความยาวของวีดีโอ
@@ -114,7 +114,7 @@ const VideoPlayerSnack = ({ url, videoId }) => {
       const jsonString = JSON.stringify(updatedExerciseSnack);
 
       const diffTime = Math.abs(videoCurrDuration - prevPlayTime);
-      /*  console.log("videoExerciseSnack", videoExerciseSnack[0].id); */
+
       dispatch(
         updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id)
       );
