@@ -40,6 +40,7 @@ const VideoExerciseSnack = () => {
 
   const [url, setUrl] = useState(null);
   const [videoId, setVideoId] = useState(null);
+  const [re_id, setRe_id] = useState(null);
 
   useEffect(() => {
     dispatch(setHidePopupVideoPlayerSnack(false));
@@ -140,11 +141,6 @@ const VideoExerciseSnack = () => {
       console.log(`Exercise with video_id ${id} not found in exerciseSnack.`);
     }
 
-    console.log("id", id);
-    console.log("randomIndex", randomIndex);
-    console.log("randomVideo", randomVideo);
-
-    console.log("videoExerciseSnack[0].id", videoExerciseSnack[0].id);
     dispatch(updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id));
   };
 
@@ -298,7 +294,6 @@ const VideoExerciseSnack = () => {
                                 marginTop: "0px",
                               }}
                             >
-                              {item.video_id}
                               อุปกรณ์ :{" "}
                               {item.equipment ? item.equipment : "ไม่มี"}{" "}
                             </p>
@@ -319,7 +314,8 @@ const VideoExerciseSnack = () => {
                           <div
                             className="box-random"
                             data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
+                            data-bs-target="#exampleModalSnack"
+                            onClick={() => setRe_id(item.video_id)}
                           >
                             <img
                               src="../assets/img/renew.png"
@@ -338,47 +334,51 @@ const VideoExerciseSnack = () => {
         </table>
       </div>
 
-      {/*    <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Launch demo modal
-      </button> */}
-
       <div
-        class="modal fade"
-        id="exampleModal"
+        className="modal fade"
+        id="exampleModalSnack"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Modal title
-              </h1>
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <p
+                className="modal-title fs-5 head-new-video"
+                id="exampleModalLabel"
+              >
+                เลือกคลิปใหม่
+              </p>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
               >
-                Close
+                <img
+                  src="../assets/img/close-line.png"
+                  width={24}
+                  height={24}
+                />
               </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
+            </div>
+            <div className="modal-body ">
+              <div className="row box-snack">
+                <img
+                  src="../assets/img/component4.png"
+                  className="component-4 mb-3"
+                />
+                <div className="snack col-12 col-md-5">
+                  <p className="snack-name">
+                    Sit to Stand / Squat 10 - 20 ครั้ง
+                  </p>
+                  <p className="equipment-name">อุปกรณ์ : เก้าอี้</p>
+                </div>
+                <div className="box-qty">
+                  <img src="../assets/img/qty.png" className="qty" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
