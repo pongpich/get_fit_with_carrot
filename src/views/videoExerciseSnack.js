@@ -7,6 +7,7 @@ import {
   getExerciseSnack,
   clearExerciseSnack,
   setHidePopupVideoPlayerSnack,
+  updateVideoSnack,
 } from "../redux/exerciseVideos";
 import {
   convertSecondsToMinutes,
@@ -116,6 +117,36 @@ const VideoExerciseSnack = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const randomVideo = (id) => {
+    let randomIndex;
+
+    do {
+      randomIndex = Math.floor(Math.random() * videoExerciseSnackAll.length);
+    } while (randomIndex === id);
+
+    const randomVideo =
+      videoExerciseSnackAll[randomIndex == 0 ? 0 : randomIndex - 1];
+
+    const indexToReplace = exerciseSnack.findIndex(
+      (exercise) => exercise.video_id == id
+    );
+    let updatedExerciseSnack;
+
+    if (indexToReplace !== -1) {
+      updatedExerciseSnack = [...exerciseSnack]; // สร้างคัดลอกใหม่
+      updatedExerciseSnack[indexToReplace] = randomVideo;
+    } else {
+      console.log(`Exercise with video_id ${id} not found in exerciseSnack.`);
+    }
+
+    console.log("id", id);
+    console.log("randomIndex", randomIndex);
+    console.log("randomVideo", randomVideo);
+
+    console.log("videoExerciseSnack[0].id", videoExerciseSnack[0].id);
+    dispatch(updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id));
+  };
 
   return (
     <>
@@ -250,13 +281,14 @@ const VideoExerciseSnack = () => {
                             </p>
                             {item.name.length < 17 ? (
                               <h4 style={{ color: "#F45197" }}>
-                                <b>{item.name}</b>
+                                <b>{item.name} </b>
                               </h4>
                             ) : (
                               <h6 style={{ color: "#F45197" }}>
                                 <b>{item.name}</b>
                               </h6>
                             )}
+                            {item.video_id}
                             <p
                               style={{
                                 color: "grey",
@@ -271,7 +303,10 @@ const VideoExerciseSnack = () => {
                           </div>
                         </div>
                         <div className="box-re ">
-                          <div className="box-random">
+                          <div
+                            className="box-random"
+                            onClick={() => randomVideo(item.video_id)}
+                          >
                             <img
                               src="../assets/img/random.png"
                               width={24}
