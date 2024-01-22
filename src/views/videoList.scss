@@ -598,6 +598,10 @@ input:checked + .slider:before {
   border-radius: 50px;
   padding: 10px 24px;
   margin-right: 16px;
+  cursor: pointer;
+}
+.box-random:hover {
+  cursor: pointer;
 }
 
 
