@@ -94,7 +94,28 @@ const VideoExerciseSnack = () => {
     }
   }, [statsGetExerciseSnack]);
 
-  console.log("111");
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  // สร้างฟังก์ชันที่จะถูกเรียกเมื่อขนาดหน้าจอเปลี่ยน
+  const handleResize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
+  // เพิ่ม event listener เพื่อตรวจจับการเปลี่ยนขนาดหน้าจอ
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    // ถอด event listener เมื่อ component ถูก unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -247,6 +268,24 @@ const VideoExerciseSnack = () => {
                               อุปกรณ์ :{" "}
                               {item.equipment ? item.equipment : "ไม่มี"}{" "}
                             </p>
+                          </div>
+                        </div>
+                        <div className="box-re ">
+                          <div className="box-random">
+                            <img
+                              src="../assets/img/random.png"
+                              width={24}
+                              height={24}
+                            />
+                            <span className="text-random">สุ่มคลิปใหม่</span>
+                          </div>
+                          <div className="box-random">
+                            <img
+                              src="../assets/img/renew.png"
+                              width={24}
+                              height={24}
+                            />
+                            <span className="text-random">เลือกคลิปใหม่</span>
                           </div>
                         </div>
                       </div>
