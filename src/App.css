@@ -3,9 +3,10 @@
   padding-bottom: 32px;
   width: 100%;
   /* padding: 130px; */
+  height: 300px;
   text-align: center;
   background: #F0EEF3;
-  background-image: url("./assets/img/title.png");
+  background-image: url("./assets/img/header.png");
   background-repeat: no-repeat;
   background-size: cover;
   color: #F45197;
@@ -24,7 +25,7 @@
     padding-top: 64px;
     padding-bottom: 32px;
     width: 100%;
-    background-image: url("./assets/img/title.png");
+    background-image: url("./assets/img/header.png");
   }
 
   .watch_introduction {
@@ -38,7 +39,8 @@
     padding-top: 64px;
     padding-bottom: 32px;
     width: 100%;
-    background-image: url("./assets/img/title.png");
+    height: 100px;
+    background-image: url("./assets/img/header.png");
     background-size: 100% 100%;
   }
 

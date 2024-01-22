@@ -417,17 +417,17 @@ class App extends Component {
             WATCH INTRODUCTION
           </div> */}
         </div>
-        <p className="with-carrot">
+        {/* <p className="with-carrot">
           Get Fit With Carrot <span className="with-week">IN 8 WEEK</span>
-        </p>
-        <div className="box-play">
+        </p> */}
+        {/* <div className="box-play">
           <img
             src="../assets/img/play-circle-line.png"
             alt=""
             className="play-circle"
           />
           Watch Introduction
-        </div>
+        </div> */}
       </div>
     );
   }
