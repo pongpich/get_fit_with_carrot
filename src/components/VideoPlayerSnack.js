@@ -9,7 +9,7 @@ import {
   updateVideoSnack,
   getExerciseSnack,
   createEventLogSnacks,
-  updatePlaytimeLastWeekSelected,
+  snacksCount,
 } from "../redux/exerciseVideos";
 import {
   completeVideoPlayPercentage,
@@ -140,7 +140,13 @@ const VideoPlayerSnack = ({ url, videoId }) => {
     var count = filteredExerciseSnack.length;
 
     if (count > 3) {
+      dispatch(snacksCount(count));
       dispatch(createEventLogSnacks(user && user.user_id, count));
+    }
+
+    if (count == 4) {
+      document.getElementById("example-snack-success") &&
+        document.getElementById("example-snack-success").click();
     }
 
     dispatch(setHidePopupVideoPlayerSnack(true));

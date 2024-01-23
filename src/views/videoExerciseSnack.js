@@ -26,6 +26,7 @@ const VideoExerciseSnack = () => {
     statsUpdateVideoSnack,
     statsGetExerciseSnack,
     videoExerciseSnackAll,
+    snackNumber,
   } = useSelector(({ exerciseVideos }) =>
     exerciseVideos ? exerciseVideos : ""
   );
@@ -172,6 +173,14 @@ const VideoExerciseSnack = () => {
 
     dispatch(updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id));
   };
+
+  useEffect(() => {
+    // /exampleModalSnackSuccess
+    if (snackNumber == 4) {
+      document.getElementById("example-snack-success") &&
+        document.getElementById("example-snack-success").click();
+    }
+  }, []);
 
   return (
     <>
@@ -416,6 +425,61 @@ const VideoExerciseSnack = () => {
                     );
                   }
                 })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        style={{ display: "none" }}
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModalSnackSuccess"
+        id="example-snack-success"
+      >
+        Launch demo modal
+      </button>
+
+      <div
+        class="modal fade"
+        id="exampleModalSnackSuccess"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <img
+                  src="../assets/img/snackSuccess.png"
+                  className="snack-success"
+                />
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <img
+                  src="../assets/img/close-line.png"
+                  width={24}
+                  height={24}
+                />
+              </button>
+            </div>
+            <div class="modal-body">
+              <p className="great-snack">เยี่ยมมาก! พิชิตภารกิจได้สำเร็จ</p>
+              <p className="snack-point">คุณได้รับ 10 คะแนน</p>
+              <div
+                className="button-snack-point"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                ตกลง
+              </div>
             </div>
           </div>
         </div>

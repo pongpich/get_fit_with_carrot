@@ -82,12 +82,19 @@ export const types = {
   CREATE_EVENT_LOG_SNACK: "CREATE_EVENT_LOG_SNACK",
   CREATE_EVENT_LOG_SNACK_SUCCESS: "CREATE_EVENT_LOG_SNACK_SUCCESS",
   CREATE_EVENT_LOG_SNACK_FALE: "CREATE_EVENT_LOG_SNACK_FALE",
+  SNACK_COUNT: "SNACK_COUNT",
 };
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
   type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN,
   payload: {
     user_id,
+  },
+});
+export const snacksCount = (number) => ({
+  type: types.SNACK_COUNT,
+  payload: {
+    number,
   },
 });
 
@@ -1593,6 +1600,7 @@ const INIT_STATE = {
   hideVideoPopUpSnack: false,
   statsVideoExerciseSnackAll: "default",
   videoExerciseSnackAll: null,
+  snackNumber: 0,
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1878,6 +1886,11 @@ export function reducer(state = INIT_STATE, action) {
         statsGetExerciseSnack: "default",
         statsUpdateVideoSnack: "default",
         statsCreateExerciseSnack: "default",
+      };
+    case types.SNACK_COUNT:
+      return {
+        ...state,
+        snackNumber: action.payload.number,
       };
 
     default:

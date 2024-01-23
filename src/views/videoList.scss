@@ -638,5 +638,44 @@ color: #000;
   font-size: 16px;
   color: #828282;
 }
+.snack-success {
 
+  width: 136px;
+  height: 136px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.great-snack {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #EF60A3;
+}
+.snack-point {
+  margin-top: -16px;
+  font-size: 48px;
+  font-weight: 600;
+  color: #000000;
+  text-align: center;
+}
+.button-snack-point {
+  font-size: 16px;
+  width: 120px;
+  height: 44px;
+  background-color: #EF60A3;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  margin-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+.button-snack-point:hover{
+  cursor: pointer;
+}
 
