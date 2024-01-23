@@ -139,9 +139,8 @@ const VideoPlayerSnack = ({ url, videoId }) => {
 
     // นับจำนวน exerciseSnack ที่มี video_id มากกว่า 0
     var count = filteredExerciseSnack.length;
-
+    dispatch(snacksCount(count));
     if (count > 3) {
-      dispatch(snacksCount(count));
       dispatch(createEventLogSnacks(user && user.user_id, count));
     }
 
