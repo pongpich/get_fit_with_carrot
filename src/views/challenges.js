@@ -492,7 +492,7 @@ class Challenges extends Component {
     if (isExerciseCompleted === exerciseVideo.length) {
       scoreInWeek += 10;
     } //ออกกำลังกายครบทั้งสัปดาห์
-    if (logWeightTeamCount >= numberOfMembers * 2) {
+    if (logWeightTeamCount >= numberOfMembers * 2 && numberOfMembers > 0) {
       scoreInWeek += 10;
     } //ทีมชั่งน้ำหนักครบ คนละ2ครั้ง
     if (dailyTeamWeightBonusCount > 0) {
@@ -510,6 +510,19 @@ class Challenges extends Component {
 
     // นับจำนวน exerciseSnack ที่มี video_id มากกว่า 0
     var count = filteredExerciseSnack && filteredExerciseSnack.length;
+
+    if (count == 4) {
+      scoreInWeek += 10;
+    }
+    if (count == 5) {
+      scoreInWeek += 15;
+    }
+    if (count == 6) {
+      scoreInWeek += 20;
+    }
+    if (count == 7) {
+      scoreInWeek += 25;
+    }
 
     return (
       <div className="row">
