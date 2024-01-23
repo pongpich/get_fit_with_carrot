@@ -573,7 +573,7 @@ class Challenges extends Component {
                   <p className="card-text">
                     ทำ Random Exercise Snacks สำเร็จ
                     <span style={{ float: "right", color: "#F45197" }}>
-                      {count}/4
+                      {count ? count : 0}/4
                     </span>
                   </p>
                 </div>
