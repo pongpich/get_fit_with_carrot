@@ -86,12 +86,15 @@ const VideoExerciseSnack = () => {
 
   useEffect(() => {
     if (statsUpdateVideoSnack == "success") {
+      document.getElementById("btn-close") &&
+        document.getElementById("btn-close").click();
       dispatch(getExerciseSnack(user.user_id, week));
     }
   }, [statsUpdateVideoSnack]);
 
   useEffect(() => {
     if (statsGetExerciseSnack == "success") {
+      //btn-close
       dispatch(clearExerciseSnack());
     }
   }, [statsGetExerciseSnack]);
@@ -139,6 +142,28 @@ const VideoExerciseSnack = () => {
       updatedExerciseSnack[indexToReplace] = randomVideo;
     } else {
       console.log(`Exercise with video_id ${id} not found in exerciseSnack.`);
+    }
+
+    dispatch(updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id));
+  };
+
+  const renew = (item) => {
+    console.log("5555", item);
+
+    const indexToReplace = exerciseSnack.findIndex(
+      (exercise) => exercise.video_id == re_id
+    );
+
+    console.log("indexToReplace", indexToReplace);
+    let updatedExerciseSnack;
+
+    if (indexToReplace !== -1) {
+      updatedExerciseSnack = [...exerciseSnack]; // สร้างคัดลอกใหม่
+      updatedExerciseSnack[indexToReplace] = item;
+    } else {
+      console.log(
+        `Exercise with video_id ${re_id} not found in exerciseSnack.`
+      );
     }
 
     dispatch(updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id));
@@ -286,7 +311,6 @@ const VideoExerciseSnack = () => {
                                 <b>{item.name}</b>
                               </h6>
                             )}
-                            {item.video_id}
                             <p
                               style={{
                                 color: "grey",
@@ -355,6 +379,7 @@ const VideoExerciseSnack = () => {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                id="btn-close"
               >
                 <img
                   src="../assets/img/close-line.png"
@@ -364,21 +389,29 @@ const VideoExerciseSnack = () => {
               </button>
             </div>
             <div className="modal-body ">
-              <div className="row box-snack">
-                <img
-                  src="../assets/img/component4.png"
-                  className="component-4 mb-3"
-                />
-                <div className="snack col-12 col-md-5">
-                  <p className="snack-name">
-                    Sit to Stand / Squat 10 - 20 ครั้ง
-                  </p>
-                  <p className="equipment-name">อุปกรณ์ : เก้าอี้</p>
-                </div>
-                <div className="box-qty">
-                  <img src="../assets/img/qty.png" className="qty" />
-                </div>
-              </div>
+              {exerciseSnack &&
+                exerciseSnack.map((item, index) => {
+                  if (item.video_id != re_id) {
+                    return (
+                      <div className="row box-snack">
+                        <img
+                          src={item.thumbnail}
+                          className="component-4 mb-3"
+                        />
+                        <div className="snack col-12 col-md-5">
+                          <p className="snack-name">{item.name}</p>
+                          <p className="equipment-name">
+                            อุปกรณ์ :{" "}
+                            {item.equipment ? item.equipment : "ไม่มี"}
+                          </p>
+                        </div>
+                        <div className="box-qty" onClick={() => renew(item)}>
+                          <img src="../assets/img/qty.png" className="qty" />
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
             </div>
           </div>
         </div>
