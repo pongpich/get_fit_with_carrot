@@ -1591,7 +1591,7 @@ const INIT_STATE = {
   statsUpdateVideoSnack: "default",
   videoExerciseSnack: null,
   hideVideoPopUpSnack: false,
-  statsVideoExerciseSnackAl: "default",
+  statsVideoExerciseSnackAll: "default",
   videoExerciseSnackAll: null,
 };
 
