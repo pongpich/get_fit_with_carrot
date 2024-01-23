@@ -112,9 +112,10 @@ const VideoPlayerSnack = ({ url, videoId }) => {
     if (playTime == true) {
       const targetIndex = 0; // Assuming you want to update the first item in the array
 
-      const jsonString = JSON.stringify(updatedExerciseSnack);
-
-      const diffTime = Math.abs(videoCurrDuration - prevPlayTime);
+      /*  const diffTime = Math.abs(videoCurrDuration - prevPlayTime); การยิ่ง ทุก ๆ 0.5 วิ
+      if (diffTime < 0.5) {
+        return;
+      } */
 
       dispatch(
         updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id)
