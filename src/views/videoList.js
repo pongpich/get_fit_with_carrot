@@ -198,7 +198,7 @@ class VideoList extends Component {
 
       this.props.getAllExerciseActivity(user.user_id);
       this.props.createExerciseSnack(user && user.user_id);
-      this.props.getVideoSnack();
+      this.props.getVideoSnack(user && user.user_id,week);
 
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);

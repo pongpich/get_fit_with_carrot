@@ -399,9 +399,9 @@ export const updateVideoSnack = (data, id) => ({
   },
 });
 
-export const getVideoSnack = () => ({
+export const getVideoSnack = (user_id, week) => ({
   type: types.GET_VIDEO_SNACK,
-  payload: {},
+  payload: { user_id, week },
 });
 
 export const clearExerciseSnack = () => ({

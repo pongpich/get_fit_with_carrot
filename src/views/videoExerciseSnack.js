@@ -8,6 +8,7 @@ import {
   clearExerciseSnack,
   setHidePopupVideoPlayerSnack,
   updateVideoSnack,
+  getVideoSnack,
 } from "../redux/exerciseVideos";
 import {
   convertSecondsToMinutes,
@@ -35,6 +36,9 @@ const VideoExerciseSnack = () => {
       ? JSON.parse(videoExerciseSnack[0].video)
       : null
   );
+  const [videoAll, setVideoAll] = useState(
+    videoExerciseSnackAll ? videoExerciseSnackAll : null
+  );
   const [weekSnack, setWeekSnack] = useState(week);
   const [autoPlayCheck, setAutoPlayCheck] = useState(true);
 
@@ -45,6 +49,10 @@ const VideoExerciseSnack = () => {
   useEffect(() => {
     dispatch(setHidePopupVideoPlayerSnack(false));
   }, []);
+
+  useEffect(() => {
+    setVideoAll(videoExerciseSnackAll ? videoExerciseSnackAll : null);
+  }, [videoExerciseSnackAll]);
 
   useEffect(() => {
     setExerciseSnack(
@@ -89,6 +97,7 @@ const VideoExerciseSnack = () => {
       document.getElementById("btn-close") &&
         document.getElementById("btn-close").click();
       dispatch(getExerciseSnack(user.user_id, week));
+      dispatch(getVideoSnack(user.user_id, week));
     }
   }, [statsUpdateVideoSnack]);
 
@@ -126,11 +135,10 @@ const VideoExerciseSnack = () => {
     let randomIndex;
 
     do {
-      randomIndex = Math.floor(Math.random() * videoExerciseSnackAll.length);
+      randomIndex = Math.floor(Math.random() * videoAll.length);
     } while (randomIndex === id);
 
-    const randomVideo =
-      videoExerciseSnackAll[randomIndex == 0 ? 0 : randomIndex - 1];
+    const randomVideo = videoAll[randomIndex == 0 ? 0 : randomIndex - 1];
 
     const indexToReplace = exerciseSnack.findIndex(
       (exercise) => exercise.video_id == id
@@ -148,13 +156,9 @@ const VideoExerciseSnack = () => {
   };
 
   const renew = (item) => {
-    console.log("5555", item);
-
-    const indexToReplace = exerciseSnack.findIndex(
+    const indexToReplace = videoAll.findIndex(
       (exercise) => exercise.video_id == re_id
     );
-
-    console.log("indexToReplace", indexToReplace);
     let updatedExerciseSnack;
 
     if (indexToReplace !== -1) {
@@ -389,8 +393,8 @@ const VideoExerciseSnack = () => {
               </button>
             </div>
             <div className="modal-body ">
-              {exerciseSnack &&
-                exerciseSnack.map((item, index) => {
+              {videoAll &&
+                videoAll.map((item, index) => {
                   if (item.video_id != re_id) {
                     return (
                       <div className="row box-snack">
