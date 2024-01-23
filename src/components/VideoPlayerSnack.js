@@ -8,6 +8,7 @@ import {
   updatePlaytimeLastWeek,
   updateVideoSnack,
   getExerciseSnack,
+  createEventLogSnacks,
   updatePlaytimeLastWeekSelected,
 } from "../redux/exerciseVideos";
 import {
@@ -127,9 +128,22 @@ const VideoPlayerSnack = ({ url, videoId }) => {
       video.pause();
       // และอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อปิดวีดีโอ
     }
+    //createEventLogSnacks
     //สั่ง set ตัวแปรใน redux และให้หน้า videoList ไปเช็ีคจากตัวแปรนั้นเพื่อซ่อน popup
-    /*     dispatch(getExerciseSnack(user.user_id, week));
-     */ dispatch(setHidePopupVideoPlayerSnack(true));
+    /*     dispatch(getExerciseSnack(user.user_id, week));*/
+
+    var filteredExerciseSnack = exerciseSnack.filter(function (item) {
+      return item.play_time > 0;
+    });
+
+    // นับจำนวน exerciseSnack ที่มี video_id มากกว่า 0
+    var count = filteredExerciseSnack.length;
+
+    if (count > 3) {
+      dispatch(createEventLogSnacks(user && user.user_id, count));
+    }
+
+    dispatch(setHidePopupVideoPlayerSnack(true));
   };
 
   return (

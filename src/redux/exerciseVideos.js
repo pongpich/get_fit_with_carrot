@@ -79,6 +79,9 @@ export const types = {
   GET_VIDEO_SNACK_SUCCESS: "GET_VIDEO_SNACK_SUCCESS",
   GET_VIDEO_SNACK_FALE: "GET_VIDEO_SNACK_FALE",
   CLEAR_EXERCISE_SNACK: "CLEAR_EXERCISE_SNACK",
+  CREATE_EVENT_LOG_SNACK: "CREATE_EVENT_LOG_SNACK",
+  CREATE_EVENT_LOG_SNACK_SUCCESS: "CREATE_EVENT_LOG_SNACK_SUCCESS",
+  CREATE_EVENT_LOG_SNACK_FALE: "CREATE_EVENT_LOG_SNACK_FALE",
 };
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
@@ -372,6 +375,14 @@ export const createExerciseSnack = (user_id) => ({
     user_id,
   },
 });
+export const createEventLogSnacks = (user_id, snacks_number) => ({
+  type: types.CREATE_EVENT_LOG_SNACK, //createExerciseSnacksChallenge
+  payload: {
+    user_id,
+    snacks_number,
+  },
+});
+
 export const getExerciseSnack = (user_id, week) => ({
   type: types.GET_EXERCISE_SNACK,
   payload: {
@@ -798,6 +809,21 @@ const createExerciseSnackSagaAsync = async (user_id) => {
     return { error, messsage: error.message };
   }
 };
+const createEventLogSnacksSagaAsync = async (user_id, snacks_number) => {
+  try {
+    const apiResult = await API.post("bebe", "/createEventLogSnacks", {
+      body: {
+        user_id,
+        snacks_number,
+      },
+    });
+    console.log("apiResult", apiResult);
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
 const updateVideoSnackSagaAsync = async (data, id) => {
   try {
     const apiResult = await API.put("bebe", "/updateVideoSnack", {
@@ -1330,6 +1356,23 @@ function* createExerciseSnackSaga({ payload }) {
     console.log("error from updateDisplayNameSaga :", error);
   }
 }
+function* createEventLogSnacksSaga({ payload }) {
+  const { user_id, snacks_number } = payload;
+  const apiResult = yield call(
+    createEventLogSnacksSagaAsync,
+    user_id,
+    snacks_number
+  );
+
+  try {
+    yield put({
+      type: types.CREATE_EVENT_LOG_SNACK_SUCCESS,
+      payload: apiResult.results,
+    });
+  } catch (error) {
+    console.log("error from updateDisplayNameSaga :", error);
+  }
+}
 function* updateVideoSnackSaga({ payload }) {
   const { data, id } = payload;
   const apiResult = yield call(updateVideoSnackSagaAsync, data, id);
@@ -1469,6 +1512,9 @@ export function* watchUpdateFbShareStatusBraveAndBurn() {
   );
 }
 
+export function* watchCreateEventLogSnacksSaga() {
+  yield takeEvery(types.CREATE_EVENT_LOG_SNACK, createEventLogSnacksSaga);
+}
 export function* watchCreateExerciseSnackSaga() {
   yield takeEvery(types.CREATE_EXERCISE_SNACK, createExerciseSnackSaga);
 }
@@ -1507,6 +1553,7 @@ export function* saga() {
     fork(watchGetExerciseSnackSaga),
     fork(watchUpdateVideoSnackSaga),
     fork(watchGetVideoSnackSaga),
+    fork(watchCreateEventLogSnacksSaga),
   ]);
 }
 
@@ -1798,12 +1845,27 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         videoExerciseSnackAll: action.payload.exerciseSnack,
-        statsVideoExerciseSnackAl: "success",
+        statsVideoExerciseSnackAll: "success",
       };
     case types.GET_VIDEO_SNACK_FALE:
       return {
         ...state,
         statsVideoExerciseSnackAll: "fail",
+      };
+    case types.CREATE_EVENT_LOG_SNACK:
+      return {
+        ...state,
+        statsEventLogSnack: "loading",
+      };
+    case types.CREATE_EVENT_LOG_SNACK_SUCCESS:
+      return {
+        ...state,
+        statsEventLogSnack: "success",
+      };
+    case types.CREATE_EVENT_LOG_SNACK_FALE:
+      return {
+        ...state,
+        statsEventLogSnack: "fail",
       };
     case types.HIDE_POPUP_VIDEO_PLAYER_SNACK:
       return {
