@@ -284,7 +284,7 @@ const VideoExerciseSnack = () => {
                         <div className="videoThumb">
                           <div className="containerThumb">
                             <img
-                              className="img-fluid"
+                              className="img-fluid thumbnail-img"
                               src={`${item.thumbnail}`}
                               alt=""
                             />
