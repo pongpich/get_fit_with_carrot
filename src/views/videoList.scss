@@ -582,6 +582,13 @@ input:checked + .slider:before {
 @media (min-width: 992px)
 {
 	.box-re {
+    margin-top: 16px;
+  }
+  
+}
+@media (min-width: 1025px)
+{
+	.box-re {
     margin-top: -64px;
   }
   
@@ -677,5 +684,10 @@ color: #000;
 }
 .button-snack-point:hover{
   cursor: pointer;
+}
+
+.thumbnail-img {
+  width: 1920px;
+  height: 1080px;
 }
 
