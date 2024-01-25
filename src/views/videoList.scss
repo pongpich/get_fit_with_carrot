@@ -579,10 +579,10 @@ input:checked + .slider:before {
   }
   
 }
-@media (min-width: 992px)
+@media (min-width: 992px) and  (max-width: 1024px)
 {
 	.box-re {
-    margin-top: 16px;
+    margin-top: 0px;
   }
   
 }
@@ -687,7 +687,7 @@ color: #000;
 }
 
 .thumbnail-img {
-  width: 1920px;
-  height: 1080px;
+  width: 1500px;
+  
 }
 
