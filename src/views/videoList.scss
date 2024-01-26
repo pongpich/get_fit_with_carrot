@@ -596,7 +596,7 @@ input:checked + .slider:before {
 .box-random {
   color: #E25E96;
   width: auto;
-  height: 100%;
+  height: auto;
   max-height: 44px;
   align-items: center;
   justify-content: center;
@@ -688,6 +688,29 @@ color: #000;
 
 .thumbnail-img {
   width: 1500px;
+  
+}
+
+@media (max-width: 1140px) 
+{
+	.property-body_part {
+    max-width: 60px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 16px;
+  }
+  
+  
+}
+@media (min-width: 1140px) 
+{
+	.property-body_part {
+    max-width: 90px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 16px;
+  }
+  
   
 }
 

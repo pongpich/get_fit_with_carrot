@@ -272,7 +272,7 @@ const VideoExerciseSnack = () => {
                         </>
                       )}
                     </div>
-                    <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
+                    <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10 mb-5">
                       <div className="videoItem border shadow">
                         <img
                           className="play_button"
@@ -281,15 +281,18 @@ const VideoExerciseSnack = () => {
                           onClick={() => toggleList(item.url, item.video_id)}
                         ></img>
 
-                        <div className="videoThumb">
-                          <div className="containerThumb">
-                            <img
-                              className="img-fluid thumbnail-img"
-                              src={`${item.thumbnail}`}
-                              alt=""
-                            />
+                        <div className="videoThumb-width">
+                          <div className="videoThumb">
+                            <div className="containerThumb">
+                              <img
+                                className="img-fluid thumbnail-img"
+                                src={`${item.thumbnail}`}
+                                alt=""
+                              />
+                            </div>
                           </div>
                         </div>
+
                         <div className="videoDetail">
                           <div className="videoDuration mt-3">
                             <h6>

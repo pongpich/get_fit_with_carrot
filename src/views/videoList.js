@@ -198,7 +198,7 @@ class VideoList extends Component {
 
       this.props.getAllExerciseActivity(user.user_id);
       this.props.createExerciseSnack(user && user.user_id);
-      this.props.getVideoSnack(user && user.user_id,week);
+      this.props.getVideoSnack(user && user.user_id, week);
 
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
@@ -368,7 +368,9 @@ class VideoList extends Component {
         this.props.videoListForUserLastWeek(
           this.props.user.user_id,
           // this.props.user.other_attributes = "{"age": 32, "hip": 41, "sex": "female", "chest": 38, "waist": 31, "height": 175, "weight": 79}"
-          (this.isJson(user.other_attributes) ? user.other_attributes.weight : JSON.parse(user.other_attributes).weight),
+          this.isJson(user.other_attributes)
+            ? user.other_attributes.weight
+            : JSON.parse(user.other_attributes).weight,
           this.props.user.start_date,
           this.props.user.expire_date,
           this.props.user.offset
@@ -383,7 +385,9 @@ class VideoList extends Component {
       this.props.videoListForUserLastWeek(
         this.props.user.user_id,
         // this.props.user.other_attributes = "{"age": 32, "hip": 41, "sex": "female", "chest": 38, "waist": 31, "height": 175, "weight": 79}"
-        (this.isJson(user.other_attributes) ? user.other_attributes.weight : JSON.parse(user.other_attributes).weight),
+        this.isJson(user.other_attributes)
+          ? user.other_attributes.weight
+          : JSON.parse(user.other_attributes).weight,
         this.props.user.start_date,
         this.props.user.expire_date,
         this.props.user.offset
@@ -514,13 +518,13 @@ class VideoList extends Component {
         this.props.user.expire_date,
         this.props.user.offset
       );
-       this.props.videoListForUserLastWeek(
-         this.props.user.user_id,
-         user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
-         this.props.user.start_date,
-         this.props.user.expire_date,
-         this.props.user.offset
-       );
+      this.props.videoListForUserLastWeek(
+        this.props.user.user_id,
+        user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
+        this.props.user.start_date,
+        this.props.user.expire_date,
+        this.props.user.offset
+      );
       this.addEventToVideo();
     }
 
@@ -4051,6 +4055,8 @@ class VideoList extends Component {
                   <tbody>
                     {this.props.exerciseVideo &&
                       todayExercise.map((item, index) => {
+                        const itemsArray = item.muscle.split(",");
+
                         const minuteLabel =
                           item.duration < 20
                             ? convertFormatTime(item.duration)
@@ -4111,7 +4117,7 @@ class VideoList extends Component {
                                 </h6>
                               )}
                             </div>
-                            <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
+                            <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10 mb-5">
                               <div className="videoItem border shadow">
                                 {this.state.autoPlayCheck && (
                                   <img
@@ -4183,7 +4189,7 @@ class VideoList extends Component {
                                         <b>{item.name}</b>
                                       </h6>
                                     )}
-                                    {this.props.member_info &&
+                                    {/*    {this.props.member_info &&
                                       this.props.member_info.low_impact ===
                                         "yes" &&
                                       item.tag &&
@@ -4198,100 +4204,87 @@ class VideoList extends Component {
                                           {" "}
                                           {"(Low impact)"}{" "}
                                         </p>
-                                      )}
+                                      )} */}
                                   </div>
-                                  {
-                                    //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                                    item.category !== "Main Circuit Combo" &&
-                                      item.category !== "Main Circuit" &&
-                                      item.category !== "Challenge" && (
-                                        <img
-                                          className="body_part"
-                                          src={`../assets/img/body_part/${item.category
-                                            .toLowerCase()
-                                            .split(" ")
-                                            .join("")}.png`}
-                                        ></img>
-                                      )
-                                  }
-                                  {(item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "chestfocus" ||
-                                    item.type
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/chest.png`}
-                                    ></img>
-                                  )}
-                                  {(item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "backfocus" ||
-                                    item.type
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/back.png`}
-                                    ></img>
-                                  )}
-                                  {(item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "backfocus" ||
-                                    item.type
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("") === "chest_back") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/core.png`}
-                                    ></img>
-                                  )}
-                                  {(item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "legfocus" ||
-                                    item.type
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/leg.png`}
-                                    ></img>
-                                  )}
-                                  {(item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "armfocus" ||
-                                    item.type
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/arm.png`}
-                                    ></img>
-                                  )}
-                                  {(item.type
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .join("") === "armfocus" ||
-                                    item.type
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("") === "leg_arm") && (
-                                    <img
-                                      className="body_part ml-2"
-                                      src={`../assets/img/body_part/shoulder.png`}
-                                    ></img>
-                                  )}
+                                  <div className="property-box">
+                                    {itemsArray &&
+                                      itemsArray.map((muItem, j) => {
+                                        console.log("muItem", muItem);
+                                        if (muItem == "warm_up") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/Propertywarmup.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "cool_down") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/Propertycooldown.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "total_body") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/totalBody.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "core") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyCore.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "chest") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyChest.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "back") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyBack.png`}
+                                            ></img>
+                                          );
+                                          //PropertyGlute
+                                        }
+                                        if (muItem == "glute") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyGlute.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "leg") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyLeg.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "shoulder") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyShoulder.png`}
+                                            ></img>
+                                          );
+                                        }
+                                      })}
+                                  </div>
                                 </div>
                               </div>
                             </div>
