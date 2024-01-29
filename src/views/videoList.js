@@ -4439,7 +4439,7 @@ class VideoList extends Component {
                 className=""
                 id="contact-tab"
                 data-toggle="tab"
-                href="/#/challenges"
+                onClick={() => this.props.history.push("/challenges")}
                 role="tab"
                 aria-controls="contact"
                 aria-selected="false"
