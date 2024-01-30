@@ -57,7 +57,7 @@ import line from "../assets/img/icon-line.png";
 import tiktok from "../assets/img/icon-tiktok.png";
 import whatsApp from "../assets/img/icon-WhatsApp.png";
 import instagram from "../assets/img/icon-instagram.png";
-import frame40 from "../assets/img/frame41.png";
+import frame40 from "../assets/img/frame40.png";
 import frame41 from "../assets/img/frame41.png";
 import frame42 from "../assets/img/frame42.png";
 import frame43 from "../assets/img/frame43.png";
@@ -160,6 +160,7 @@ class Challenges extends Component {
       statusCancelTeamInvite,
       statusCreateTeam,
     } = this.props;
+    
     const achievementFinisher =
       achievementLog &&
       achievementLog.filter((item) => item.achievement === "Finisher").length >
@@ -1797,39 +1798,39 @@ class Challenges extends Component {
       achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
-        : false;
+        : true;
     const achievementAce =
       achievementLog &&
       achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
-        : false;
+        : true;
     const achievement1st =
       achievementLog &&
       achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
-        : false;
+        : true;
     const achievement2nd =
       achievementLog &&
       achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
-        : false;
+        : true;
     const achievementTop10 =
       achievementLog &&
       achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
-        : false;
+        : true;
     const achievementSocialStar =
       achievementLog &&
       achievementLog.filter((item) => item.achievement === "Social star")
         .length > 0
         ? true
-        : false;
+        : true;
     const achievementSocialStarPlus =
       achievementLog &&
       achievementLog.filter((item) => item.achievement === "Social star+")
         .length > 0
         ? true
-        : false;
+        : true;
 
     return (
       <div className="row">
