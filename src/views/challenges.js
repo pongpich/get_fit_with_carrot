@@ -1793,39 +1793,39 @@ class Challenges extends Component {
         achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
-        : true;
+        : false;
     const achievementAce =
       achievementLog &&
         achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
-        : true;
+        : false;
     const achievement1st =
       achievementLog &&
         achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
-        : true;
+        : false;
     const achievement2nd =
       achievementLog &&
         achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
-        : true;
+        : false;
     const achievementTop10 =
       achievementLog &&
         achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
-        : true;
+        : false;
     const achievementSocialStar =
       achievementLog &&
         achievementLog.filter((item) => item.achievement === "Social star")
           .length > 0
         ? true
-        : true;
+        : false;
     const achievementSocialStarPlus =
       achievementLog &&
         achievementLog.filter((item) => item.achievement === "Social star+")
           .length > 0
         ? true
-        : true;
+        : false;
 
     return (
       <div className="row">
@@ -3602,7 +3602,7 @@ class Challenges extends Component {
         <div class="row justify-content-md-center">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <img src={frame42} className="frame40" />
-            <img src={icon_web} className="icon_web" />
+            {/* <img src={icon_web} className="icon_web" /> */}
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-6  ">
             <div className="canterMode-box">
@@ -3662,7 +3662,7 @@ class Challenges extends Component {
         <div class="row justify-content-md-center">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <img src={frame43} className="frame40" />
-            <img src={icon_web} className="icon_web" />
+            {/* <img src={icon_web} className="icon_web" /> */}
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-6  ">
             <div className="canterMode-box">
@@ -3720,7 +3720,7 @@ class Challenges extends Component {
         <div class="row justify-content-md-center">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <img src={frame44} className="frame40" />
-            <img src={icon_web} className="icon_web" />
+            {/* <img src={icon_web} className="icon_web" /> */}
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-6  ">
             <div className="canterMode-box">
@@ -3778,7 +3778,7 @@ class Challenges extends Component {
         <div class="row justify-content-md-center">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <img src={frame47} className="frame40" />
-            <img src={icon_web} className="icon_web" />
+            {/* <img src={icon_web} className="icon_web" /> */}
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-6  ">
             <div className="canterMode-box">
@@ -3835,7 +3835,7 @@ class Challenges extends Component {
         <div class="row justify-content-md-center">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <img src={frame40} className="frame40" />
-            <img src={icon_web} className="icon_web2" />
+            {/* <img src={icon_web} className="icon_web2" /> */}
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-6  ">
             <div className="canterMode-box">
@@ -3892,7 +3892,7 @@ class Challenges extends Component {
         <div class="row justify-content-md-center">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <img src={frame46} className="frame40" />
-            <img src={icon_web} className="icon_web" />
+            {/* <img src={icon_web} className="icon_web" /> */}
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-6  ">
             <div className="canterMode-box">
@@ -3950,7 +3950,7 @@ class Challenges extends Component {
         <div class="row justify-content-md-center">
           <div class="col-12 col-sm-12 col-md-12 col-lg-6">
             <img src={frame45} className="frame40" />
-            <img src={icon_web} className="icon_web" />
+            {/* <img src={icon_web} className="icon_web" /> */}
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-6  ">
             <div className="canterMode-box">
