@@ -3460,13 +3460,13 @@ class Challenges extends Component {
             <b>ทำ Random Exercise Snacks 4 ครั้ง</b> จะได้รับ 10 คะแนน
           </h6>
           <h6>
-            <b>ทำ Random Exercise Snacks 5 ครั้ง</b> จะได้รับคะแนนพิเศษ x คะแนน
+            <b>ทำ Random Exercise Snacks 5 ครั้ง</b> จะได้รับคะแนนพิเศษ 2 คะแนน
           </h6>
           <h6>
-            <b>ทำ Random Exercise Snacks 6 ครั้ง</b> จะได้รับคะแนนพิเศษ y คะแนน
+            <b>ทำ Random Exercise Snacks 6 ครั้ง</b> จะได้รับคะแนนพิเศษ 3 คะแนน
           </h6>
           <h6>
-            <b>ทำ Random Exercise Snacks 7 ครั้ง</b> จะได้รับคะแนนพิเศษ z คะแนน
+            <b>ทำ Random Exercise Snacks 7 ครั้ง</b> จะได้รับคะแนนพิเศษ 5 คะแนน
           </h6>
           <br></br>
           <h5 style={{ color: "#F45197" }}>
