@@ -45,6 +45,7 @@ class App extends Component {
       statusNews: "default",
       overlay: false,
       overlay2: false,
+      showPopupIntro: false
     };
   }
 
@@ -277,8 +278,9 @@ class App extends Component {
   toggle(popupName) {
     if (popupName === "popupIntroVDO") {
       document.getElementById("popupIntroVDO").classList.toggle("active");
-      var video = document.getElementById(`introVDO`);
-      video.play();
+      this.setState({
+        showPopupIntro: true
+      })
     }
     if (popupName === "popupQuestionnaire") {
       document.getElementById("popupQuestionnaire").classList.toggle("active");
@@ -295,9 +297,9 @@ class App extends Component {
   closeToggle(popupName) {
     if (popupName === "popupIntroVDO") {
       document.getElementById("popupIntroVDO").classList.toggle("active");
-      var video = document.getElementById(`introVDO`);
-      video.pause();
-      video.currentTime = 0;
+      this.setState({
+        showPopupIntro: false
+      })
     }
     if (popupName === "popupQuestionnaire") {
       document.getElementById("popupQuestionnaire").classList.toggle("active");
@@ -309,25 +311,22 @@ class App extends Component {
   }
 
   renderHeader() {
+    const { showPopupIntro } = this.state;
     const { overlay, overlay2 } = this.state;
     return (
       <div className="header">
+         <header>
+        <img src={Header} alt="Header Image" className="header2" />
+        <img src={Header_icon} alt="Header Image" className="header-button"   onClick={() => this.toggle("popupIntroVDO")}/>
+        {/* <img src={Header_icon} className="header-button">Click Me</img> */}
+      </header>
         <div className="popupIntroVDO" id={`popupIntroVDO`}>
-          <video
-            src={
-              "https://player.vimeo.com/external/414645540.hd.mp4?s=d2c95abe8443336f858f4bf9243b79fee350a8d4&profile_id=174"
-            }
-            id="introVDO"
-            controls
-            controlsList="nodownload"
-            disablePictureInPicture
-          ></video>
-          <img
-            alt=""
-            src="./assets/img/thumb/close.png"
-            className="close"
-            onClick={() => this.closeToggle("popupIntroVDO")}
-          ></img>
+          <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupIntroVDO')}></img>
+          {
+            showPopupIntro &&
+            <iframe
+              src="https://stream-player.byteark.com/players/6540b05c1524da29c9b6843b/videos/U2YLrVDY1YYs" width="560" height="320" frameborder="0" allowfullscreen referrerpolicy="origin">
+            </iframe>}
         </div>
 
         {overlay && (
@@ -403,8 +402,8 @@ class App extends Component {
           ></img>
         </div>
 
-        <div className="watch_introduction">
-          {/* <div
+        {/* <div className="watch_introduction">
+          <div
             onClick={() => this.toggle("popupIntroVDO")}
             className=""
             style={{ float: "left" }}
@@ -417,8 +416,8 @@ class App extends Component {
               height="54px"
             />
             WATCH INTRODUCTION
-          </div> */}
-        </div>
+          </div>
+        </div> */}
         {/* <p className="with-carrot">
           Get Fit With Carrot <span className="with-week">IN 8 WEEK</span>
         </p> */}
@@ -434,23 +433,13 @@ class App extends Component {
     );
   }
 
-  renderHeader2() {
-    return (
-      <header>
-        <img src={Header} alt="Header Image" className="header2" />
-        <img src={Header_icon} alt="Header Image" className="header-button" />
-        {/* <img src={Header_icon} className="header-button">Click Me</img> */}
-      </header>
-    );
-  }
   render() {
     return (
       <div className="App" style={{ backgroundColor: "#F0EEF3" }}>
         {/* {this.renderTopbar()} */}
         {this.renderNavbar()}
-        {/* {this.props.user && this.renderHeader()} */}
-        {this.props.user && this.renderHeader2()}
-
+        {this.props.user && this.renderHeader()}
+        
         <Switch>
           <Route exact path="/">
             <Redirect to="/login" />
