@@ -3,7 +3,7 @@
   padding-bottom: 32px;
   width: 100%;
   /* padding: 130px; */
-  height: 400px;
+  height: auto;
   text-align: center;
   background: #F0EEF3;
   background-image: url("./assets/img/header.png");
@@ -12,6 +12,30 @@
   color: #F45197;
 }
 
+header {
+  position: relative;
+  text-align: center;
+}
+
+.header2 {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+.header-button {
+  position: absolute;
+  width: 290px;
+  bottom: 10px;
+  left: 20px;
+  /* background-color: #4CAF50; */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .watch_introduction {
   font-size: 18px;
   cursor: pointer;
@@ -29,7 +53,18 @@
     background-image: url("./assets/img/header.png");
     background-size: 100% 100%;
   }
-
+  .header-button {
+    position: absolute;
+    width: 200px;
+    bottom: 5px;
+    left: 10px;
+    /* background-color: #4CAF50; */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   .watch_introduction {
     margin-top: 40px;
     margin-left: -70px;
@@ -45,7 +80,18 @@
     background-image: url("./assets/img/header.png");
     background-size: 100% 100%;
   }
-
+  .header-button {
+    position: absolute;
+    width: 120px;
+    bottom: 5px;
+    left: 5px;
+    /* background-color: #4CAF50; */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   .watch_introduction {
     margin-top: 40px;
     margin-left: -60px;

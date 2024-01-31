@@ -26,6 +26,8 @@ import TestGPS_GG from "./views/test_gps_gg";
 import TestGPS_Permission from "./views/test_gps_permission";
 import BonusChallenge from "./views/bonus_challenge";
 import Footer from "./views/footer";
+import Header from "./assets/img/header.png";
+import Header_icon from "./assets/img/header_icon.png";
 
 import { awsConfig } from "./constants/defaultValues";
 
@@ -85,7 +87,7 @@ class App extends Component {
 
     if (
       prevProps.statusGetCheckQuestionnaireLog !==
-        statusGetCheckQuestionnaireLog &&
+      statusGetCheckQuestionnaireLog &&
       statusGetCheckQuestionnaireLog === "success"
     ) {
       let week;
@@ -432,12 +434,22 @@ class App extends Component {
     );
   }
 
+  renderHeader2() {
+    return (
+      <header>
+        <img src={Header} alt="Header Image" className="header2" />
+        <img src={Header_icon} alt="Header Image" className="header-button" />
+        {/* <img src={Header_icon} className="header-button">Click Me</img> */}
+      </header>
+    );
+  }
   render() {
     return (
       <div className="App" style={{ backgroundColor: "#F0EEF3" }}>
         {/* {this.renderTopbar()} */}
         {this.renderNavbar()}
-        {this.props.user && this.renderHeader()}
+        {/* {this.props.user && this.renderHeader()} */}
+        {this.props.user && this.renderHeader2()}
 
         <Switch>
           <Route exact path="/">

@@ -75,7 +75,7 @@ class Login extends Component {
             style={{ borderRadius: "16px" }}
           >
             <div className="position-relative image-side-login col-lg-6 col-12">
-              <p className="welcome-program mt-3">ยินต้อนรับเข้าสู่โปรแกรม</p>
+              <p className="welcome-program mt-3">ยินดีต้อนรับเข้าสู่โปรแกรม</p>
               <img
                 className="mb-4 col-12"
                 src="/assets/img/group37592.png"
