@@ -4420,7 +4420,7 @@ class VideoList extends Component {
         <div className="nav mt-5 mb-4 ml-5" id="myTab" role="tablist">
           <div className="mr-4 mb-3">
             <a
-              className=""
+              className="workout Routine"
               id="home-tab"
               data-toggle="tab"
               href="/#/Videdivst"
@@ -4434,7 +4434,7 @@ class VideoList extends Component {
                 textDecorationColor: "white",
               }}
             >
-              workout Routine
+              Workout Routine
             </a>
           </div>
           {/* <li className="nav-item">
@@ -4443,7 +4443,7 @@ class VideoList extends Component {
           {this.props.user && (
             <div className="">
               <a
-                className=""
+                className="challenges-cursor"
                 id="contact-tab"
                 data-toggle="tab"
                 onClick={() => this.props.history.push("/challenges")}
