@@ -157,14 +157,11 @@ const VideoExerciseSnack = () => {
   };
 
   const renew = (item) => {
-    const indexToReplace = videoAll.findIndex(
-      (exercise) => exercise.video_id == re_id
-    );
     let updatedExerciseSnack;
 
-    if (indexToReplace !== -1) {
+    if (re_id !== -1) {
       updatedExerciseSnack = [...exerciseSnack]; // สร้างคัดลอกใหม่
-      updatedExerciseSnack[indexToReplace] = item;
+      updatedExerciseSnack[re_id] = item;
     } else {
       console.log(
         `Exercise with video_id ${re_id} not found in exerciseSnack.`
@@ -181,6 +178,13 @@ const VideoExerciseSnack = () => {
         document.getElementById("example-snack-success").click();
     }
   }, []);
+
+  const renewId = (index) => {
+    setRe_id(index);
+    document.getElementById("example-snack") &&
+      document.getElementById("example-snack").click();
+    console.log("index", index);
+  };
 
   return (
     <>
@@ -353,9 +357,7 @@ const VideoExerciseSnack = () => {
                           </div>
                           <div
                             className="box-random"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModalSnack"
-                            onClick={() => setRe_id(item.video_id)}
+                            onClick={() => renewId(index)}
                           >
                             <img
                               src="../assets/img/renew.png"
@@ -421,7 +423,10 @@ const VideoExerciseSnack = () => {
                             {item.equipment ? item.equipment : "ไม่มี"}
                           </p>
                         </div>
-                        <div className="box-qty" onClick={() => renew(item)}>
+                        <div
+                          className="box-qty"
+                          onClick={() => renew(item, item.video_id)}
+                        >
                           <img src="../assets/img/qty.png" className="qty" />
                         </div>
                       </div>
@@ -442,6 +447,16 @@ const VideoExerciseSnack = () => {
         id="example-snack-success"
       >
         Launch demo modal
+      </button>
+      <button
+        type="button"
+        style={{ display: "none" }}
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModalSnack"
+        id="example-snack"
+      >
+        exampleModalSnack
       </button>
 
       <div

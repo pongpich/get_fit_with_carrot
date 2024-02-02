@@ -4216,7 +4216,6 @@ class VideoList extends Component {
                                   <div className="property-box">
                                     {itemsArray &&
                                       itemsArray.map((muItem, j) => {
-                                        console.log("muItem", muItem);
                                         if (muItem == "warm_up") {
                                           return (
                                             <img
