@@ -526,7 +526,7 @@ class Challenges extends Component {
     }
     console.log(rank);
 
-    
+
     return (
       <div className="row">
         {this.renderPopupRulesAndPrizes()}
@@ -650,7 +650,8 @@ class Challenges extends Component {
           <div className="card-body">
             <center>
               <img
-                src={rank && `../assets/img/rank/${rank.toLowerCase()}.png`}
+                src={rank ? `../assets/img/rank/${rank.toLowerCase()}.png` : `../assets/img/rank/newbie.png.png`}
+                // src={rank && `../assets/img/rank/${rank.toLowerCase()}.png`}
                 className="rounded-circle"
                 alt="Cinque Terre"
                 width="45%"
@@ -1180,10 +1181,10 @@ class Challenges extends Component {
             individualRankFilter.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
               const rankDetail = `${index + 1}. ${item.display_name
-                  ? item.display_name
-                  : item.facebook
-                    ? item.facebook
-                    : fullName
+                ? item.display_name
+                : item.facebook
+                  ? item.facebook
+                  : fullName
                 }`;
               index = index + 1;
               return (
@@ -1280,10 +1281,10 @@ class Challenges extends Component {
             friendsRank.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
               const rankDetail = `${index + 1}. ${item.display_name
-                  ? item.display_name
-                  : item.facebook
-                    ? item.facebook
-                    : fullName
+                ? item.display_name
+                : item.facebook
+                  ? item.facebook
+                  : fullName
                 }`;
               index = index + 1;
               return (
