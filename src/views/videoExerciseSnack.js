@@ -412,10 +412,20 @@ const VideoExerciseSnack = () => {
                   if (item.video_id != re_id) {
                     return (
                       <div className="row box-snack">
-                        <img
-                          src={item.thumbnail}
-                          className="component-4 mb-3"
-                        />
+                        <div className="thumbnail-box"
+                          onClick={() => toggleList(item.url, item.video_id)}
+                        >
+                          <img
+                            src={item.thumbnail}
+                            className="component-4 mb-3"
+                          />
+                          <img
+                            className="play_snack"
+                            src="../assets/img/thumb/play_button2.png"
+                            width="100px"
+                          />
+                        </div>
+
                         <div className="snack col-12 col-md-5">
                           <p className="snack-name">{item.name}</p>
                           <p className="equipment-name">
