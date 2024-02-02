@@ -1174,130 +1174,184 @@ class VideoList extends Component {
               </div>
               <div className="row mt-4 body_part_header">
                 {selectChangeVideoList.map((item, index) => {
-                  const itemsArray = item.muscle.split(",");
-                  return (
-                    <div className="property-box">
-                      {itemsArray &&
-                        itemsArray.map((muItem, j) => {
-                          if (muItem == "warm_up") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/Propertywarmup.png`}
-                              ></img>
-                            );
-                          }
-                          if (muItem == "cool_down") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/Propertycooldown.png`}
-                              ></img>
-                            );
-                          }
-                          if (muItem == "total_body") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/totalBody.png`}
-                              ></img>
-                            );
-                          }
-                          if (muItem == "core") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/PropertyCore.png`}
-                              ></img>
-                            );
-                          }
-                          if (muItem == "chest") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/PropertyChest.png`}
-                              ></img>
-                            );
-                          }
-                          if (muItem == "back") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/PropertyBack.png`}
-                              ></img>
-                            );
-                            //PropertyGlute
-                          }
-                          if (muItem == "glute") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/PropertyGlute.png`}
-                              ></img>
-                            );
-                          }
-                          if (muItem == "leg") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/PropertyLeg.png`}
-                              ></img>
-                            );
-                          }
-                          if (muItem == "shoulder") {
-                            return (
-                              <img
-                                className="property-body_part ml-2"
-                                src={`../assets/img/body_part/PropertyShoulder.png`}
-                              ></img>
-                            );
-                          }
-                        })}
-                    </div>
-                  );
+                  const itemsArray = item && item.muscle.split(",");
+                  if (index == 0) {
+                    return (
+                      <div className="property-box">
+                        {itemsArray &&
+                          itemsArray.map((muItem, j) => {
+                            console.log("muItem", muItem);
+                            if (muItem == "warm_up") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/Propertywarmup.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "cool_down") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/Propertycooldown.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "total_body") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/totalBody.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "core") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyCore.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "chest") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyChest.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "back") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyBack.png`}
+                                ></img>
+                              );
+                              //PropertyGlute
+                            }
+                            if (muItem == "glute") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyGlute.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "leg") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyLeg.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "shoulder") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyShoulder.png`}
+                                ></img>
+                              );
+                            }
+                          })}
+                      </div>
+                    );
+                  }
                 })}
               </div>
               <div className="selectEditPlaylist">
-                {selectChangeVideoList.map((item, index) => (
-                  <div className="playlistWrapper border shadow">
-                    <div className="">
-                      <SelectChangeVideoList
-                        thumbnail={item.thumbnail}
-                        category={item.category}
-                        url={item.url}
-                      />
-                    </div>
-                    <div className="mt-1 ml-3 mb-4">
-                      <h6 style={{ color: "#F45197" }}>
-                        <b> {item.name} </b>
-                      </h6>
-                    </div>
-                    <div className="mt-1 ml-3 mb-4">
-                      <h6>
-                        <b> {item.type} </b>
-                      </h6>
-                    </div>
+                {selectChangeVideoList.map((item, index) => {
+                  if (item.category == "Flexibility") {
+                    let weekFlexibility =
+                      this.props.week <= 4
+                        ? ["00004", "00005", "00006", "00007"]
+                        : ["00008", "00009", "00010", "00011"];
+                    if (weekFlexibility.includes(item.video_id)) {
+                      return (
+                        <div className="playlistWrapper border shadow">
+                          <div className="">
+                            <SelectChangeVideoList
+                              thumbnail={item.thumbnail}
+                              category={item.category}
+                              url={item.url}
+                            />
+                          </div>
+                          <div className="mt-1 ml-3 mb-4">
+                            <h6 style={{ color: "#F45197" }}>
+                              <b> {item.name}</b>
+                            </h6>
+                          </div>
+                          <div className="mt-1 ml-3 mb-4">
+                            <h6>
+                              <b> {item.type} </b>
+                            </h6>
+                          </div>
 
-                    <button
-                      className="btn btn-danger mb-3 mt-5"
-                      type="button"
-                      style={{
-                        fontSize: "15px",
-                        cursor: "pointer",
-                        padding: "10px 24px",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        display: "block",
-                        width: "85%",
-                        backgroundColor: "#F45197",
-                        borderRadius: "20px",
-                      }}
-                      onClick={() => this.selectEditVideo(item)}
-                    >
-                      <b>เลือกวีดีโอนี้</b>
-                    </button>
-                  </div>
-                ))}
+                          <button
+                            className="btn btn-danger mb-3 mt-5"
+                            type="button"
+                            style={{
+                              fontSize: "15px",
+                              cursor: "pointer",
+                              padding: "10px 24px",
+                              marginLeft: "auto",
+                              marginRight: "auto",
+                              display: "block",
+                              width: "85%",
+                              backgroundColor: "#F45197",
+                              borderRadius: "20px",
+                            }}
+                            onClick={() => this.selectEditVideo(item)}
+                          >
+                            <b>เลือกวีดีโอนี้</b>
+                          </button>
+                        </div>
+                      );
+                    }
+                  } else {
+                    return (
+                      <div className="playlistWrapper border shadow">
+                        <div className="">
+                          <SelectChangeVideoList
+                            thumbnail={item.thumbnail}
+                            category={item.category}
+                            url={item.url}
+                          />
+                        </div>
+                        <div className="mt-1 ml-3 mb-4">
+                          <h6 style={{ color: "#F45197" }}>
+                            <b> {item.name} </b>
+                          </h6>
+                        </div>
+                        <div className="mt-1 ml-3 mb-4">
+                          <h6>
+                            <b> {item.type} </b>
+                          </h6>
+                        </div>
+
+                        <button
+                          className="btn btn-danger mb-3 mt-5"
+                          type="button"
+                          style={{
+                            fontSize: "15px",
+                            cursor: "pointer",
+                            padding: "10px 24px",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            display: "block",
+                            width: "85%",
+                            backgroundColor: "#F45197",
+                            borderRadius: "20px",
+                          }}
+                          onClick={() => this.selectEditVideo(item)}
+                        >
+                          <b>เลือกวีดีโอนี้</b>
+                        </button>
+                      </div>
+                    );
+                  }
+                })}
               </div>
             </div>
           </div>
