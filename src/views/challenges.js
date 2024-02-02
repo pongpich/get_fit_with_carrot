@@ -650,7 +650,7 @@ class Challenges extends Component {
           <div className="card-body">
             <center>
               <img
-                src={rank ? `../assets/img/rank/${rank.toLowerCase()}.png` : `../assets/img/rank/newbie.png.png`}
+                src={rank ? `../assets/img/rank/${rank.toLowerCase()}.png` : `../assets/img/rank/newbie.png`}
                 // src={rank && `../assets/img/rank/${rank.toLowerCase()}.png`}
                 className="rounded-circle"
                 alt="Cinque Terre"
