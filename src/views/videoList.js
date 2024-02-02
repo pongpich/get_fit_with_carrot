@@ -3808,7 +3808,7 @@ class VideoList extends Component {
               </div>
 
               <nav className="nav">
-                {numbDayExercise >= 1 && (
+                {numbDayExercise && numbDayExercise >= 1 && (
                   <a
                     className="nav-link"
                     style={{
@@ -3824,7 +3824,7 @@ class VideoList extends Component {
                     </h5>
                   </a>
                 )}
-                {numbDayExercise >= 2 && (
+                {numbDayExercise && numbDayExercise >= 2 && (
                   <a
                     className="nav-link"
                     style={{
@@ -3840,22 +3840,25 @@ class VideoList extends Component {
                     </h5>
                   </a>
                 )}
-                {this.props.member_info.exercise_day != 2 && (
-                  <a
-                    className="nav-link"
-                    style={{
-                      color: `${
-                        !showBarveAndBurn && focusDay === 2 ? "#F45197" : "grey"
-                      }`,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => this.onDayChange(2)}
-                  >
-                    <h5>
-                      <b>DAY 3</b>
-                    </h5>
-                  </a>
-                )}
+                {this.props.member_info &&
+                  this.props.member_info.exercise_day != 2 && (
+                    <a
+                      className="nav-link"
+                      style={{
+                        color: `${
+                          !showBarveAndBurn && focusDay === 2
+                            ? "#F45197"
+                            : "grey"
+                        }`,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => this.onDayChange(2)}
+                    >
+                      <h5>
+                        <b>DAY 3</b>
+                      </h5>
+                    </a>
+                  )}
                 {/* {numbDayExercise >= 3 && (
                   <a
                     className="nav-link"
