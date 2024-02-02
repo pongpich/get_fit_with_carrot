@@ -45,6 +45,7 @@ import {
   createExerciseSnack,
   getExerciseSnack,
   getVideoSnack,
+  clearExerciseSnack,
 } from "../redux/exerciseVideos";
 import {
   completeVideoPlayPercentage,
@@ -277,11 +278,16 @@ class VideoList extends Component {
       statusGetBraveAndBurn,
       statsCreateExerciseSnack,
       videoExerciseSnack,
+      statsGetExerciseSnack,
       week,
     } = this.props;
 
     if (statsCreateExerciseSnack == "success") {
       this.props.getExerciseSnack(user.user_id, week);
+    }
+
+    if (statsGetExerciseSnack == "success") {
+      this.props.clearExerciseSnack();
     }
 
     if (
@@ -584,6 +590,7 @@ class VideoList extends Component {
 
   toggleListLastWeek(index) {
     const { focusDay, lastWeekVDOAll } = this.state;
+
     if (!lastWeekVDOAll) {
       const todayExercise = this.exerciseDaySelectionLastWeek(focusDay);
       const selectedVDO = todayExercise.find(
@@ -836,7 +843,7 @@ class VideoList extends Component {
         selectedVDO: selectedVDO,
       });
     }
-    console.log("selectedVDO :", selectedVDO);
+
     trailer.classList.toggle("active");
     if (video) {
       video.pause();
@@ -2020,6 +2027,7 @@ class VideoList extends Component {
 
   renderBodyInfo() {
     const { statusOtherAttributes } = this.state;
+
     /*  console.log("window.innerWidth :", window.innerWidth); */
     return (
       <div
@@ -2707,6 +2715,7 @@ class VideoList extends Component {
       lastWeekStart,
       selectExerciseVideoLastWeek,
     } = this.state;
+
     const { exerciseVideoLastWeek } = this.props;
     const videoUrl = selectedVDO && selectedVDO.url ? `${selectedVDO.url}` : "";
     const todayExercise = this.exerciseDaySelectionLastWeek(focusDay);
@@ -4399,6 +4408,7 @@ class VideoList extends Component {
       lastWeekVDO_click,
       step4WeeksPrompt,
       lastWeekVDOAll,
+      selectedVDO,
     } = this.state;
     const {
       user,
@@ -4535,6 +4545,7 @@ const mapStateToProps = ({
     brave_and_burn_challenge,
     statsCreateExerciseSnack,
     videoExerciseSnack,
+    statsGetExerciseSnack,
   } = exerciseVideos;
   return {
     user,
@@ -4569,6 +4580,7 @@ const mapStateToProps = ({
     brave_and_burn_challenge,
     statsCreateExerciseSnack,
     videoExerciseSnack,
+    statsGetExerciseSnack,
   };
 };
 
@@ -4606,6 +4618,7 @@ const mapActionsToProps = {
   createExerciseSnack,
   getExerciseSnack,
   getVideoSnack,
+  clearExerciseSnack,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(VideoList);
