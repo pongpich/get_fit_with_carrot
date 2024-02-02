@@ -49,6 +49,8 @@ const VideoExerciseSnack = () => {
 
   useEffect(() => {
     dispatch(setHidePopupVideoPlayerSnack(false));
+    dispatch(getExerciseSnack(user.user_id, week));
+    dispatch(getVideoSnack(user && user.user_id, week));
   }, []);
 
   useEffect(() => {
@@ -183,8 +185,9 @@ const VideoExerciseSnack = () => {
     setRe_id(index);
     document.getElementById("example-snack") &&
       document.getElementById("example-snack").click();
-    console.log("index", index);
   };
+
+
 
   return (
     <>
@@ -412,7 +415,8 @@ const VideoExerciseSnack = () => {
                   if (item.video_id != re_id) {
                     return (
                       <div className="row box-snack">
-                        <div className="thumbnail-box"
+                        <div
+                          className="thumbnail-box"
                           onClick={() => toggleList(item.url, item.video_id)}
                         >
                           <img

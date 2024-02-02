@@ -784,6 +784,7 @@ const getExerciseSnackSagaAsync = async (user_id, week) => {
         week,
       },
     });
+
     return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
