@@ -134,13 +134,14 @@ export const updateProfile = (
     }
   });
 
-export const importMembers = (members, start_date, expire_date, member_type) => ({
+export const importMembers = (members, start_date, expire_date, member_type, exercise_day) => ({
   type: types.IMPORT_MEMBERS,
   payload: {
     members,
     start_date,
     expire_date,
-    member_type
+    member_type,
+    exercise_day
   }
 })
 
@@ -238,7 +239,8 @@ const importMembersSagaAsync = async (
   members,
   start_date,
   expire_date,
-  member_type
+  member_type,
+  exercise_day
 ) => {
   try {
     const apiResult = await API.post("bebe", "/import_members", {
@@ -246,7 +248,8 @@ const importMembersSagaAsync = async (
         members,
         start_date,
         expire_date,
-        member_type
+        member_type,
+        exercise_day
       }
     });
     return apiResult;
@@ -544,7 +547,8 @@ function* importMembersSaga({ payload }) {
     members,
     start_date,
     expire_date,
-    member_type
+    member_type,
+    exercise_day
   } = payload
 
   try {
@@ -553,7 +557,8 @@ function* importMembersSaga({ payload }) {
       members,
       start_date,
       expire_date,
-      member_type
+      member_type,
+      exercise_day
     )
     console.log("apiResult :", apiResult);
     if (apiResult && apiResult.results.message === "success") {

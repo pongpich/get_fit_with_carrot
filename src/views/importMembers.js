@@ -29,9 +29,11 @@ class ImportMembers extends Component {
       fb_group: 404,
       member_type: "bodyweight",
       member_type2: "bodyweight",
+      // exercise_day: 3,
       import_type: "import_members",
       editMemberType: false,
       editProgramLevel: false,
+      exercise_day: '3',
     };
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
   }
@@ -79,7 +81,16 @@ class ImportMembers extends Component {
       [event.target.id]: event.target.value
     })
   }
-
+  // handleExerciseDayChange = (event) => {
+  //   this.setState({
+  //     exercise_day: event.target.value,
+  //   });
+  // };
+  handleRadioChange = (event) => {
+    this.setState({
+      exercise_day: event.target.value,
+    });
+  };
   fileSelectedHandler = event => {
     const Papa = require('papaparse');
     var members = [];
@@ -141,7 +152,7 @@ class ImportMembers extends Component {
   }
 
   onSubmitAddMember() {
-    const { selectedStartDate, selectedExpireDate, email, fullname, phone, facebook, fb_group, member_type2 } = this.state;
+    const { selectedStartDate, selectedExpireDate, email, fullname, phone, facebook, fb_group, member_type2, exercise_day } = this.state;
     const start_date = this.formatDate(selectedStartDate) + " 00:00:00"; // Ex. "2021-02-19 00:00:00"
     const expire_date = this.formatDate(selectedExpireDate) + " 23:59:59"; // Ex. "2021-04-30 23:59:59"
     this.setState({
@@ -169,7 +180,8 @@ class ImportMembers extends Component {
       console.log("members : ", members);
       console.log("start_date : ", start_date);
       console.log("expire_date : ", expire_date);
-      this.props.importMembers(members, start_date, expire_date, member_type2);
+      console.log("excersise_day : ", exercise_day);
+      this.props.importMembers(members, start_date, expire_date, member_type2, exercise_day);
       document.getElementById("popupSuccessSubmit").classList.toggle("active");
       document.getElementById("overlayPopupSuccessSubmit").classList.toggle("active");
       var delayInMilliseconds = 1750; //1.75 second
@@ -590,7 +602,8 @@ class ImportMembers extends Component {
   }
 
   renderAddMember() {
-    const { selectedStartDate, selectedExpireDate, statusSubmitAddMember, member_type2 } = this.state;
+    const { selectedStartDate, selectedExpireDate, statusSubmitAddMember, member_type2, exercise_day } = this.state;
+
     return (
       <div className="row">
 
@@ -622,7 +635,23 @@ class ImportMembers extends Component {
               />
               <label className="ml-2" style={{ color: (member_type2 === 'gym') ? 'orange' : 'black', fontSize: (member_type2 === 'gym') ? 24 : 16 }}> gym</label><br></br>
             </div>
-
+           
+            <div className="mb-2">
+              <h5>เลือกจำนวนวันของผู้ใช้:</h5>
+              <input
+                type="radio"
+                value="2"
+                checked={exercise_day === '2'}
+                onChange={this.handleRadioChange} />
+              <label className="ml-2" style={{ color: (exercise_day === '2') ? 'orange' : 'black', fontSize: (exercise_day === '2') ? 24 : 16 }}> 2</label><br></br>
+              <input
+                type="radio"
+                value="3"
+                checked={exercise_day === '3'}
+                onChange={this.handleRadioChange} />
+              <label className="ml-2" style={{ color: (exercise_day === '3') ? 'orange' : 'black', fontSize: (exercise_day === '3') ? 24 : 16 }}> 3</label><br></br>
+            </div>
+            {/* <p>Selected Option: {exercise_day}</p> */}
             <label for="fname">Email: </label>
             <input type="text" id="email" name="email" value={this.state.email} onChange={(event) => this.handleChange(event)} /><br></br>
             <label for="fname">Fullname: </label>
@@ -793,7 +822,7 @@ class ImportMembers extends Component {
             </div>
 
             <div className="mb-2">
-              <h5>เลือกประเภทของผู้ใช้:</h5>
+              <h5>เลือกประเภทของผู้ใช้cc:</h5>
               <input
                 id='member_type'
                 type="radio"
