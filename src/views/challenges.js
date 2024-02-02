@@ -525,6 +525,8 @@ class Challenges extends Component {
       scoreInWeek += 25;
     }
     console.log(rank);
+
+    
     return (
       <div className="row">
         {this.renderPopupRulesAndPrizes()}
