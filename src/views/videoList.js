@@ -1173,193 +1173,89 @@ class VideoList extends Component {
                 &times;
               </div>
               <div className="row mt-4 body_part_header">
-                {
-                  //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                  this.props.videos[0] &&
-                    this.props.videos[0].category !== "Main Circuit Combo" &&
-                    this.props.videos[0].category !== "Main Circuit" &&
-                    this.props.videos[0].category !== "Challenge" && (
-                      <img
-                        className="body_part"
-                        src={`../assets/img/body_part/${this.props.videos[0].category
-                          .toLowerCase()
-                          .split(" ")
-                          .join("")}.png`}
-                      ></img>
-                    )
-                }
-                {((this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "chestfocus") ||
-                  (this.props.videos[0] &&
-                    this.props.videos[0].type
-                      .toLowerCase()
-                      .split(" ")
-                      .join("") === "chest_back")) && (
-                  <img
-                    className="body_part ml-2"
-                    src={`../assets/img/body_part/chest.png`}
-                  ></img>
-                )}
-                {((this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "backfocus") ||
-                  (this.props.videos[0] &&
-                    this.props.videos[0].type
-                      .toLowerCase()
-                      .split(" ")
-                      .join("") === "chest_back")) && (
-                  <img
-                    className="body_part ml-2"
-                    src={`../assets/img/body_part/back.png`}
-                  ></img>
-                )}
-                {((this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "backfocus") ||
-                  (this.props.videos[0] &&
-                    this.props.videos[0].type
-                      .toLowerCase()
-                      .split(" ")
-                      .join("") === "chest_back")) && (
-                  <img
-                    className="body_part ml-2"
-                    src={`../assets/img/body_part/core.png`}
-                  ></img>
-                )}
-                {((this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "legfocus") ||
-                  (this.props.videos[0] &&
-                    this.props.videos[0].type
-                      .toLowerCase()
-                      .split(" ")
-                      .join("") === "leg_arm")) && (
-                  <img
-                    className="body_part ml-2"
-                    src={`../assets/img/body_part/leg.png`}
-                  ></img>
-                )}
-                {((this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "armfocus") ||
-                  (this.props.videos[0] &&
-                    this.props.videos[0].type
-                      .toLowerCase()
-                      .split(" ")
-                      .join("") === "leg_arm")) && (
-                  <img
-                    className="body_part ml-2"
-                    src={`../assets/img/body_part/arm.png`}
-                  ></img>
-                )}
-                {((this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "armfocus") ||
-                  (this.props.videos[0] &&
-                    this.props.videos[0].type
-                      .toLowerCase()
-                      .split(" ")
-                      .join("") === "leg_arm")) && (
-                  <img
-                    className="body_part ml-2"
-                    src={`../assets/img/body_part/shoulder.png`}
-                  ></img>
-                )}
-
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "warmup" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Warm Up</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "chestfocus" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Chest</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "backfocus" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Back and Core</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "chest_back" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Chest and Back</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "legfocus" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Leg</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "armfocus" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Arm and Shoulder</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "leg_arm" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Leg and Arm</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "subcircuit" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Full Body</b>
-                    </h2>
-                  )}
-                {this.props.videos[0] &&
-                  this.props.videos[0].type
-                    .toLowerCase()
-                    .split(" ")
-                    .join("") === "cardio" && (
-                    <h2 className="ml-2 mt-1" style={{ color: "#F45197" }}>
-                      <b>Cardio</b>
-                    </h2>
-                  )}
+                {selectChangeVideoList.map((item, index) => {
+                  const itemsArray = item.muscle.split(",");
+                  return (
+                    <div className="property-box">
+                      {itemsArray &&
+                        itemsArray.map((muItem, j) => {
+                          if (muItem == "warm_up") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/Propertywarmup.png`}
+                              ></img>
+                            );
+                          }
+                          if (muItem == "cool_down") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/Propertycooldown.png`}
+                              ></img>
+                            );
+                          }
+                          if (muItem == "total_body") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/totalBody.png`}
+                              ></img>
+                            );
+                          }
+                          if (muItem == "core") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/PropertyCore.png`}
+                              ></img>
+                            );
+                          }
+                          if (muItem == "chest") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/PropertyChest.png`}
+                              ></img>
+                            );
+                          }
+                          if (muItem == "back") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/PropertyBack.png`}
+                              ></img>
+                            );
+                            //PropertyGlute
+                          }
+                          if (muItem == "glute") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/PropertyGlute.png`}
+                              ></img>
+                            );
+                          }
+                          if (muItem == "leg") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/PropertyLeg.png`}
+                              ></img>
+                            );
+                          }
+                          if (muItem == "shoulder") {
+                            return (
+                              <img
+                                className="property-body_part ml-2"
+                                src={`../assets/img/body_part/PropertyShoulder.png`}
+                              ></img>
+                            );
+                          }
+                        })}
+                    </div>
+                  );
+                })}
               </div>
               <div className="selectEditPlaylist">
                 {selectChangeVideoList.map((item, index) => (
@@ -1568,6 +1464,7 @@ class VideoList extends Component {
               </div>
               <tbody>
                 {tempPlaylist.map((item, index) => {
+                  const itemsArray = item.muscle.split(",");
                   const minuteLabel =
                     item.duration < 20
                       ? convertFormatTime(item.duration)
@@ -1675,74 +1572,84 @@ class VideoList extends Component {
                                   </p>
                                 )}
                             </div>
-                            {
-                              //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                              item.category !== "Main Circuit Combo" &&
-                                item.category !== "Main Circuit" &&
-                                item.category !== "Challenge" && (
-                                  <img
-                                    className="body_part"
-                                    src={`../assets/img/body_part/${item.category
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("")}.png`}
-                                  ></img>
-                                )
-                            }
-                            {(item.type.toLowerCase().split(" ").join("") ===
-                              "chestfocus" ||
-                              item.type.toLowerCase().split(" ").join("") ===
-                                "chest_back") && (
-                              <img
-                                className="body_part ml-2"
-                                src={`../assets/img/body_part/chest.png`}
-                              ></img>
-                            )}
-                            {(item.type.toLowerCase().split(" ").join("") ===
-                              "backfocus" ||
-                              item.type.toLowerCase().split(" ").join("") ===
-                                "chest_back") && (
-                              <img
-                                className="body_part ml-2"
-                                src={`../assets/img/body_part/back.png`}
-                              ></img>
-                            )}
-                            {(item.type.toLowerCase().split(" ").join("") ===
-                              "backfocus" ||
-                              item.type.toLowerCase().split(" ").join("") ===
-                                "chest_back") && (
-                              <img
-                                className="body_part ml-2"
-                                src={`../assets/img/body_part/core.png`}
-                              ></img>
-                            )}
-                            {(item.type.toLowerCase().split(" ").join("") ===
-                              "legfocus" ||
-                              item.type.toLowerCase().split(" ").join("") ===
-                                "leg_arm") && (
-                              <img
-                                className="body_part ml-2"
-                                src={`../assets/img/body_part/leg.png`}
-                              ></img>
-                            )}
-                            {(item.type.toLowerCase().split(" ").join("") ===
-                              "armfocus" ||
-                              item.type.toLowerCase().split(" ").join("") ===
-                                "leg_arm") && (
-                              <img
-                                className="body_part ml-2"
-                                src={`../assets/img/body_part/arm.png`}
-                              ></img>
-                            )}
-                            {(item.type.toLowerCase().split(" ").join("") ===
-                              "armfocus" ||
-                              item.type.toLowerCase().split(" ").join("") ===
-                                "leg_arm") && (
-                              <img
-                                className="body_part ml-2"
-                                src={`../assets/img/body_part/shoulder.png`}
-                              ></img>
-                            )}
+                            <div className="property-box">
+                              {itemsArray &&
+                                itemsArray.map((muItem, j) => {
+                                  if (muItem == "warm_up") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/Propertywarmup.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "cool_down") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/Propertycooldown.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "total_body") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/totalBody.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "core") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/PropertyCore.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "chest") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/PropertyChest.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "back") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/PropertyBack.png`}
+                                      ></img>
+                                    );
+                                    //PropertyGlute
+                                  }
+                                  if (muItem == "glute") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/PropertyGlute.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "leg") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/PropertyLeg.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "shoulder") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/PropertyShoulder.png`}
+                                      ></img>
+                                    );
+                                  }
+                                })}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -2979,6 +2886,7 @@ class VideoList extends Component {
               <tbody>
                 {this.props.exerciseVideoLastWeek &&
                   todayExercise.map((item, index) => {
+                    const itemsArray = item.muscle.split(",");
                     const minuteLabel =
                       item.duration < 20
                         ? convertFormatTime(item.duration)
@@ -3130,74 +3038,84 @@ class VideoList extends Component {
                                     </p>
                                   )}
                               </div>
-                              {
-                                //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                                item.category !== "Main Circuit Combo" &&
-                                  item.category !== "Main Circuit" &&
-                                  item.category !== "Challenge" && (
-                                    <img
-                                      className="body_part"
-                                      src={`../assets/img/body_part/${item.category
-                                        .toLowerCase()
-                                        .split(" ")
-                                        .join("")}.png`}
-                                    ></img>
-                                  )
-                              }
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "chestfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/chest.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "backfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/back.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "backfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/core.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "legfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/leg.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "armfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/arm.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "armfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/shoulder.png`}
-                                ></img>
-                              )}
+                              <div className="property-box">
+                                {itemsArray &&
+                                  itemsArray.map((muItem, j) => {
+                                    if (muItem == "warm_up") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/Propertywarmup.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "cool_down") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/Propertycooldown.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "total_body") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/totalBody.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "core") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyCore.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "chest") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyChest.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "back") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyBack.png`}
+                                        ></img>
+                                      );
+                                      //PropertyGlute
+                                    }
+                                    if (muItem == "glute") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyGlute.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "leg") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyLeg.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "shoulder") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyShoulder.png`}
+                                        ></img>
+                                      );
+                                    }
+                                  })}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -3510,6 +3428,7 @@ class VideoList extends Component {
               <tbody>
                 {selectExerciseVideoLastWeek &&
                   todayExercise.map((item, index) => {
+                    const itemsArray = item.muscle.split(",");
                     const minuteLabel =
                       item.duration < 20
                         ? convertFormatTime(item.duration)
@@ -3661,74 +3580,84 @@ class VideoList extends Component {
                                     </p>
                                   )}
                               </div>
-                              {
-                                //เช็ค ถ้าหากเป็น category ที่มี type ย่อย จะไม่สามารถนำชื่อ category มาตั้งเป็นชื่อรูปได้ ต้องแยกเป็นเคสๆไป
-                                item.category !== "Main Circuit Combo" &&
-                                  item.category !== "Main Circuit" &&
-                                  item.category !== "Challenge" && (
-                                    <img
-                                      className="body_part"
-                                      src={`../assets/img/body_part/${item.category
-                                        .toLowerCase()
-                                        .split(" ")
-                                        .join("")}.png`}
-                                    ></img>
-                                  )
-                              }
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "chestfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/chest.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "backfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/back.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "backfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "chest_back") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/core.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "legfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/leg.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "armfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/arm.png`}
-                                ></img>
-                              )}
-                              {(item.type.toLowerCase().split(" ").join("") ===
-                                "armfocus" ||
-                                item.type.toLowerCase().split(" ").join("") ===
-                                  "leg_arm") && (
-                                <img
-                                  className="body_part ml-2"
-                                  src={`../assets/img/body_part/shoulder.png`}
-                                ></img>
-                              )}
+                              <div className="property-box">
+                                {itemsArray &&
+                                  itemsArray.map((muItem, j) => {
+                                    if (muItem == "warm_up") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/Propertywarmup.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "cool_down") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/Propertycooldown.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "total_body") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/totalBody.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "core") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyCore.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "chest") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyChest.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "back") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyBack.png`}
+                                        ></img>
+                                      );
+                                      //PropertyGlute
+                                    }
+                                    if (muItem == "glute") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyGlute.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "leg") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyLeg.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "shoulder") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/PropertyShoulder.png`}
+                                        ></img>
+                                      );
+                                    }
+                                  })}
+                              </div>
                             </div>
                           </div>
                         </div>
