@@ -88,6 +88,7 @@ class Challenges extends Component {
       statusRandomTeam: "default",
       selectedCreateTeam: false,
       videoSnack: null,
+      challengePeriod2: 'false'
     };
   }
 
@@ -535,7 +536,8 @@ class Challenges extends Component {
           className="card shadow col-lg-7 col-md-12"
           style={{ borderRadius: "25px" }}
         >
-          {challengePeriod ? (
+          {/* เปิดปิด event ตรงนี้อย่าลืม เอา challengePeriod2 ออกเปลี่ยนเป็น challengePeriod ธรรมดา */}
+          {!this.state.challengePeriod2 ? (
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-6  mb-3" style={{ float: "left" }}>
