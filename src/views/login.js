@@ -42,7 +42,13 @@ class Login extends Component {
     }
   }
 
-  onUserLogin() {
+  onUserLogin(e) {
+    e.preventDefault();
+    if (this.props.user == null && this.props.status === "fail") {
+      this.setState({
+        statusLogin: "fail",
+      });
+    }
     if (this.state.email !== "") {
       this.props.loginUser(this.state.email, this.state.password);
       if (
@@ -100,7 +106,7 @@ class Login extends Component {
               <CardTitle className="h3 mb-4 mt-5" style={{ color: "#F45197" }}>
                 {"เข้าสู่ระบบ"}
               </CardTitle>
-              <Form>
+              <Form onSubmit={(e) => this.onUserLogin(e)}>
                 <Label className="form-group2 has-float-label mb-4">
                   {"Email"}
                   <Input
@@ -126,7 +132,8 @@ class Login extends Component {
                     }}
                     className="btn-shadow"
                     size="lg"
-                    onClick={() => this.onUserLogin()}
+                    // onClick={() => this.onUserLogin()}
+                    type="submit"
                     block
                   >
                     <span className="h6 text-one">{"LOGIN"}</span>
