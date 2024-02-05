@@ -44,7 +44,6 @@ class Login extends Component {
 
   onUserLogin(e) {
     e.preventDefault();
-    console.log("first", this.props.user);
     if (!!this.props.user == false && this.props.status === "fail") {
       this.setState({
         statusLogin: "fail",
