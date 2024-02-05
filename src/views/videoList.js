@@ -1316,7 +1316,7 @@ class VideoList extends Component {
                       if (bodyweight_video_id.includes(item.video_id)) {
                         return (
                           <div className="playlistWrapper border shadow">
-                            {member_info.exercise_type}
+                            {/* {member_info.exercise_type} */}
                             <div className="">
                               <SelectChangeVideoList
                                 thumbnail={item.thumbnail}
