@@ -1309,97 +1309,6 @@ class VideoList extends Component {
                         </div>
                       );
                     }
-                  } else if (item.category == "Core Training") {
-                    let bodyweight_video_id = ["00012", "00013", "00014", "00015", "00019"];
-                    let gym_video_id = ["00016", "00017", "00018"];
-                    if (member_info.exercise_type == 'bodyweight') {
-                      if (bodyweight_video_id.includes(item.video_id)) {
-                        return (
-                          <div className="playlistWrapper border shadow">
-                            {/* {member_info.exercise_type} */}
-                            <div className="">
-                              <SelectChangeVideoList
-                                thumbnail={item.thumbnail}
-                                category={item.category}
-                                url={item.url}
-                              />
-                            </div>
-                            <div className="mt-1 ml-3 mb-4">
-                              <h6 style={{ color: "#F45197" }}>
-                                <b> {item.name}</b>
-                              </h6>
-                            </div>
-                            <div className="mt-1 ml-3 mb-4">
-                              <h6>
-                                <b> {item.type} </b>
-                              </h6>
-                            </div>
-
-                            <button
-                              className="btn btn-danger mb-3 mt-5"
-                              type="button"
-                              style={{
-                                fontSize: "15px",
-                                cursor: "pointer",
-                                padding: "10px 24px",
-                                marginLeft: "auto",
-                                marginRight: "auto",
-                                display: "block",
-                                width: "85%",
-                                backgroundColor: "#F45197",
-                                borderRadius: "20px",
-                              }}
-                              onClick={() => this.selectEditVideo(item)}
-                            >
-                              <b>เลือกวีดีโอนี้</b>
-                            </button>
-                          </div>
-                        );
-                      }
-                    } else if ((gym_video_id.includes(item.video_id))){
-                      return (
-                        <div className="playlistWrapper border shadow">
-                          <div className="">
-                            <SelectChangeVideoList
-                              thumbnail={item.thumbnail}
-                              category={item.category}
-                              url={item.url}
-                            />
-                          </div>
-                          <div className="mt-1 ml-3 mb-4">
-                            <h6 style={{ color: "#F45197" }}>
-                              <b> {item.name} </b>
-                            </h6>
-                          </div>
-                          <div className="mt-1 ml-3 mb-4">
-                            <h6>
-                              <b> {item.type} </b>
-                            </h6>
-                          </div>
-  
-                          <button
-                            className="btn btn-danger mb-3 mt-5"
-                            type="button"
-                            style={{
-                              fontSize: "15px",
-                              cursor: "pointer",
-                              padding: "10px 24px",
-                              marginLeft: "auto",
-                              marginRight: "auto",
-                              display: "block",
-                              width: "85%",
-                              backgroundColor: "#F45197",
-                              borderRadius: "20px",
-                            }}
-                            onClick={() => this.selectEditVideo(item)}
-                          >
-                            <b>เลือกวีดีโอนี้</b>
-                          </button>
-                        </div>
-                      );
-                    }
-
-
                   } else {
                     return (
                       <div className="playlistWrapper border shadow">
@@ -1443,7 +1352,6 @@ class VideoList extends Component {
                     );
                   }
                 })}
-
               </div>
             </div>
           </div>
