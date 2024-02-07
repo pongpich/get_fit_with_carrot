@@ -564,6 +564,7 @@ class VideoList extends Component {
 
   selectVideoLastWeek(lastWeekStart) {
     const { all_exercise_activity } = this.props;
+
     const exercise_result =
       all_exercise_activity &&
       all_exercise_activity.filter((exercise) => {
@@ -3187,7 +3188,7 @@ class VideoList extends Component {
   videoWeekAll() {
     const { user } = this.props;
     this.setState({ lastWeekVDO_click: "show" });
-    /*     this.props.getAllExerciseActivity(user.user_id); */
+    this.props.getAllExerciseActivity(user.user_id);
   }
 
   renderVideoListLastWeekAll() {
@@ -3240,6 +3241,7 @@ class VideoList extends Component {
       timesExercise = `${totalMinute}:${totalSecond}`;
     }
 
+ 
     return (
       <div className="card-body d-flex justify-content-center">
         <form>
