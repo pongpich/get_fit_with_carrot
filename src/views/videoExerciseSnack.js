@@ -181,13 +181,17 @@ const VideoExerciseSnack = () => {
     }
   }, []);
 
-  const renewId = (index) => {
+  const renewId = (index, id) => {
     setRe_id(index);
+
+    const result = videoExerciseSnackAll.filter((video) => {
+      return video.video_id != id;
+    });
+    setVideoAll(result);
+
     document.getElementById("example-snack") &&
       document.getElementById("example-snack").click();
   };
-
-
 
   return (
     <>
@@ -360,7 +364,7 @@ const VideoExerciseSnack = () => {
                           </div>
                           <div
                             className="box-random"
-                            onClick={() => renewId(index)}
+                            onClick={() => renewId(index, item.video_id)}
                           >
                             <img
                               src="../assets/img/renew.png"
