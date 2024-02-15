@@ -164,40 +164,40 @@ class Challenges extends Component {
 
     const achievementFinisher =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Finisher").length >
+        achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
         : false;
     const achievementAce =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Ace").length > 0
+        achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
         : false;
     const achievement1st =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "1st").length > 0
+        achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
         : false;
     const achievement2nd =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "2nd").length > 0
+        achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
         : false;
     const achievementTop10 =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Top 10").length > 0
+        achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
         : false;
     const achievementSocialStar =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star")
+          .length > 0
         ? true
         : false;
     const achievementSocialStarPlus =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star+")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star+")
+          .length > 0
         ? true
         : false;
 
@@ -223,7 +223,7 @@ class Challenges extends Component {
       this.setState({
         videoSnack:
           this.props.videoExerciseSnack &&
-          this.props.videoExerciseSnack.length > 0
+            this.props.videoExerciseSnack.length > 0
             ? JSON.parse(this.props.videoExerciseSnack[0].video)
             : null,
       });
@@ -287,7 +287,7 @@ class Challenges extends Component {
 
     if (
       prevProps.statusCheckAllMissionComplete !==
-        statusCheckAllMissionComplete &&
+      statusCheckAllMissionComplete &&
       statusCheckAllMissionComplete === "success"
     ) {
       //สั่งให้โชว์ popup
@@ -472,7 +472,7 @@ class Challenges extends Component {
     const rank =
       this.props.rank &&
       this.props.rank.charAt(0).toUpperCase() +
-        this.props.rank.substr(1).toLowerCase(); //ตัวแรกพิมพ์ใหญ่ ตัวที่เหลือพิมพ์เล็ก
+      this.props.rank.substr(1).toLowerCase(); //ตัวแรกพิมพ์ใหญ่ ตัวที่เหลือพิมพ์เล็ก
     const {
       logWeightCount,
       isReducedWeight,
@@ -545,9 +545,11 @@ class Challenges extends Component {
                     <b>รายการชาเลนจ์แบบทีม</b>
                   </h5>
                   <p className="card-text">
-                    ทีมชั่งน้ำหนักครบ {numberOfMembers * 2} ครั้ง{" "}
+                    {/* ทีมชั่งน้ำหนักครบ {numberOfMembers * 2} ครั้ง{" "} */}
+                    ทีมชั่งน้ำหนักครบ 2 ครั้ง{" "}
                     <span style={{ float: "right", color: "#F45197" }}>
-                      {logWeightTeamCount}/{numberOfMembers * 2}
+                      {/* {logWeightTeamCount}/{numberOfMembers * 2} */}
+                      {logWeightTeamCount}/2
                     </span>
                   </p>
                   <p className="card-text">
@@ -732,8 +734,8 @@ class Challenges extends Component {
                   onClick={() =>
                     this.props.rejectTeamInvite(
                       this.props.team_invite &&
-                        this.props.team_invite[0] &&
-                        this.props.team_invite[0].log_id
+                      this.props.team_invite[0] &&
+                      this.props.team_invite[0].log_id
                     )
                   }
                 >
@@ -748,11 +750,11 @@ class Challenges extends Component {
                     this.props.acceptTeamInvite(
                       this.props.user && this.props.user.user_id,
                       this.props.team_invite &&
-                        this.props.team_invite[0] &&
-                        this.props.team_invite[0].group_id,
+                      this.props.team_invite[0] &&
+                      this.props.team_invite[0].group_id,
                       this.props.team_invite &&
-                        this.props.team_invite[0] &&
-                        this.props.team_invite[0].log_id
+                      this.props.team_invite[0] &&
+                      this.props.team_invite[0].log_id
                     )
                   }
                 >
@@ -869,8 +871,8 @@ class Challenges extends Component {
                               {item.display_name
                                 ? item.display_name
                                 : item.facebook
-                                ? item.facebook
-                                : `${item.first_name} ${item.last_name}`}
+                                  ? item.facebook
+                                  : `${item.first_name} ${item.last_name}`}
                             </div>
                             <div className="col-lg-3 col-md-3 col-6">
                               <span style={{ color: "grey" }}>
@@ -883,9 +885,9 @@ class Challenges extends Component {
                               >
                                 {item.end_rank
                                   ? item.end_rank.charAt(0).toUpperCase() +
-                                    item.end_rank.substr(1).toLowerCase()
+                                  item.end_rank.substr(1).toLowerCase()
                                   : item.start_rank.charAt(0).toUpperCase() +
-                                    item.start_rank.substr(1).toLowerCase()}
+                                  item.start_rank.substr(1).toLowerCase()}
                               </span>
                             </div>
                           </div>
@@ -1186,13 +1188,12 @@ class Challenges extends Component {
           {individualRankFilter &&
             individualRankFilter.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
-              const rankDetail = `${index + 1}. ${
-                item.display_name
+              const rankDetail = `${index + 1}. ${item.display_name
                   ? item.display_name
                   : item.facebook
-                  ? item.facebook
-                  : fullName
-              }`;
+                    ? item.facebook
+                    : fullName
+                }`;
               index = index + 1;
               return (
                 <>
@@ -1245,8 +1246,8 @@ class Challenges extends Component {
               {myRank[0].display_name
                 ? myRank[0].display_name
                 : myRank[0].facebook
-                ? myRank[0].facebook
-                : `${myRank[0].first_name} ${myRank[0].last_name}`}
+                  ? myRank[0].facebook
+                  : `${myRank[0].first_name} ${myRank[0].last_name}`}
               <span style={{ float: "right", color: "#F45197" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
@@ -1270,8 +1271,8 @@ class Challenges extends Component {
         facebook: user.display_name
           ? user.display_name
           : user.facebook
-          ? user.facebook
-          : `${user.first_name} ${user.last_name}`,
+            ? user.facebook
+            : `${user.first_name} ${user.last_name}`,
         total_score: 0,
       };
     }
@@ -1287,13 +1288,12 @@ class Challenges extends Component {
             friendsRank.length > 0 &&
             friendsRank.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
-              const rankDetail = `${index + 1}. ${
-                item.display_name
+              const rankDetail = `${index + 1}. ${item.display_name
                   ? item.display_name
                   : item.facebook
-                  ? item.facebook
-                  : fullName
-              }`;
+                    ? item.facebook
+                    : fullName
+                }`;
               index = index + 1;
               return (
                 <>
@@ -1343,8 +1343,8 @@ class Challenges extends Component {
               {myRank[0].display_name
                 ? myRank[0].display_name
                 : myRank[0].facebook
-                ? myRank[0].facebook
-                : `${myRank[0].first_name} ${myRank[0].last_name}`}
+                  ? myRank[0].facebook
+                  : `${myRank[0].first_name} ${myRank[0].last_name}`}
               <span style={{ float: "right", color: "#F45197" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
@@ -1369,9 +1369,8 @@ class Challenges extends Component {
               <h5
                 className="ml-3 mr-4"
                 style={{
-                  color: `${
-                    selectedScoreBoard === "team" ? "#F45197" : "grey"
-                  }`,
+                  color: `${selectedScoreBoard === "team" ? "#F45197" : "grey"
+                    }`,
                   cursor: "pointer",
                 }}
                 onClick={() => this.setState({ selectedScoreBoard: "team" })}
@@ -1381,9 +1380,8 @@ class Challenges extends Component {
               <h5
                 className="mr-4"
                 style={{
-                  color: `${
-                    selectedScoreBoard === "individual" ? "#F45197" : "grey"
-                  }`,
+                  color: `${selectedScoreBoard === "individual" ? "#F45197" : "grey"
+                    }`,
                   cursor: "pointer",
                 }}
                 onClick={() =>
@@ -1396,9 +1394,8 @@ class Challenges extends Component {
                 <h5
                   className=""
                   style={{
-                    color: `${
-                      selectedScoreBoard === "friendsRank" ? "#F45197" : "grey"
-                    }`,
+                    color: `${selectedScoreBoard === "friendsRank" ? "#F45197" : "grey"
+                      }`,
                     cursor: "pointer",
                   }}
                   onClick={() =>
@@ -1529,8 +1526,8 @@ class Challenges extends Component {
                   onClick={() =>
                     this.props.rejectFriend(
                       this.props.friend_request &&
-                        this.props.friend_request[0] &&
-                        this.props.friend_request[0].log_id
+                      this.props.friend_request[0] &&
+                      this.props.friend_request[0].log_id
                     )
                   }
                 >
@@ -1545,11 +1542,11 @@ class Challenges extends Component {
                     this.props.acceptFriend(
                       this.props.user && this.props.user.user_id,
                       this.props.friend_request &&
-                        this.props.friend_request[0] &&
-                        this.props.friend_request[0].sender_id,
+                      this.props.friend_request[0] &&
+                      this.props.friend_request[0].sender_id,
                       this.props.friend_request &&
-                        this.props.friend_request[0] &&
-                        this.props.friend_request[0].log_id
+                      this.props.friend_request[0] &&
+                      this.props.friend_request[0].log_id
                     )
                   }
                 >
@@ -1743,8 +1740,8 @@ class Challenges extends Component {
                             {item.display_name
                               ? item.display_name
                               : item.facebook
-                              ? item.facebook
-                              : `${item.first_name} ${item.last_name}`}
+                                ? item.facebook
+                                : `${item.first_name} ${item.last_name}`}
                           </div>
                           <div className="col-lg-3 col-md-3 col-6">
                             <span style={{ color: "grey" }}>
@@ -1755,9 +1752,9 @@ class Challenges extends Component {
                             <span style={{ float: "right", color: "#F45197" }}>
                               {item.end_rank
                                 ? item.end_rank.charAt(0).toUpperCase() +
-                                  item.end_rank.substr(1).toLowerCase()
+                                item.end_rank.substr(1).toLowerCase()
                                 : item.start_rank.charAt(0).toUpperCase() +
-                                  item.start_rank.substr(1).toLowerCase()}{" "}
+                                item.start_rank.substr(1).toLowerCase()}{" "}
                               <img
                                 className="ml-4"
                                 style={{ cursor: "pointer" }}
@@ -1804,40 +1801,40 @@ class Challenges extends Component {
     const { achievementLog } = this.props;
     const achievementFinisher =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Finisher").length >
+        achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
         : false;
     const achievementAce =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Ace").length > 0
+        achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
         : false;
     const achievement1st =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "1st").length > 0
+        achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
         : false;
     const achievement2nd =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "2nd").length > 0
+        achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
         : false;
     const achievementTop10 =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Top 10").length > 0
+        achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
         : false;
     const achievementSocialStar =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star")
+          .length > 0
         ? true
         : false;
     const achievementSocialStarPlus =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star+")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star+")
+          .length > 0
         ? true
         : false;
 
@@ -2751,7 +2748,7 @@ class Challenges extends Component {
               <ul id="myUL" className="myUL">
                 <div class="li">
                   {allMemberStayFitFilter &&
-                  allMemberStayFitFilter.length > 0 ? (
+                    allMemberStayFitFilter.length > 0 ? (
                     allMemberStayFit &&
                     allMemberStayFit.map((item, i) => (
                       <li key={i}>
@@ -2896,7 +2893,7 @@ class Challenges extends Component {
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-12 col-md-12 col-lg-4">{}</div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">{ }</div>
       </>
     );
   }
@@ -2961,9 +2958,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "mission" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "mission" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -2975,9 +2971,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "teamList" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "teamList" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -2993,9 +2988,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "scoreBoard" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "scoreBoard" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3007,9 +3001,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "friendList" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "friendList" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3024,9 +3017,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "achievement" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "achievement" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3041,9 +3033,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "searchMember" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "searchMember" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onSearchMember()}
