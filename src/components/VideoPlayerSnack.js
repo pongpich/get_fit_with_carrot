@@ -164,8 +164,6 @@ const VideoPlayerSnack = ({ url, videoId }) => {
         document.getElementById("example-snack-success").click();
     }
 
-    console.log("9999");
-
     dispatch(setHidePopupVideoPlayerSnack(true));
   };
 
