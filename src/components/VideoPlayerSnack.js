@@ -153,8 +153,10 @@ const VideoPlayerSnack = ({ url, videoId }) => {
     var count = filteredExerciseSnack.length;
     dispatch(snacksCount(count));
 
-    if (count > 3 && !playTimeEnd) {
-      dispatch(createEventLogSnacks(user && user.user_id, count));
+    console.log("week", week);
+
+    if (count > 3) {
+      dispatch(createEventLogSnacks(user && user.user_id, count, week));
     }
 
     if (count == 4) {
