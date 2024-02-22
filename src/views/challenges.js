@@ -508,31 +508,33 @@ class Challenges extends Component {
       scoreInWeek = 41;
     } //เพื่อไม่ให้เกินหลอด
 
-    // นับจำนวน exerciseSnack ที่มี video_id มากกว่า 0
-    var count = scoreSnack && scoreSnack.length;
+  
+    var filteredExerciseSnack =
+      this.state.videoSnack &&
+      this.state.videoSnack.filter(function (item) {
+        return item.play_time > 0;
+      });
 
-    // ตรวจสอบว่า scoreSnack มีค่าและไม่ใช่ undefined หรือ null
-    if (scoreSnack && scoreSnack.length) {
-      for (var i = 0; i < scoreSnack.length; i++) {
-        if (i === 0) {
-          // ดู 4 คลิป
+    if (filteredExerciseSnack && filteredExerciseSnack.length) {
+      var count = filteredExerciseSnack.length;
+
+      for (var i = 0; i < count + 1; i++) {
+        if (i == 4) {
+          // เพิ่มคะแนนในสัปดาห์เมื่อ i เป็น 4
           scoreInWeek += 10;
-        } else if (i === 1) {
-          // ดู 5 คลิป
+        } else if (i == 5) {
+          // เพิ่มคะแนนในสัปดาห์เมื่อ i เป็น 5
           scoreInWeek += 2;
-        } else if (i === 2) {
-          // ดู 6 คลิป
+        } else if (i == 6) {
+          // เพิ่มคะแนนในสัปดาห์เมื่อ i เป็น 6
           scoreInWeek += 3;
-        } else if (i === 3) {
-          // ดู 7 คลิป
+        } else if (i == 7) {
+          // เพิ่มคะแนนในสัปดาห์เมื่อ i เป็น 7
           scoreInWeek += 5;
         }
       }
     }
-    const count2 = count - 1 < 0 ? 0 : count - 1;
-    console.log("scoreSnack", scoreSnack);
-    console.log("count", count);
-
+    const count2 = count == 5 ? 1 : count == 6 ? 2 : count == 7 ? 3 : 0;
     return (
       <div className="row">
         {this.renderPopupRulesAndPrizes()}
@@ -598,13 +600,13 @@ class Challenges extends Component {
                   <p className="card-text">
                     ทำ Random Exercise Snacks สำเร็จ
                     <span style={{ float: "right", color: "#F45197" }}>
-                      {count >= 1 ? 4 : 0}/4
+                      {count >= 4 ? 4 : 0}/4
                     </span>
                   </p>
                   <p className="card-text">
-                    ทำ Exercise Snacks เพิ่มเติม 
+                    ทำ Exercise Snacks เพิ่มเติม
                     <span style={{ float: "right", color: "#F45197" }}>
-                      {count >= 2 ? count2 : 0}/3
+                      {count2}/3
                     </span>
                   </p>
                 </div>
