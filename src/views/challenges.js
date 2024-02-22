@@ -529,6 +529,7 @@ class Challenges extends Component {
         }
       }
     }
+    const count2 = count - 1 < 0 ? 0 : count - 1;
     console.log("scoreSnack", scoreSnack);
     console.log("count", count);
 
@@ -597,13 +598,13 @@ class Challenges extends Component {
                   <p className="card-text">
                     ทำ Random Exercise Snacks สำเร็จ
                     <span style={{ float: "right", color: "#F45197" }}>
-                      {count == 4 ? 4 : 0}/4
+                      {count >= 1 ? 4 : 0}/4
                     </span>
                   </p>
                   <p className="card-text">
-                    ทำ Exercise Snacks เพิ่มเติม{" "}
+                    ทำ Exercise Snacks เพิ่มเติม 
                     <span style={{ float: "right", color: "#F45197" }}>
-                      {count - 1 ? count - 1 : 0}/3
+                      {count >= 2 ? count2 : 0}/3
                     </span>
                   </p>
                 </div>
