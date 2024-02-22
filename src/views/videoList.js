@@ -404,7 +404,7 @@ class VideoList extends Component {
     }
     if (
       prevProps.statusPostDailyWeighChallenge !==
-      statusPostDailyWeighChallenge &&
+        statusPostDailyWeighChallenge &&
       statusPostDailyWeighChallenge === "success"
     ) {
       this.props.history.push("/challenges");
@@ -937,7 +937,7 @@ class VideoList extends Component {
       !video.duration ||
       video.currentTime / video.duration < minimumVideoPlayPercentage ||
       selectedVDO.play_time / selectedVDO.duration >=
-      completeVideoPlayPercentage
+        completeVideoPlayPercentage
     ) {
       return;
     }
@@ -1712,8 +1712,8 @@ class VideoList extends Component {
                         item.category !== "Challenge" &&
                         ((item.category === "Warm Up" ||
                           item.category === "Cool Down") &&
-                          member_info &&
-                          member_info.program_level === "bfr_lv1" ? (
+                        member_info &&
+                        member_info.program_level === "bfr_lv1" ? (
                           <div></div>
                         ) : (
                           <div
@@ -2578,17 +2578,17 @@ class VideoList extends Component {
                 onClick={
                   step4WeeksPrompt < 3
                     ? () =>
-                      this.setState({
-                        step4WeeksPrompt: step4WeeksPrompt + 1,
-                      })
+                        this.setState({
+                          step4WeeksPrompt: step4WeeksPrompt + 1,
+                        })
                     : () =>
-                      this.props.updateProgramPromptLog(
-                        user.user_id,
-                        !statusCheckRenewPrompt
-                          ? "4 weeks prompt"
-                          : "renew prompt",
-                        "level up"
-                      )
+                        this.props.updateProgramPromptLog(
+                          user.user_id,
+                          !statusCheckRenewPrompt
+                            ? "4 weeks prompt"
+                            : "renew prompt",
+                          "level up"
+                        )
                 }
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
@@ -2955,8 +2955,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                            item.duration &&
-                            item.play_time / item.duration >=
+                          item.duration &&
+                          item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3241,7 +3241,6 @@ class VideoList extends Component {
       timesExercise = `${totalMinute}:${totalSecond}`;
     }
 
- 
     return (
       <div className="card-body d-flex justify-content-center">
         <form>
@@ -3498,8 +3497,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                            item.duration &&
-                            item.play_time / item.duration >=
+                          item.duration &&
+                          item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3814,8 +3813,9 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${!showBarveAndBurn && focusDay === 0 ? "#F45197" : "grey"
-                        }`,
+                      color: `${
+                        !showBarveAndBurn && focusDay === 0 ? "#F45197" : "grey"
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(0)}
@@ -3829,8 +3829,9 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${!showBarveAndBurn && focusDay === 1 ? "#F45197" : "grey"
-                        }`,
+                      color: `${
+                        !showBarveAndBurn && focusDay === 1 ? "#F45197" : "grey"
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(1)}
@@ -3845,10 +3846,11 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${!showBarveAndBurn && focusDay === 2
-                          ? "#F45197"
-                          : "grey"
-                          }`,
+                        color: `${
+                          !showBarveAndBurn && focusDay === 2
+                            ? "#F45197"
+                            : "grey"
+                        }`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(2)}
@@ -4089,8 +4091,8 @@ class VideoList extends Component {
                                 </h6>
                               )}
                               {item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                              item.duration &&
+                              item.play_time / item.duration >=
                                 completeVideoPlayPercentage ? (
                                 <span
                                   className="dot"
@@ -4423,6 +4425,8 @@ class VideoList extends Component {
       statusGetCheckRenewPrompt,
     } = this.props;
 
+    console.log("dailyWeighChallenge", dailyWeighChallenge);
+
     return (
       <div>
         {dailyWeighChallenge &&
@@ -4485,21 +4489,21 @@ class VideoList extends Component {
               <Success_Modal success_modal_show={this.state.success_modal_show} handleClose={this.hideSuccessModal} /> */}
 
               {this.props.user &&
-                this.props.user.other_attributes &&
-                this.props.statusVideoList !== "no_video"
+              this.props.user.other_attributes &&
+              this.props.statusVideoList !== "no_video"
                 ? editVDO_click === "show"
                   ? this.renderEditVDO()
                   : lastWeekVDO_click === "show"
-                    ? lastWeekVDOAll === true
-                      ? this.renderVideoListLastWeekAll()
-                      : this.renderVideoListLastWeek()
-                    : this.renderVideoList()
+                  ? lastWeekVDOAll === true
+                    ? this.renderVideoListLastWeekAll()
+                    : this.renderVideoListLastWeek()
+                  : this.renderVideoList()
                 : statusGetCheck4WeeksPrompt !== "loading" &&
-                statusGetCheckRenewPrompt !== "loading" &&
-                ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
+                  statusGetCheckRenewPrompt !== "loading" &&
+                  ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
                   step4WeeksPrompt < 4 //ปัจจุบัน (4weeks, renew) Prompt ใช้ render เดียวกัน
-                  ? this.render4WeeksPrompt()
-                  : this.renderOtherAttribute())}
+                    ? this.render4WeeksPrompt()
+                    : this.renderOtherAttribute())}
             </div>
           </div>
         </div>
