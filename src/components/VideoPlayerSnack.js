@@ -52,9 +52,11 @@ const VideoPlayerSnack = ({ url, videoId }) => {
   const [videoCurrDuration, setVideoCurrDuration] = useState(0); // เพิ่ม state สำหรับเก็บระยะเวลาที่เล่นไปของวีดีโอ
   const [videoDuration, setVideoDuration] = useState(0); // เพิ่ม state สำหรับเก็บความยาวของวีดีโอ
   const [prevPlayTime, setPrevPlayTime] = useState(0);
+  const [playTimeEnd, setPlayTimeEnd] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
+    setPlayTimeEnd(false);
     if (video && url) {
       if (Hls.isSupported()) {
         const hls = new Hls();
@@ -68,6 +70,16 @@ const VideoPlayerSnack = ({ url, videoId }) => {
         video.addEventListener("canplay", () => {
           // video.play();
         });
+      }
+
+      var playTimeVideoSnack = exerciseSnack.filter(function (item) {
+        return item.video_id == videoId;
+      });
+
+      if (playTimeVideoSnack && playTimeVideoSnack[0].play_time == 0) {
+        setPlayTimeEnd(false);
+      } else {
+        setPlayTimeEnd(true);
       }
 
       video.addEventListener("ended", () => {
@@ -140,7 +152,8 @@ const VideoPlayerSnack = ({ url, videoId }) => {
     // นับจำนวน exerciseSnack ที่มี video_id มากกว่า 0
     var count = filteredExerciseSnack.length;
     dispatch(snacksCount(count));
-    if (count > 3) {
+
+    if (count > 3 && !playTimeEnd) {
       dispatch(createEventLogSnacks(user && user.user_id, count));
     }
 
@@ -148,6 +161,8 @@ const VideoPlayerSnack = ({ url, videoId }) => {
       document.getElementById("example-snack-success") &&
         document.getElementById("example-snack-success").click();
     }
+
+    console.log("9999");
 
     dispatch(setHidePopupVideoPlayerSnack(true));
   };

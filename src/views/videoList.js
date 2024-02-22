@@ -2775,7 +2775,7 @@ class VideoList extends Component {
                     </h5>
                   </a>
                 )}
-                {exerciseVideoLastWeek.length >= 4 && (
+                {/*  {exerciseVideoLastWeek.length >= 4 && (
                   <a
                     className="nav-link"
                     style={{
@@ -2788,7 +2788,7 @@ class VideoList extends Component {
                       <b>DAY 4</b>
                     </h5>
                   </a>
-                )}
+                )} */}
 
                 <a
                   className="nav-link ml-auto"
@@ -3316,7 +3316,7 @@ class VideoList extends Component {
                       </h5>
                     </a>
                   )}
-                {selectExerciseVideoLastWeek &&
+                {/*   {selectExerciseVideoLastWeek &&
                   selectExerciseVideoLastWeek.length >= 4 && (
                     <a
                       className="nav-link"
@@ -3330,7 +3330,7 @@ class VideoList extends Component {
                         <b>DAY 4</b>
                       </h5>
                     </a>
-                  )}
+                  )} */}
 
                 <a
                   className="nav-link ml-auto"
@@ -4424,8 +4424,6 @@ class VideoList extends Component {
       statusCheckRenewPrompt,
       statusGetCheckRenewPrompt,
     } = this.props;
-
-    console.log("dailyWeighChallenge", dailyWeighChallenge);
 
     return (
       <div>
