@@ -86,6 +86,9 @@ export const types = {
   GET_SCORE_SNACK: "GET_SCORE_SNACK",
   GET_SCORE_SNACK_SUCCESS: "GET_SCORE_SNACK_SUCCESS",
   GET_SCORE_SNACK_FALE: "GET_SCORE_SNACK_FALE",
+  GET_VIDEO_SNACK_ALL: "GET_VIDEO_SNACK_ALL",
+  GET_VIDEO_SNACK_SUCCESS_ALL: "GET_VIDEO_SNACK_SUCCESS_ALL",
+  GET_VIDEO_SNACK_FALE_ALL: "GET_VIDEO_SNACK_FALE_ALL",
 };
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
@@ -426,9 +429,29 @@ export const clearExerciseSnack = () => ({
   payload: {},
 });
 
+export const getVideoSnackAll = (user_id) => ({
+  type: types.GET_VIDEO_SNACK_ALL,
+  payload: {
+    user_id,
+  },
+});
+
 /* END OF ACTION Section */
 
 /* SAGA Section */
+
+const getVideoSnackAllSagaAsync = async (user_id) => {
+  try {
+    const apiResult = await API.get("bebe", "/getExerciseSnacksChallengeAll", {
+      queryStringParameters: {
+        user_id,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
 
 const getBraveAndBurnChallengeSagaAsync = async (user_id) => {
   try {
@@ -900,6 +923,27 @@ function* updateFbShareStatusBraveAndBurnSaga({ payload }) {
     if (apiResult.results.message === "success") {
       yield put({
         type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS,
+      });
+    }
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
+function* getVideoSnackAllSaga({ payload }) {
+  const { user_id } = payload;
+
+  try {
+    const apiResult = yield call(getVideoSnackAllSagaAsync, user_id);
+    if (apiResult.results.message === "success") {
+      yield put({
+        type: types.GET_VIDEO_SNACK_SUCCESS_ALL,
+        payload: apiResult.results.exerciseSnack,
+      });
+    }
+    if (apiResult.results.message === "fail") {
+      yield put({
+        type: types.GET_VIDEO_SNACK_FALE_ALL,
       });
     }
   } catch (error) {
@@ -1468,6 +1512,10 @@ function* getVideoSnackSaga({ payload }) {
   }
 }
 
+export function* watchGetVideoSnackAll() {
+  yield takeEvery(types.GET_VIDEO_SNACK_ALL, getVideoSnackAllSaga);
+}
+
 export function* watchUpdatePlaytime() {
   yield takeEvery(types.UPDATE_PLAYTIME, updatePlaytimeSaga);
 }
@@ -1611,6 +1659,7 @@ export function* saga() {
     fork(watchGetVideoSnackSaga),
     fork(watchCreateEventLogSnacksSaga),
     fork(watchGetScoreSnacksSaga),
+    fork(watchGetVideoSnackAll),
   ]);
 }
 
@@ -1653,6 +1702,8 @@ const INIT_STATE = {
   snackNumber: 0,
   scoreSnack: [],
   statsScoreSnack: "default",
+  exerciseSnackAll: [],
+  statsExerciseSnackAll: "default",
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1692,6 +1743,22 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         statusGetBraveAndBurn: "fail",
+      };
+    case types.GET_VIDEO_SNACK_ALL:
+      return {
+        ...state,
+        statsExerciseSnackAll: "loading",
+      };
+    case types.GET_VIDEO_SNACK_SUCCESS_ALL:
+      return {
+        ...state,
+        statsExerciseSnackAll: "success",
+        exerciseSnackAll: action.payload,
+      };
+    case types.GET_VIDEO_SNACK_FALE_ALL:
+      return {
+        ...state,
+        statsExerciseSnackAll: "fail",
       };
     case types.CREATE_BRAVE_AND_BURN_CHALLENGE:
       return {
