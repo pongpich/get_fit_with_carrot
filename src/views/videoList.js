@@ -3316,21 +3316,19 @@ class VideoList extends Component {
                       </h5>
                     </a>
                   )}
-                {/*   {selectExerciseVideoLastWeek &&
-                  selectExerciseVideoLastWeek.length >= 4 && (
-                    <a
-                      className="nav-link"
-                      style={{
-                        color: `${focusDay === 3 ? "#F45197" : "grey"}`,
-                        cursor: "pointer",
-                      }}
-                      onClick={() => this.onDayChange(3)}
-                    >
-                      <h5>
-                        <b>DAY 4</b>
-                      </h5>
-                    </a>
-                  )} */}
+
+                <a
+                  className="nav-link"
+                  style={{
+                    color: `${focusDay === 3 ? "#F45197" : "grey"}`,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => this.onDayChange(3)}
+                >
+                  <h5>
+                    <b>Random Exercise Snack</b>
+                  </h5>
+                </a>
 
                 <a
                   className="nav-link ml-auto"
@@ -3481,7 +3479,8 @@ class VideoList extends Component {
                 </div>
               </div>
               <tbody>
-                {selectExerciseVideoLastWeek &&
+                {focusDay < 3 &&
+                  selectExerciseVideoLastWeek &&
                   todayExercise.map((item, index) => {
                     const itemsArray = item.muscle.split(",");
                     const minuteLabel =
@@ -3575,14 +3574,6 @@ class VideoList extends Component {
                                     alt=""
                                   />
                                 )}
-                                {/* <div className="overlay" onClick={() => this.toggle(item)}>
-                                <i className="fa fa-play fa-4x" aria-hidden="true"></i>
-                                <div className="videoDuration" style={{ position: "absolute", right: "5%", bottom: "0", color: "white" }}>
-                                  <h6>
-                                    <b>{(item.duration + "").split(".")[0]}:{(item.duration + "").split(".")[1]} นาที</b>
-                                  </h6>
-                                </div>
-                              </div> */}
                               </div>
                             </div>
                             <div className="videoDetail">

@@ -193,6 +193,8 @@ const VideoExerciseSnack = () => {
       document.getElementById("example-snack").click();
   };
 
+  console.log("videoExerciseSnack", videoExerciseSnack);
+
   return (
     <>
       <div className="">
