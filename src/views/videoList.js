@@ -585,9 +585,10 @@ class VideoList extends Component {
           return val;
         }
       });
+
     this.setState({
       exerciseVideosSnackAll:
-        currentWeekExerciseSnackAll &&
+        currentWeekExerciseSnackAll.length > 0 &&
         JSON.parse(currentWeekExerciseSnackAll[0].video),
     });
   }
