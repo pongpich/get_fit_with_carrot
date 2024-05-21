@@ -10,6 +10,8 @@ export const types = {
   GET_CHECK_DISPAY_NAME_SUCCESS: "GET_CHECK_DISPAY_NAME_SUCCESS",
   GET_MEMBER_INFO: "GET_MEMBER_INFO",
   GET_MEMBER_INFO_SUCCESS: "GET_MEMBER_INFO_SUCCESS",
+  GET_MEMBER_TOTAL_SCORE: "GET_MEMBER_TOTAL_SCORE",
+  GET_MEMBER_TOTAL_SCORE_SUCCESS: "GET_MEMBER_TOTAL_SCORE_SUCCESS",
   CHECK_4WEEKS_PROMPT: "CHECK_4WEEKS_PROMPT",
   CHECK_4WEEKS_PROMPT_SUCCESS: "CHECK_4WEEKS_PROMPT_SUCCESS",
   CHECK_RENEW_PROMPT: "CHECK_RENEW_PROMPT",
@@ -65,6 +67,13 @@ export const getMemberInfo = (user_id) => ({
   },
 });
 
+export const getMemberTotalScore = (user_id) => ({
+  type: types.GET_MEMBER_TOTAL_SCORE,
+  payload: {
+    user_id,
+  },
+});
+
 export const getAllMemberStayFit = (fb_group) => ({
   type: types.GET_ALL_MEMBER_STAY_FIT,
   payload: {
@@ -78,6 +87,19 @@ const getAllMemberStayFitSagaAsync = async (fb_group) => {
     const apiResult = await API.get("bebe", "/getAllMemberPlatfrom", {
       queryStringParameters: {
         fb_group,
+      },
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
+const getMemberTotalScoreSagaAsync = async (user_id) => {
+  try {
+    const apiResult = await API.get("bebe", "/getMemberEventLogScore", {
+      queryStringParameters: {
+        user_id,
       },
     });
     return apiResult;
@@ -176,6 +198,20 @@ function* getAllMemberStayFitSaga({ payload }) {
     });
   } catch (error) {
     console.log("error from getAllMemberStayFitSaga :", error);
+  }
+}
+
+function* getMemberTotalScoreSaga({ payload }) {
+  const { user_id } = payload;
+
+  try {
+    const apiResult = yield call(getMemberTotalScoreSagaAsync, user_id);
+    yield put({
+      type: types.GET_MEMBER_TOTAL_SCORE_SUCCESS,
+      payload: apiResult.results.sum_score[0],
+    });
+  } catch (error) {
+    console.log("error from getMemberTotalScoreSaga :", error);
   }
 }
 
@@ -293,6 +329,10 @@ export function* watchGetAllMemberStayFitSaga() {
   yield takeEvery(types.GET_ALL_MEMBER_STAY_FIT, getAllMemberStayFitSaga);
 }
 
+export function* watchGetMemberTotalScoreSaga() {
+  yield takeEvery(types.GET_MEMBER_TOTAL_SCORE, getMemberTotalScoreSaga);
+}
+
 export function* watchCheck4WeeksPromptSaga() {
   yield takeEvery(types.CHECK_4WEEKS_PROMPT, check4WeeksPromptSaga);
 }
@@ -318,6 +358,7 @@ export function* saga() {
     fork(watchCheckRenewPromptSaga),
     fork(watchCheckQuestionnaireLogSaga),
     fork(watchCheckNewsLogSaga),
+    fork(watchGetMemberTotalScoreSaga),
   ]);
 }
 
@@ -330,6 +371,7 @@ const INIT_STATE = {
   statusGetMemberInfo: "default",
   member_info: null,
   allMemberStayFit: null,
+  membertotalscore: null,
   statusCheck4WeeksPrompt: false,
   statusGetCheck4WeeksPrompt: "default",
   statusCheckRenewPrompt: false,
@@ -346,6 +388,11 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         allMemberStayFit: action.payload.allMemberStayFit,
+      };
+    case types.GET_MEMBER_TOTAL_SCORE_SUCCESS:
+      return {
+        ...state,
+        membertotalscore: action.payload,
       };
     case types.CHECK_QUESTIONNAIRE_LOG:
       return {

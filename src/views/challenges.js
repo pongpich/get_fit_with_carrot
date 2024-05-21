@@ -39,7 +39,7 @@ import {
 } from "../redux/challenges";
 import { getExerciseSnack, getScoreSnacks } from "../redux/exerciseVideos";
 import { getGroupID, checkUpdateMaxFriends } from "../redux/auth";
-import { getAllMemberStayFit } from "../redux/get";
+import { getAllMemberStayFit, getMemberTotalScore } from "../redux/get";
 import "./challenges.scss";
 import {
   FacebookShareButton,
@@ -67,6 +67,7 @@ import frame46 from "../assets/img/frame46.png";
 import group25 from "../assets/img/group25.png";
 import frame47 from "../assets/img/frame47.png";
 import copyLink from "../assets/img/copy-link.png";
+import Modal from './modal'; // นำเข้า Modal Component จากไฟล์ Modal.js
 
 class Challenges extends Component {
   constructor(props) {
@@ -89,8 +90,25 @@ class Challenges extends Component {
       selectedCreateTeam: false,
       videoSnack: null,
       challengePeriod2: "false",
+      showScoreConvertModal: false,
+      showModal: false
+
     };
   }
+  handleButtonClick = () => {
+    this.setState({ showModal: true });
+    console.log(this.props.membertotalscore.total_score,'xxxxx');
+  };
+
+  handleConfirm = () => {
+    // ในที่นี้คุณสามารถเพิ่มโค้ดที่ต้องการให้ทำเมื่อยืนยันได้
+    this.setState({ showModal: false });
+  };
+
+  handleCancel = () => {
+    // ในที่นี้คุณสามารถเพิ่มโค้ดที่ต้องการให้ทำเมื่อยกเลิกได้
+    this.setState({ showModal: false });
+  };
 
   async componentDidMount() {
     console.log("his", this.props.user.user_id, this.props.week);
@@ -99,7 +117,7 @@ class Challenges extends Component {
       this.props.getScoreSnacks(this.props.user.user_id);
       this.props.checkUpdateMaxFriends(this.props.user.user_id);
       this.props.getChallengePeriod();
-
+      this.props.getMemberTotalScore(this.props.user.user_id);
       this.props.getTeamInvite(this.props.user.user_id);
 
       this.props.getRank(this.props.user.user_id, this.props.user.start_date);
@@ -165,40 +183,40 @@ class Challenges extends Component {
 
     const achievementFinisher =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Finisher").length >
+        achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
         : false;
     const achievementAce =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Ace").length > 0
+        achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
         : false;
     const achievement1st =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "1st").length > 0
+        achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
         : false;
     const achievement2nd =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "2nd").length > 0
+        achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
         : false;
     const achievementTop10 =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Top 10").length > 0
+        achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
         : false;
     const achievementSocialStar =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star")
+          .length > 0
         ? true
         : false;
     const achievementSocialStarPlus =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star+")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star+")
+          .length > 0
         ? true
         : false;
 
@@ -224,7 +242,7 @@ class Challenges extends Component {
       this.setState({
         videoSnack:
           this.props.videoExerciseSnack &&
-          this.props.videoExerciseSnack.length > 0
+            this.props.videoExerciseSnack.length > 0
             ? JSON.parse(this.props.videoExerciseSnack[0].video)
             : null,
       });
@@ -288,7 +306,7 @@ class Challenges extends Component {
 
     if (
       prevProps.statusCheckAllMissionComplete !==
-        statusCheckAllMissionComplete &&
+      statusCheckAllMissionComplete &&
       statusCheckAllMissionComplete === "success"
     ) {
       //สั่งให้โชว์ popup
@@ -473,7 +491,7 @@ class Challenges extends Component {
     const rank =
       this.props.rank &&
       this.props.rank.charAt(0).toUpperCase() +
-        this.props.rank.substr(1).toLowerCase(); //ตัวแรกพิมพ์ใหญ่ ตัวที่เหลือพิมพ์เล็ก
+      this.props.rank.substr(1).toLowerCase(); //ตัวแรกพิมพ์ใหญ่ ตัวที่เหลือพิมพ์เล็ก
     const {
       logWeightCount,
       isReducedWeight,
@@ -508,7 +526,7 @@ class Challenges extends Component {
       scoreInWeek = 41;
     } //เพื่อไม่ให้เกินหลอด
 
-  
+
     var filteredExerciseSnack =
       this.state.videoSnack &&
       this.state.videoSnack.filter(function (item) {
@@ -694,8 +712,21 @@ class Challenges extends Component {
                 ></div>
               </div>
               <h5 className="card-text mt-3 mb-3" style={{ color: "#F45197" }}>
-                {scoreInWeek}/41 คะแนน
+                {scoreInWeek}/4xx1 คะแนน
               </h5>
+              <h5 className="card-text mt-3 mb-3" style={{ color: "#F45197" }}>
+                คุณมีคะแนนรวม {this.props.membertotalscore.total_score} คะแนน
+              </h5>
+              <div>
+                <button onClick={this.handleButtonClick}>Click me</button>
+                {this.state.showModal}
+                {this.state.showModal && (
+                  <Modal
+                    onConfirm={this.handleConfirm}
+                    onCancel={this.handleCancel}
+                  />
+                )}
+              </div>
             </center>
           </div>
         </div>
@@ -747,8 +778,8 @@ class Challenges extends Component {
                   onClick={() =>
                     this.props.rejectTeamInvite(
                       this.props.team_invite &&
-                        this.props.team_invite[0] &&
-                        this.props.team_invite[0].log_id
+                      this.props.team_invite[0] &&
+                      this.props.team_invite[0].log_id
                     )
                   }
                 >
@@ -763,11 +794,11 @@ class Challenges extends Component {
                     this.props.acceptTeamInvite(
                       this.props.user && this.props.user.user_id,
                       this.props.team_invite &&
-                        this.props.team_invite[0] &&
-                        this.props.team_invite[0].group_id,
+                      this.props.team_invite[0] &&
+                      this.props.team_invite[0].group_id,
                       this.props.team_invite &&
-                        this.props.team_invite[0] &&
-                        this.props.team_invite[0].log_id
+                      this.props.team_invite[0] &&
+                      this.props.team_invite[0].log_id
                     )
                   }
                 >
@@ -884,8 +915,8 @@ class Challenges extends Component {
                               {item.display_name
                                 ? item.display_name
                                 : item.facebook
-                                ? item.facebook
-                                : `${item.first_name} ${item.last_name}`}
+                                  ? item.facebook
+                                  : `${item.first_name} ${item.last_name}`}
                             </div>
                             <div className="col-lg-3 col-md-3 col-6">
                               <span style={{ color: "grey" }}>
@@ -898,9 +929,9 @@ class Challenges extends Component {
                               >
                                 {item.end_rank
                                   ? item.end_rank.charAt(0).toUpperCase() +
-                                    item.end_rank.substr(1).toLowerCase()
+                                  item.end_rank.substr(1).toLowerCase()
                                   : item.start_rank.charAt(0).toUpperCase() +
-                                    item.start_rank.substr(1).toLowerCase()}
+                                  item.start_rank.substr(1).toLowerCase()}
                               </span>
                             </div>
                           </div>
@@ -1201,13 +1232,12 @@ class Challenges extends Component {
           {individualRankFilter &&
             individualRankFilter.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
-              const rankDetail = `${index + 1}. ${
-                item.display_name
+              const rankDetail = `${index + 1}. ${item.display_name
                   ? item.display_name
                   : item.facebook
-                  ? item.facebook
-                  : fullName
-              }`;
+                    ? item.facebook
+                    : fullName
+                }`;
               index = index + 1;
               return (
                 <>
@@ -1260,8 +1290,8 @@ class Challenges extends Component {
               {myRank[0].display_name
                 ? myRank[0].display_name
                 : myRank[0].facebook
-                ? myRank[0].facebook
-                : `${myRank[0].first_name} ${myRank[0].last_name}`}
+                  ? myRank[0].facebook
+                  : `${myRank[0].first_name} ${myRank[0].last_name}`}
               <span style={{ float: "right", color: "#F45197" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
@@ -1285,8 +1315,8 @@ class Challenges extends Component {
         facebook: user.display_name
           ? user.display_name
           : user.facebook
-          ? user.facebook
-          : `${user.first_name} ${user.last_name}`,
+            ? user.facebook
+            : `${user.first_name} ${user.last_name}`,
         total_score: 0,
       };
     }
@@ -1302,13 +1332,12 @@ class Challenges extends Component {
             friendsRank.length > 0 &&
             friendsRank.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
-              const rankDetail = `${index + 1}. ${
-                item.display_name
+              const rankDetail = `${index + 1}. ${item.display_name
                   ? item.display_name
                   : item.facebook
-                  ? item.facebook
-                  : fullName
-              }`;
+                    ? item.facebook
+                    : fullName
+                }`;
               index = index + 1;
               return (
                 <>
@@ -1358,8 +1387,8 @@ class Challenges extends Component {
               {myRank[0].display_name
                 ? myRank[0].display_name
                 : myRank[0].facebook
-                ? myRank[0].facebook
-                : `${myRank[0].first_name} ${myRank[0].last_name}`}
+                  ? myRank[0].facebook
+                  : `${myRank[0].first_name} ${myRank[0].last_name}`}
               <span style={{ float: "right", color: "#F45197" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
@@ -1384,9 +1413,8 @@ class Challenges extends Component {
               <h5
                 className="ml-3 mr-4"
                 style={{
-                  color: `${
-                    selectedScoreBoard === "team" ? "#F45197" : "grey"
-                  }`,
+                  color: `${selectedScoreBoard === "team" ? "#F45197" : "grey"
+                    }`,
                   cursor: "pointer",
                 }}
                 onClick={() => this.setState({ selectedScoreBoard: "team" })}
@@ -1396,9 +1424,8 @@ class Challenges extends Component {
               <h5
                 className="mr-4"
                 style={{
-                  color: `${
-                    selectedScoreBoard === "individual" ? "#F45197" : "grey"
-                  }`,
+                  color: `${selectedScoreBoard === "individual" ? "#F45197" : "grey"
+                    }`,
                   cursor: "pointer",
                 }}
                 onClick={() =>
@@ -1411,9 +1438,8 @@ class Challenges extends Component {
                 <h5
                   className=""
                   style={{
-                    color: `${
-                      selectedScoreBoard === "friendsRank" ? "#F45197" : "grey"
-                    }`,
+                    color: `${selectedScoreBoard === "friendsRank" ? "#F45197" : "grey"
+                      }`,
                     cursor: "pointer",
                   }}
                   onClick={() =>
@@ -1544,8 +1570,8 @@ class Challenges extends Component {
                   onClick={() =>
                     this.props.rejectFriend(
                       this.props.friend_request &&
-                        this.props.friend_request[0] &&
-                        this.props.friend_request[0].log_id
+                      this.props.friend_request[0] &&
+                      this.props.friend_request[0].log_id
                     )
                   }
                 >
@@ -1560,11 +1586,11 @@ class Challenges extends Component {
                     this.props.acceptFriend(
                       this.props.user && this.props.user.user_id,
                       this.props.friend_request &&
-                        this.props.friend_request[0] &&
-                        this.props.friend_request[0].sender_id,
+                      this.props.friend_request[0] &&
+                      this.props.friend_request[0].sender_id,
                       this.props.friend_request &&
-                        this.props.friend_request[0] &&
-                        this.props.friend_request[0].log_id
+                      this.props.friend_request[0] &&
+                      this.props.friend_request[0].log_id
                     )
                   }
                 >
@@ -1758,8 +1784,8 @@ class Challenges extends Component {
                             {item.display_name
                               ? item.display_name
                               : item.facebook
-                              ? item.facebook
-                              : `${item.first_name} ${item.last_name}`}
+                                ? item.facebook
+                                : `${item.first_name} ${item.last_name}`}
                           </div>
                           <div className="col-lg-3 col-md-3 col-6">
                             <span style={{ color: "grey" }}>
@@ -1770,9 +1796,9 @@ class Challenges extends Component {
                             <span style={{ float: "right", color: "#F45197" }}>
                               {item.end_rank
                                 ? item.end_rank.charAt(0).toUpperCase() +
-                                  item.end_rank.substr(1).toLowerCase()
+                                item.end_rank.substr(1).toLowerCase()
                                 : item.start_rank.charAt(0).toUpperCase() +
-                                  item.start_rank.substr(1).toLowerCase()}{" "}
+                                item.start_rank.substr(1).toLowerCase()}{" "}
                               <img
                                 className="ml-4"
                                 style={{ cursor: "pointer" }}
@@ -1819,40 +1845,40 @@ class Challenges extends Component {
     const { achievementLog } = this.props;
     const achievementFinisher =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Finisher").length >
+        achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
         : false;
     const achievementAce =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Ace").length > 0
+        achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
         : false;
     const achievement1st =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "1st").length > 0
+        achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
         : false;
     const achievement2nd =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "2nd").length > 0
+        achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
         : false;
     const achievementTop10 =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Top 10").length > 0
+        achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
         : false;
     const achievementSocialStar =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star")
+          .length > 0
         ? true
         : false;
     const achievementSocialStarPlus =
       achievementLog &&
-      achievementLog.filter((item) => item.achievement === "Social star+")
-        .length > 0
+        achievementLog.filter((item) => item.achievement === "Social star+")
+          .length > 0
         ? true
         : false;
 
@@ -2766,7 +2792,7 @@ class Challenges extends Component {
               <ul id="myUL" className="myUL">
                 <div class="li">
                   {allMemberStayFitFilter &&
-                  allMemberStayFitFilter.length > 0 ? (
+                    allMemberStayFitFilter.length > 0 ? (
                     allMemberStayFit &&
                     allMemberStayFit.map((item, i) => (
                       <li key={i}>
@@ -2911,7 +2937,7 @@ class Challenges extends Component {
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-12 col-md-12 col-lg-4">{}</div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">{ }</div>
       </>
     );
   }
@@ -2976,9 +3002,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "mission" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "mission" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -2990,9 +3015,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "teamList" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "teamList" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3008,9 +3032,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "scoreBoard" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "scoreBoard" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3022,9 +3045,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "friendList" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "friendList" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3039,9 +3061,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "achievement" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "achievement" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3056,9 +3077,8 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${
-                        selectedNavLink === "searchMember" ? "#F45197" : ""
-                      }`,
+                      color: `${selectedNavLink === "searchMember" ? "#F45197" : ""
+                        }`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onSearchMember()}
@@ -4742,7 +4762,7 @@ const mapStateToProps = ({ authUser, challenges, exerciseVideos, get }) => {
     statsGetExerciseSnack,
     scoreSnack,
   } = exerciseVideos;
-  const { allMemberStayFit } = get;
+  const { allMemberStayFit, membertotalscore } = get;
   const {
     friend_request_sent,
     statusGetFriendRequestSent,
@@ -4844,6 +4864,7 @@ const mapStateToProps = ({ authUser, challenges, exerciseVideos, get }) => {
     videoExerciseSnack,
     statsGetExerciseSnack,
     scoreSnack,
+    membertotalscore
   };
 };
 
@@ -4888,6 +4909,7 @@ const mapActionsToProps = {
   getIsReducedWaist,
   getExerciseSnack,
   getScoreSnacks,
+  getMemberTotalScore
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Challenges);

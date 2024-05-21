@@ -1,0 +1,24 @@
+/* modal.css */
+
+.modal {
+    display: none; /* เริ่มต้นด้วยการซ่อน Modal */
+    position: fixed; /* ให้ Modal อยู่ในตำแหน่งที่ติดตั้ง */
+    z-index: 1; /* ให้ Modal อยู่ข้างหน้าสุด */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* เพื่อให้สามารถเลื่อนเนื้อหาของ Modal ได้หากมีเนื้อหามากเกินไป */
+    background-color: rgba(0,0,0,0.4); /* สีพื้นหลังด้านหลังของ Modal */
+  }
+  
+  .modal-content {
+    background-color: #fefefe; /* สีพื้นหลังของเนื้อหาใน Modal */
+    margin: 15% auto; /* ตำแหน่งในการจัดการตำแหน่งของ Modal ในจอ */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* ขนาดความกว้างของ Modal */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* เพิ่มเงาให้ Modal */
+  }
+  
+  /* สำหรับปุ่มยืนยันและยกเลิก คุณอาจจะต้องปรับแต่งด้วย CSS ตามความต้องการของคุณ */
