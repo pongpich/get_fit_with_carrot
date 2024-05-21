@@ -210,6 +210,7 @@ function* getMemberTotalScoreSaga({ payload }) {
       type: types.GET_MEMBER_TOTAL_SCORE_SUCCESS,
       payload: apiResult.results.sum_score[0],
     });
+    console.log("getMemberTotalScoreSaga", apiResult);
   } catch (error) {
     console.log("error from getMemberTotalScoreSaga :", error);
   }
@@ -371,7 +372,7 @@ const INIT_STATE = {
   statusGetMemberInfo: "default",
   member_info: null,
   allMemberStayFit: null,
-  membertotalscore: null,
+  membertotalscore: 0,
   statusCheck4WeeksPrompt: false,
   statusGetCheck4WeeksPrompt: "default",
   statusCheckRenewPrompt: false,
@@ -392,7 +393,7 @@ export function reducer(state = INIT_STATE, action) {
     case types.GET_MEMBER_TOTAL_SCORE_SUCCESS:
       return {
         ...state,
-        membertotalscore: action.payload,
+        membertotalscore: action.payload.total_score,
       };
     case types.CHECK_QUESTIONNAIRE_LOG:
       return {

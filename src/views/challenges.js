@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  Button,
+  Modal as ModalStrap,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
+import {
   cancelTeamInvite,
   cancelFriendRequest,
   getFriendRequestSent,
@@ -37,6 +44,10 @@ import {
   checkAllMissionComplete,
   getIsReducedWaist,
 } from "../redux/challenges";
+import {
+  clearStatusUpdateMemberEventLogScoreConvert,
+  updateMemberEventLogScoreConvert,
+} from "../redux/update";
 import { getExerciseSnack, getScoreSnacks } from "../redux/exerciseVideos";
 import { getGroupID, checkUpdateMaxFriends } from "../redux/auth";
 import { getAllMemberStayFit, getMemberTotalScore } from "../redux/get";
@@ -67,7 +78,7 @@ import frame46 from "../assets/img/frame46.png";
 import group25 from "../assets/img/group25.png";
 import frame47 from "../assets/img/frame47.png";
 import copyLink from "../assets/img/copy-link.png";
-import Modal from './modal'; // นำเข้า Modal Component จากไฟล์ Modal.js
+import Modal from "./modal"; // นำเข้า Modal Component จากไฟล์ Modal.js
 
 class Challenges extends Component {
   constructor(props) {
@@ -91,13 +102,54 @@ class Challenges extends Component {
       videoSnack: null,
       challengePeriod2: "false",
       showScoreConvertModal: false,
-      showModal: false
-
+      showModalScore: false,
+      showModalPoint: false,
     };
   }
-  handleButtonClick = () => {
-    this.setState({ showModal: true });
-    console.log(this.props.membertotalscore.total_score,'xxxxx');
+
+  toggleShowModalScore = () => {
+    this.setState({ showModalScore: true });
+  };
+
+  toggleShowModalPoint = () => {
+    this.setState({ showModalPoint: true });
+  };
+
+  handleScoreConvert = () => {
+    const { membertotalscore, user, statusUpdateMemberEventLogScoreConvert } =
+      this.props;
+    const exchange_credit = membertotalscore / 10;
+    const divisibleNumber = exchange_credit % 2 == 0;
+
+    if (membertotalscore < 10) {
+      console.log("show modal your point not enough");
+      this.setState({ showModalScore: false, showModalPoint: true });
+      return;
+    }
+
+    if (divisibleNumber) {
+      this.props.updateMemberEventLogScoreConvert(
+        user.user_id,
+        exchange_credit,
+        0,
+        user.email
+      );
+    } else {
+      const integerPart = Math.floor(exchange_credit);
+      const fractionalPart = (exchange_credit - integerPart).toFixed(2) * 10;
+      this.props.updateMemberEventLogScoreConvert(
+        user.user_id,
+        integerPart,
+        fractionalPart,
+        user.email
+      );
+    }
+
+    if (statusUpdateMemberEventLogScoreConvert == "success") {
+      console.log("SHOW MODAL SUCCESS");
+      this.props.clearStatusUpdateMemberEventLogScoreConvert();
+    }
+    this.setState({ showModalScore: false });
   };
 
   handleConfirm = () => {
@@ -179,44 +231,45 @@ class Challenges extends Component {
       statusCancelFriendRequest,
       statusCancelTeamInvite,
       statusCreateTeam,
+      statusUpdateMemberEventLogScoreConvert,
     } = this.props;
 
     const achievementFinisher =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Finisher").length >
+      achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
         : false;
     const achievementAce =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Ace").length > 0
+      achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
         : false;
     const achievement1st =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "1st").length > 0
+      achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
         : false;
     const achievement2nd =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "2nd").length > 0
+      achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
         : false;
     const achievementTop10 =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Top 10").length > 0
+      achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
         : false;
     const achievementSocialStar =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Social star")
-          .length > 0
+      achievementLog.filter((item) => item.achievement === "Social star")
+        .length > 0
         ? true
         : false;
     const achievementSocialStarPlus =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Social star+")
-          .length > 0
+      achievementLog.filter((item) => item.achievement === "Social star+")
+        .length > 0
         ? true
         : false;
 
@@ -242,7 +295,7 @@ class Challenges extends Component {
       this.setState({
         videoSnack:
           this.props.videoExerciseSnack &&
-            this.props.videoExerciseSnack.length > 0
+          this.props.videoExerciseSnack.length > 0
             ? JSON.parse(this.props.videoExerciseSnack[0].video)
             : null,
       });
@@ -305,8 +358,17 @@ class Challenges extends Component {
     }
 
     if (
+      prevProps.statusUpdateMemberEventLogScoreConvert !==
+        statusUpdateMemberEventLogScoreConvert &&
+      statusUpdateMemberEventLogScoreConvert == "success"
+    ) {
+      this.props.getMemberTotalScore(user.user_id);
+      console.log("FETCH NEW SCORE");
+    }
+
+    if (
       prevProps.statusCheckAllMissionComplete !==
-      statusCheckAllMissionComplete &&
+        statusCheckAllMissionComplete &&
       statusCheckAllMissionComplete === "success"
     ) {
       //สั่งให้โชว์ popup
@@ -491,7 +553,7 @@ class Challenges extends Component {
     const rank =
       this.props.rank &&
       this.props.rank.charAt(0).toUpperCase() +
-      this.props.rank.substr(1).toLowerCase(); //ตัวแรกพิมพ์ใหญ่ ตัวที่เหลือพิมพ์เล็ก
+        this.props.rank.substr(1).toLowerCase(); //ตัวแรกพิมพ์ใหญ่ ตัวที่เหลือพิมพ์เล็ก
     const {
       logWeightCount,
       isReducedWeight,
@@ -502,6 +564,7 @@ class Challenges extends Component {
       exerciseVideo,
       waistInWeekResult,
       scoreSnack,
+      membertotalscore,
     } = this.props;
     const isExerciseCompleted = this.isExerciseCompleted(exerciseVideo);
 
@@ -525,7 +588,6 @@ class Challenges extends Component {
     if (scoreInWeek > 41) {
       scoreInWeek = 41;
     } //เพื่อไม่ให้เกินหลอด
-
 
     var filteredExerciseSnack =
       this.state.videoSnack &&
@@ -712,20 +774,79 @@ class Challenges extends Component {
                 ></div>
               </div>
               <h5 className="card-text mt-3 mb-3" style={{ color: "#F45197" }}>
-                {scoreInWeek}/4xx1 คะแนน
+                {scoreInWeek}/41 คะแนน
               </h5>
               <h5 className="card-text mt-3 mb-3" style={{ color: "#F45197" }}>
-                คุณมีคะแนนรวม {this.props.membertotalscore.total_score} คะแนน
+                คุณมีแต้มคะแนน {membertotalscore} คะแนน
               </h5>
               <div>
-                <button onClick={this.handleButtonClick}>Click me</button>
-                {this.state.showModal}
-                {this.state.showModal && (
-                  <Modal
-                    onConfirm={this.handleConfirm}
-                    onCancel={this.handleCancel}
-                  />
-                )}
+                <button
+                  style={{
+                    backgroundColor: "rgb(244, 81, 151)",
+                    border: "none",
+                    width: 150,
+                    height: 44,
+                    color: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  type="button"
+                  onClick={this.toggleShowModalScore}
+                >
+                  แลกคะแนน
+                </button>
+
+                <ModalStrap
+                  isOpen={this.state.showModalScore}
+                  toggle={() => this.setState({ showModalScore: false })}
+                >
+                  <ModalHeader>
+                    คุณยืนยันที่จะแลกคะแนนเป็น Pynk Coin ใช่หรือไม่
+                  </ModalHeader>
+                  <ModalBody>
+                    หมายเหตุ: คะแนนรวม 10 คะแนน สามารถแลกเป็น pynk coin ได้ 1
+                    pynk coin
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      style={{
+                        backgroundColor: "rgb(244, 81, 151)",
+                        border: "1px solid rgb(244, 81, 151)",
+                      }}
+                      onClick={this.handleScoreConvert}
+                    >
+                      ยืนยัน
+                    </Button>
+                    <Button
+                      color="danger"
+                      onClick={() => this.setState({ showModalScore: false })}
+                    >
+                      ยกเลิก
+                    </Button>
+                  </ModalFooter>
+                </ModalStrap>
+                <ModalStrap
+                  isOpen={this.state.showModalPoint}
+                  toggle={() => this.setState({ showModalPoint: false })}
+                >
+                  <ModalHeader>คะแนนของคุณไม่พอ</ModalHeader>
+                  {/* <ModalBody>
+                    หมายเหตุ: คะแนนรวม 10 คะแนน สามารถแลกเป็น pynk coin ได้ 1
+                    pynk coin
+                  </ModalBody> */}
+                  <ModalFooter>
+                    <Button
+                      style={{
+                        backgroundColor: "rgb(244, 81, 151)",
+                        border: "1px solid rgb(244, 81, 151)",
+                      }}
+                      onClick={() => this.setState({ showModalPoint: false })}
+                    >
+                      ยืนยัน
+                    </Button>
+                  </ModalFooter>
+                </ModalStrap>
               </div>
             </center>
           </div>
@@ -778,8 +899,8 @@ class Challenges extends Component {
                   onClick={() =>
                     this.props.rejectTeamInvite(
                       this.props.team_invite &&
-                      this.props.team_invite[0] &&
-                      this.props.team_invite[0].log_id
+                        this.props.team_invite[0] &&
+                        this.props.team_invite[0].log_id
                     )
                   }
                 >
@@ -794,11 +915,11 @@ class Challenges extends Component {
                     this.props.acceptTeamInvite(
                       this.props.user && this.props.user.user_id,
                       this.props.team_invite &&
-                      this.props.team_invite[0] &&
-                      this.props.team_invite[0].group_id,
+                        this.props.team_invite[0] &&
+                        this.props.team_invite[0].group_id,
                       this.props.team_invite &&
-                      this.props.team_invite[0] &&
-                      this.props.team_invite[0].log_id
+                        this.props.team_invite[0] &&
+                        this.props.team_invite[0].log_id
                     )
                   }
                 >
@@ -915,8 +1036,8 @@ class Challenges extends Component {
                               {item.display_name
                                 ? item.display_name
                                 : item.facebook
-                                  ? item.facebook
-                                  : `${item.first_name} ${item.last_name}`}
+                                ? item.facebook
+                                : `${item.first_name} ${item.last_name}`}
                             </div>
                             <div className="col-lg-3 col-md-3 col-6">
                               <span style={{ color: "grey" }}>
@@ -929,9 +1050,9 @@ class Challenges extends Component {
                               >
                                 {item.end_rank
                                   ? item.end_rank.charAt(0).toUpperCase() +
-                                  item.end_rank.substr(1).toLowerCase()
+                                    item.end_rank.substr(1).toLowerCase()
                                   : item.start_rank.charAt(0).toUpperCase() +
-                                  item.start_rank.substr(1).toLowerCase()}
+                                    item.start_rank.substr(1).toLowerCase()}
                               </span>
                             </div>
                           </div>
@@ -1232,12 +1353,13 @@ class Challenges extends Component {
           {individualRankFilter &&
             individualRankFilter.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
-              const rankDetail = `${index + 1}. ${item.display_name
+              const rankDetail = `${index + 1}. ${
+                item.display_name
                   ? item.display_name
                   : item.facebook
-                    ? item.facebook
-                    : fullName
-                }`;
+                  ? item.facebook
+                  : fullName
+              }`;
               index = index + 1;
               return (
                 <>
@@ -1290,8 +1412,8 @@ class Challenges extends Component {
               {myRank[0].display_name
                 ? myRank[0].display_name
                 : myRank[0].facebook
-                  ? myRank[0].facebook
-                  : `${myRank[0].first_name} ${myRank[0].last_name}`}
+                ? myRank[0].facebook
+                : `${myRank[0].first_name} ${myRank[0].last_name}`}
               <span style={{ float: "right", color: "#F45197" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
@@ -1315,8 +1437,8 @@ class Challenges extends Component {
         facebook: user.display_name
           ? user.display_name
           : user.facebook
-            ? user.facebook
-            : `${user.first_name} ${user.last_name}`,
+          ? user.facebook
+          : `${user.first_name} ${user.last_name}`,
         total_score: 0,
       };
     }
@@ -1332,12 +1454,13 @@ class Challenges extends Component {
             friendsRank.length > 0 &&
             friendsRank.map((item, index) => {
               const fullName = `${item.first_name} ${item.last_name}`;
-              const rankDetail = `${index + 1}. ${item.display_name
+              const rankDetail = `${index + 1}. ${
+                item.display_name
                   ? item.display_name
                   : item.facebook
-                    ? item.facebook
-                    : fullName
-                }`;
+                  ? item.facebook
+                  : fullName
+              }`;
               index = index + 1;
               return (
                 <>
@@ -1387,8 +1510,8 @@ class Challenges extends Component {
               {myRank[0].display_name
                 ? myRank[0].display_name
                 : myRank[0].facebook
-                  ? myRank[0].facebook
-                  : `${myRank[0].first_name} ${myRank[0].last_name}`}
+                ? myRank[0].facebook
+                : `${myRank[0].first_name} ${myRank[0].last_name}`}
               <span style={{ float: "right", color: "#F45197" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
@@ -1413,8 +1536,9 @@ class Challenges extends Component {
               <h5
                 className="ml-3 mr-4"
                 style={{
-                  color: `${selectedScoreBoard === "team" ? "#F45197" : "grey"
-                    }`,
+                  color: `${
+                    selectedScoreBoard === "team" ? "#F45197" : "grey"
+                  }`,
                   cursor: "pointer",
                 }}
                 onClick={() => this.setState({ selectedScoreBoard: "team" })}
@@ -1424,8 +1548,9 @@ class Challenges extends Component {
               <h5
                 className="mr-4"
                 style={{
-                  color: `${selectedScoreBoard === "individual" ? "#F45197" : "grey"
-                    }`,
+                  color: `${
+                    selectedScoreBoard === "individual" ? "#F45197" : "grey"
+                  }`,
                   cursor: "pointer",
                 }}
                 onClick={() =>
@@ -1438,8 +1563,9 @@ class Challenges extends Component {
                 <h5
                   className=""
                   style={{
-                    color: `${selectedScoreBoard === "friendsRank" ? "#F45197" : "grey"
-                      }`,
+                    color: `${
+                      selectedScoreBoard === "friendsRank" ? "#F45197" : "grey"
+                    }`,
                     cursor: "pointer",
                   }}
                   onClick={() =>
@@ -1570,8 +1696,8 @@ class Challenges extends Component {
                   onClick={() =>
                     this.props.rejectFriend(
                       this.props.friend_request &&
-                      this.props.friend_request[0] &&
-                      this.props.friend_request[0].log_id
+                        this.props.friend_request[0] &&
+                        this.props.friend_request[0].log_id
                     )
                   }
                 >
@@ -1586,11 +1712,11 @@ class Challenges extends Component {
                     this.props.acceptFriend(
                       this.props.user && this.props.user.user_id,
                       this.props.friend_request &&
-                      this.props.friend_request[0] &&
-                      this.props.friend_request[0].sender_id,
+                        this.props.friend_request[0] &&
+                        this.props.friend_request[0].sender_id,
                       this.props.friend_request &&
-                      this.props.friend_request[0] &&
-                      this.props.friend_request[0].log_id
+                        this.props.friend_request[0] &&
+                        this.props.friend_request[0].log_id
                     )
                   }
                 >
@@ -1784,8 +1910,8 @@ class Challenges extends Component {
                             {item.display_name
                               ? item.display_name
                               : item.facebook
-                                ? item.facebook
-                                : `${item.first_name} ${item.last_name}`}
+                              ? item.facebook
+                              : `${item.first_name} ${item.last_name}`}
                           </div>
                           <div className="col-lg-3 col-md-3 col-6">
                             <span style={{ color: "grey" }}>
@@ -1796,9 +1922,9 @@ class Challenges extends Component {
                             <span style={{ float: "right", color: "#F45197" }}>
                               {item.end_rank
                                 ? item.end_rank.charAt(0).toUpperCase() +
-                                item.end_rank.substr(1).toLowerCase()
+                                  item.end_rank.substr(1).toLowerCase()
                                 : item.start_rank.charAt(0).toUpperCase() +
-                                item.start_rank.substr(1).toLowerCase()}{" "}
+                                  item.start_rank.substr(1).toLowerCase()}{" "}
                               <img
                                 className="ml-4"
                                 style={{ cursor: "pointer" }}
@@ -1845,40 +1971,40 @@ class Challenges extends Component {
     const { achievementLog } = this.props;
     const achievementFinisher =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Finisher").length >
+      achievementLog.filter((item) => item.achievement === "Finisher").length >
         0
         ? true
         : false;
     const achievementAce =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Ace").length > 0
+      achievementLog.filter((item) => item.achievement === "Ace").length > 0
         ? true
         : false;
     const achievement1st =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "1st").length > 0
+      achievementLog.filter((item) => item.achievement === "1st").length > 0
         ? true
         : false;
     const achievement2nd =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "2nd").length > 0
+      achievementLog.filter((item) => item.achievement === "2nd").length > 0
         ? true
         : false;
     const achievementTop10 =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Top 10").length > 0
+      achievementLog.filter((item) => item.achievement === "Top 10").length > 0
         ? true
         : false;
     const achievementSocialStar =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Social star")
-          .length > 0
+      achievementLog.filter((item) => item.achievement === "Social star")
+        .length > 0
         ? true
         : false;
     const achievementSocialStarPlus =
       achievementLog &&
-        achievementLog.filter((item) => item.achievement === "Social star+")
-          .length > 0
+      achievementLog.filter((item) => item.achievement === "Social star+")
+        .length > 0
         ? true
         : false;
 
@@ -2792,7 +2918,7 @@ class Challenges extends Component {
               <ul id="myUL" className="myUL">
                 <div class="li">
                   {allMemberStayFitFilter &&
-                    allMemberStayFitFilter.length > 0 ? (
+                  allMemberStayFitFilter.length > 0 ? (
                     allMemberStayFit &&
                     allMemberStayFit.map((item, i) => (
                       <li key={i}>
@@ -2937,7 +3063,7 @@ class Challenges extends Component {
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-12 col-md-12 col-lg-4">{ }</div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">{}</div>
       </>
     );
   }
@@ -3002,8 +3128,9 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "mission" ? "#F45197" : ""
-                        }`,
+                      color: `${
+                        selectedNavLink === "mission" ? "#F45197" : ""
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3015,8 +3142,9 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "teamList" ? "#F45197" : ""
-                        }`,
+                      color: `${
+                        selectedNavLink === "teamList" ? "#F45197" : ""
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3032,8 +3160,9 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "scoreBoard" ? "#F45197" : ""
-                        }`,
+                      color: `${
+                        selectedNavLink === "scoreBoard" ? "#F45197" : ""
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3045,8 +3174,9 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "friendList" ? "#F45197" : ""
-                        }`,
+                      color: `${
+                        selectedNavLink === "friendList" ? "#F45197" : ""
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3061,8 +3191,9 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "achievement" ? "#F45197" : ""
-                        }`,
+                      color: `${
+                        selectedNavLink === "achievement" ? "#F45197" : ""
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() =>
@@ -3077,8 +3208,9 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "searchMember" ? "#F45197" : ""
-                        }`,
+                      color: `${
+                        selectedNavLink === "searchMember" ? "#F45197" : ""
+                      }`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onSearchMember()}
@@ -4752,7 +4884,13 @@ class Challenges extends Component {
   }
 }
 
-const mapStateToProps = ({ authUser, challenges, exerciseVideos, get }) => {
+const mapStateToProps = ({
+  authUser,
+  challenges,
+  exerciseVideos,
+  get,
+  update,
+}) => {
   const { user } = authUser;
   const {
     exerciseVideo,
@@ -4763,6 +4901,7 @@ const mapStateToProps = ({ authUser, challenges, exerciseVideos, get }) => {
     scoreSnack,
   } = exerciseVideos;
   const { allMemberStayFit, membertotalscore } = get;
+  const { statusUpdateMemberEventLogScoreConvert } = update;
   const {
     friend_request_sent,
     statusGetFriendRequestSent,
@@ -4864,7 +5003,8 @@ const mapStateToProps = ({ authUser, challenges, exerciseVideos, get }) => {
     videoExerciseSnack,
     statsGetExerciseSnack,
     scoreSnack,
-    membertotalscore
+    membertotalscore,
+    statusUpdateMemberEventLogScoreConvert,
   };
 };
 
@@ -4909,7 +5049,9 @@ const mapActionsToProps = {
   getIsReducedWaist,
   getExerciseSnack,
   getScoreSnacks,
-  getMemberTotalScore
+  getMemberTotalScore,
+  updateMemberEventLogScoreConvert,
+  clearStatusUpdateMemberEventLogScoreConvert,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Challenges);

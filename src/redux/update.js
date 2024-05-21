@@ -11,6 +11,14 @@ export const types = {
   UPDATE_DISPLAY_NAME: "UPDATE_DISPLAY_NAME",
   UPDATE_DISPLAY_NAME_SUCCESS: "UPDATE_DISPLAY_NAME_SUCCESS",
   UPDATE_DISPLAY_NAME_FAIL: "UPDATE_DISPLAY_NAME_FAIL",
+  UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT:
+    "UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT",
+  UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT_SUCCESS:
+    "UPDATE_MEMBER_EVENT_LOG_SUCCESS",
+  UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT_FAIL:
+    "UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT_FAIL",
+  CLEAR_UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT:
+    "CLEAR_UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT",
   UPDATE_STATUS_LOW_IMPACT: "UPDATE_STATUS_LOW_IMPACT",
   UPDATE_STATUS_LOW_IMPACT_SUCCESS: "UPDATE_STATUS_LOW_IMPACT_SUCCESS",
   UPDATE_PROGRAM_LEVEL: "UPDATE_PROGRAM_LEVEL",
@@ -23,38 +31,49 @@ export const types = {
   INSERT_QUESTIONNAIRE_LOG_SUCCESS: "INSERT_QUESTIONNAIRE_LOG_SUCCESS",
   INSERT_NEWS_LOG: "INSERT_NEWS_LOG",
   INSERT_NEWS_LOG_SUCCESS: "INSERT_NEWS_LOG_SUCCESS",
-}
+};
 
-export const insertQuestionnaireLog = (
+export const updateMemberEventLogScoreConvert = (
   user_id,
-  log
+  exchange_credit,
+  score,
+  email
 ) => ({
+  type: types.UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT,
+  payload: {
+    user_id,
+    exchange_credit,
+    score,
+    email,
+  },
+});
+export const clearStatusUpdateMemberEventLogScoreConvert = () => ({
+  type: types.CLEAR_UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT,
+  payload: {},
+});
+
+export const insertQuestionnaireLog = (user_id, log) => ({
   type: types.INSERT_QUESTIONNAIRE_LOG,
   payload: {
     user_id,
-    log
-  }
-})
+    log,
+  },
+});
 
-export const insertNewsLog = (
-  user_id,
-  log
-) => ({
+export const insertNewsLog = (user_id, log) => ({
   type: types.INSERT_NEWS_LOG,
   payload: {
     user_id,
-    log
-  }
-})
+    log,
+  },
+});
 
-export const checkProgramLevel = (
-  user_id
-) => ({
+export const checkProgramLevel = (user_id) => ({
   type: types.CHECK_PROGRAM_LEVEL,
   payload: {
-    user_id
-  }
-})
+    user_id,
+  },
+});
 
 export const updateProgramPromptLog = (
   user_id,
@@ -65,8 +84,8 @@ export const updateProgramPromptLog = (
   payload: {
     user_id,
     log_name,
-    log_value
-  }
+    log_value,
+  },
 });
 
 export const updateStatusLowImpact = (
@@ -76,8 +95,8 @@ export const updateStatusLowImpact = (
   type: types.UPDATE_STATUS_LOW_IMPACT,
   payload: {
     user_id,
-    status_low_impact
-  }
+    status_low_impact,
+  },
 });
 
 export const updateProgramLevel = (
@@ -87,166 +106,168 @@ export const updateProgramLevel = (
   type: types.UPDATE_PROGRAM_LEVEL,
   payload: {
     user_id,
-    program_level
-  }
+    program_level,
+  },
 });
 
 export const updateDisplayName = (user_id, display_name) => ({
   type: types.UPDATE_DISPLAY_NAME,
   payload: {
     user_id,
-    display_name
-  }
-})
+    display_name,
+  },
+});
 
 export const updateFittoPlant = (user_id, data) => ({
   type: types.UPDATE_FITTO_PLANT,
   payload: {
     user_id,
-    data
-  }
-})
+    data,
+  },
+});
 export const updateAddress = (user_id, data) => ({
   type: types.UPDATE_ADDRESS,
   payload: {
     user_id,
-    data
-  }
-})
+    data,
+  },
+});
 
 /* END OF ACTION Section */
 
 /* SAGA Section */
 
-const updateFittoPlantSagaAsync = async (
+const updateMemberEventLogScoreConvertSagaAsync = async (
   user_id,
-  data
+  exchange_credit,
+  score,
+  email
 ) => {
+  try {
+    const apiResult = await API.put(
+      "bebe",
+      "/updateMemberEventLogScoreConvert",
+      {
+        body: {
+          user_id,
+          exchange_credit,
+          score,
+          email,
+        },
+      }
+    );
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+};
+
+const updateFittoPlantSagaAsync = async (user_id, data) => {
   try {
     const apiResult = await API.post("bebe", "/updateFittoPlant", {
       body: {
         user_id,
-        data
-      }
+        data,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
-const updateAddressSagaAsync = async (
-  user_id,
-  data
-) => {
+};
+const updateAddressSagaAsync = async (user_id, data) => {
   try {
     const apiResult = await API.post("bebe", "/updateAddress", {
       body: {
         user_id,
-        data
-      }
+        data,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
-const updateDisplayNameSagaAsync = async (
-  user_id,
-  display_name
-) => {
+};
+const updateDisplayNameSagaAsync = async (user_id, display_name) => {
   try {
     const apiResult = await API.post("bebe", "/updateDisplayName", {
       body: {
         user_id,
-        display_name
-      }
+        display_name,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
-const checkProgramLevelSagaAsync = async (
-  user_id
-) => {
+};
+const checkProgramLevelSagaAsync = async (user_id) => {
   try {
     const apiResult = await API.put("bebe", "/checkProgramLevel", {
       body: {
-        user_id
-      }
+        user_id,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const insertQuestionnaireLogSagaAsync = async (
-  user_id,
-  log
-) => {
+const insertQuestionnaireLogSagaAsync = async (user_id, log) => {
   try {
     const apiResult = await API.post("bebe", "/insertQuestionnaireLog", {
       body: {
         user_id,
-        log
-      }
+        log,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const insertNewsLogSagaAsync = async (
-  user_id,
-  log
-) => {
+const insertNewsLogSagaAsync = async (user_id, log) => {
   try {
     const apiResult = await API.post("bebe", "/insertNewsLog", {
       body: {
         user_id,
-        log
-      }
+        log,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
-const updateStatusLowImpactSagaAsync = async (
-  user_id,
-  status_low_impact
-) => {
+const updateStatusLowImpactSagaAsync = async (user_id, status_low_impact) => {
   try {
     const apiResult = await API.put("bebe", "/updateStatusLowImpact", {
       body: {
         user_id,
-        status_low_impact
-      }
+        status_low_impact,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
-const updateProgramLevelSagaAsync = async (
-  user_id,
-  program_level
-) => {
+};
+const updateProgramLevelSagaAsync = async (user_id, program_level) => {
   try {
     const apiResult = await API.put("bebe", "/updateProgramLevel", {
       body: {
         user_id,
-        program_level
-      }
+        program_level,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 const updateProgramPromptLogSagaAsync = async (
   user_id,
   log_name,
@@ -257,32 +278,44 @@ const updateProgramPromptLogSagaAsync = async (
       body: {
         user_id,
         log_name,
-        log_value
-      }
+        log_value,
+      },
     });
-    return apiResult
+    return apiResult;
   } catch (error) {
     return { error, messsage: error.message };
   }
-}
+};
 
 /* END OF SAGA Section */
 
-function* updateFittoPlantSaga({ payload }) {
-  const {
-    user_id,
-    data
-  } = payload
+function* updateMemberEventLogScoreConvertSaga({ payload }) {
+  const { user_id, exchange_credit, score, email } = payload;
 
   try {
     const apiResult = yield call(
-      updateFittoPlantSagaAsync,
+      updateMemberEventLogScoreConvertSagaAsync,
       user_id,
-      data
+      exchange_credit,
+      score,
+      email
     );
     yield put({
-      type: types.UPDATE_FITTO_PLANT_SUCCESS
-    })
+      type: types.UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT_SUCCESS,
+    });
+  } catch (error) {
+    console.log("error from updateMemberEventLogScoreConvertSaga :", error);
+  }
+}
+
+function* updateFittoPlantSaga({ payload }) {
+  const { user_id, data } = payload;
+
+  try {
+    const apiResult = yield call(updateFittoPlantSagaAsync, user_id, data);
+    yield put({
+      type: types.UPDATE_FITTO_PLANT_SUCCESS,
+    });
     console.log("apiResult  :", apiResult);
   } catch (error) {
     console.log("error from updateFittoPlantSaga :", error);
@@ -290,20 +323,13 @@ function* updateFittoPlantSaga({ payload }) {
 }
 
 function* updateAddressSaga({ payload }) {
-  const {
-    user_id,
-    data
-  } = payload
+  const { user_id, data } = payload;
 
   try {
-    const apiResult = yield call(
-      updateAddressSagaAsync,
-      user_id,
-      data
-    );
+    const apiResult = yield call(updateAddressSagaAsync, user_id, data);
     yield put({
-      type: types.UPDATE_ADDRESS_SUCCESS
-    })
+      type: types.UPDATE_ADDRESS_SUCCESS,
+    });
     console.log("apiResult  :", apiResult);
   } catch (error) {
     console.log("error from updateFittoPlantSaga :", error);
@@ -311,10 +337,7 @@ function* updateAddressSaga({ payload }) {
 }
 
 function* updateDisplayNameSaga({ payload }) {
-  const {
-    user_id,
-    display_name
-  } = payload
+  const { user_id, display_name } = payload;
 
   try {
     const apiResult = yield call(
@@ -323,8 +346,8 @@ function* updateDisplayNameSaga({ payload }) {
       display_name
     );
     yield put({
-      type: types.UPDATE_DISPLAY_NAME_SUCCESS
-    })
+      type: types.UPDATE_DISPLAY_NAME_SUCCESS,
+    });
     /*  if (apiResult.results.message === "new") {
        yield put({
          type: types.UPDATE_DISPLAY_NAME_SUCCESS
@@ -341,70 +364,45 @@ function* updateDisplayNameSaga({ payload }) {
 }
 
 function* checkProgramLevelSaga({ payload }) {
-  const {
-    user_id,
-  } = payload
+  const { user_id } = payload;
 
   try {
-    const apiResult = yield call(
-      checkProgramLevelSagaAsync,
-      user_id,
-    );
+    const apiResult = yield call(checkProgramLevelSagaAsync, user_id);
     yield put({
-      type: types.CHECK_PROGRAM_LEVEL_SUCCESS
-    })
-
+      type: types.CHECK_PROGRAM_LEVEL_SUCCESS,
+    });
   } catch (error) {
     console.log("error from checkProgramLevelSaga :", error);
   }
 }
 
 function* insertQuestionnaireLogSaga({ payload }) {
-  const {
-    user_id,
-    log
-  } = payload
+  const { user_id, log } = payload;
 
   try {
-    const apiResult = yield call(
-      insertQuestionnaireLogSagaAsync,
-      user_id,
-      log
-    );
+    const apiResult = yield call(insertQuestionnaireLogSagaAsync, user_id, log);
     yield put({
-      type: types.INSERT_QUESTIONNAIRE_LOG_SUCCESS
-    })
-
+      type: types.INSERT_QUESTIONNAIRE_LOG_SUCCESS,
+    });
   } catch (error) {
     console.log("error from insertQuestionnaireLogSaga :", error);
   }
 }
 function* insertNewsLogSaga({ payload }) {
-  const {
-    user_id,
-    log
-  } = payload
+  const { user_id, log } = payload;
 
   try {
-    const apiResult = yield call(
-      insertNewsLogSagaAsync,
-      user_id,
-      log
-    );
+    const apiResult = yield call(insertNewsLogSagaAsync, user_id, log);
     yield put({
-      type: types.INSERT_NEWS_LOG_SUCCESS
-    })
-
+      type: types.INSERT_NEWS_LOG_SUCCESS,
+    });
   } catch (error) {
     console.log("error from insertNewsLogSaga :", error);
   }
 }
 
 function* updateStatusLowImpactSaga({ payload }) {
-  const {
-    user_id,
-    status_low_impact
-  } = payload
+  const { user_id, status_low_impact } = payload;
 
   try {
     const apiResult = yield call(
@@ -413,18 +411,15 @@ function* updateStatusLowImpactSaga({ payload }) {
       status_low_impact
     );
     yield put({
-      type: types.UPDATE_STATUS_LOW_IMPACT_SUCCESS
-    })
+      type: types.UPDATE_STATUS_LOW_IMPACT_SUCCESS,
+    });
   } catch (error) {
     console.log("error from updateStatusLowImpactSaga :", error);
   }
 }
 
 function* updateProgramLevelSaga({ payload }) {
-  const {
-    user_id,
-    program_level
-  } = payload
+  const { user_id, program_level } = payload;
 
   try {
     const apiResult = yield call(
@@ -433,19 +428,15 @@ function* updateProgramLevelSaga({ payload }) {
       program_level
     );
     yield put({
-      type: types.UPDATE_PROGRAM_LEVEL_SUCCESS
-    })
+      type: types.UPDATE_PROGRAM_LEVEL_SUCCESS,
+    });
   } catch (error) {
     console.log("error from updateProgramLevelSaga :", error);
   }
 }
 
 function* updateProgramPromptLogSaga({ payload }) {
-  const {
-    user_id,
-    log_name,
-    log_value
-  } = payload
+  const { user_id, log_name, log_value } = payload;
 
   try {
     const apiResult = yield call(
@@ -455,44 +446,51 @@ function* updateProgramPromptLogSaga({ payload }) {
       log_value
     );
     yield put({
-      type: types.UPDATE_PROGRAM_PROMPT_LOG_SUCCESS
-    })
+      type: types.UPDATE_PROGRAM_PROMPT_LOG_SUCCESS,
+    });
   } catch (error) {
     console.log("error from updateProgramPromptLogSaga :", error);
   }
 }
 
+export function* watchUpdateMemberEventLogScoreConvert() {
+  yield takeEvery(
+    types.UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT,
+    updateMemberEventLogScoreConvertSaga
+  );
+}
+
 export function* watchupdateFittoPlant() {
-  yield takeEvery(types.UPDATE_FITTO_PLANT, updateFittoPlantSaga)
+  yield takeEvery(types.UPDATE_FITTO_PLANT, updateFittoPlantSaga);
 }
 export function* watchupdateAddress() {
-  yield takeEvery(types.UPDATE_ADDRESS, updateAddressSaga)
+  yield takeEvery(types.UPDATE_ADDRESS, updateAddressSaga);
 }
 export function* watchupdateDisplayName() {
-  yield takeEvery(types.UPDATE_DISPLAY_NAME, updateDisplayNameSaga)
+  yield takeEvery(types.UPDATE_DISPLAY_NAME, updateDisplayNameSaga);
 }
 export function* watchUpdateStatusLowImpact() {
-  yield takeEvery(types.UPDATE_STATUS_LOW_IMPACT, updateStatusLowImpactSaga)
+  yield takeEvery(types.UPDATE_STATUS_LOW_IMPACT, updateStatusLowImpactSaga);
 }
 
 export function* watchUpdateProgramLevel() {
-  yield takeEvery(types.UPDATE_PROGRAM_LEVEL, updateProgramLevelSaga)
+  yield takeEvery(types.UPDATE_PROGRAM_LEVEL, updateProgramLevelSaga);
 }
 
 export function* watchUpdateProgramPromptLog() {
-  yield takeEvery(types.UPDATE_PROGRAM_PROMPT_LOG, updateProgramPromptLogSaga)
+  yield takeEvery(types.UPDATE_PROGRAM_PROMPT_LOG, updateProgramPromptLogSaga);
 }
 
 export function* watchCheckProgramLevel() {
-  yield takeEvery(types.CHECK_PROGRAM_LEVEL, checkProgramLevelSaga)
+  yield takeEvery(types.CHECK_PROGRAM_LEVEL, checkProgramLevelSaga);
 }
 
 export function* watchInsertQuestionnaireLogSaga() {
-  yield takeEvery(types.INSERT_QUESTIONNAIRE_LOG, insertQuestionnaireLogSaga)
+  yield takeEvery(types.INSERT_QUESTIONNAIRE_LOG, insertQuestionnaireLogSaga);
 }
 
 export function* watchInsertNewsLogSaga() {
-  yield takeEvery(types.INSERT_NEWS_LOG, insertNewsLogSaga)
+  yield takeEvery(types.INSERT_NEWS_LOG, insertNewsLogSaga);
 }
 
 export function* saga() {
@@ -506,6 +504,7 @@ export function* saga() {
     fork(watchUpdateProgramLevel),
     fork(watchInsertQuestionnaireLogSaga),
     fork(watchInsertNewsLogSaga),
+    fork(watchUpdateMemberEventLogScoreConvert),
   ]);
 }
 
@@ -519,7 +518,8 @@ const INIT_STATE = {
   statusUpdateProgramLevel: "default",
   statusUpdateProgramPromptLog: "default",
   statusInsertQuestionnaireLog: "default",
-  statusInsertNewsLog: "default"
+  statusInsertNewsLog: "default",
+  statusUpdateMemberEventLogScoreConvert: "default",
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -527,86 +527,106 @@ export function reducer(state = INIT_STATE, action) {
     case types.INSERT_QUESTIONNAIRE_LOG:
       return {
         ...state,
-        statusInsertQuestionnaireLog: "loading"
-      }
+        statusInsertQuestionnaireLog: "loading",
+      };
     case types.INSERT_QUESTIONNAIRE_LOG_SUCCESS:
       return {
         ...state,
-        statusInsertQuestionnaireLog: "success"
-      }
+        statusInsertQuestionnaireLog: "success",
+      };
     case types.INSERT_NEWS_LOG:
       return {
         ...state,
-        statusInsertNewsLog: "loading"
-      }
+        statusInsertNewsLog: "loading",
+      };
     case types.INSERT_NEWS_LOG_SUCCESS:
       return {
         ...state,
-        statusInsertNewsLog: "success"
-      }
+        statusInsertNewsLog: "success",
+      };
     case types.CHECK_PROGRAM_LEVEL:
       return {
-        ...state
-      }
+        ...state,
+      };
     case types.CHECK_PROGRAM_LEVEL_SUCCESS:
       return {
-        ...state
-      }
+        ...state,
+      };
     case types.UPDATE_PROGRAM_PROMPT_LOG:
       return {
         ...state,
-        statusUpdateProgramPromptLog: "loading"
-      }
+        statusUpdateProgramPromptLog: "loading",
+      };
     case types.UPDATE_PROGRAM_PROMPT_LOG_SUCCESS:
       return {
         ...state,
-        statusUpdateProgramPromptLog: "success"
-      }
+        statusUpdateProgramPromptLog: "success",
+      };
     case types.UPDATE_PROGRAM_LEVEL:
       return {
         ...state,
-        statusUpdateProgramLevel: "loading"
-      }
+        statusUpdateProgramLevel: "loading",
+      };
     case types.UPDATE_PROGRAM_LEVEL_SUCCESS:
       return {
         ...state,
-        statusUpdateProgramLevel: "success"
-      }
+        statusUpdateProgramLevel: "success",
+      };
     case types.UPDATE_STATUS_LOW_IMPACT:
       return {
         ...state,
-        statusUpdateLowImpact: "loading"
-      }
+        statusUpdateLowImpact: "loading",
+      };
     case types.UPDATE_STATUS_LOW_IMPACT_SUCCESS:
       return {
         ...state,
-        statusUpdateLowImpact: "success"
-      }
+        statusUpdateLowImpact: "success",
+      };
     case types.UPDATE_DISPLAY_NAME:
       return {
         ...state,
-        statusUpdateDisplayName: "loading"
-      }
+        statusUpdateDisplayName: "loading",
+      };
     case types.UPDATE_DISPLAY_NAME_SUCCESS:
       return {
         ...state,
-        statusUpdateDisplayName: "success"
-      }
+        statusUpdateDisplayName: "success",
+      };
     case types.UPDATE_DISPLAY_NAME_FAIL:
       return {
         ...state,
-        statusUpdateDisplayName: "fail"
-      }
+        statusUpdateDisplayName: "fail",
+      };
+    case types.UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT:
+      return {
+        ...state,
+        statusUpdateMemberEventLogScoreConvert: "loading",
+      };
+    case types.UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT_SUCCESS:
+      return {
+        ...state,
+        statusUpdateMemberEventLogScoreConvert: "success",
+      };
+    case types.UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT_FAIL:
+      return {
+        ...state,
+        statusUpdateMemberEventLogScoreConvert: "fail",
+      };
+    case types.CLEAR_UPDATE_MEMBER_EVENT_LOG_SCORE_CONVERT:
+      return {
+        ...state,
+        statusUpdateMemberEventLogScoreConvert: "default",
+      };
     case types.UPDATE_FITTO_PLANT_SUCCESS:
       return {
         ...state,
-        fittoPlant: "success"
-      }
+        fittoPlant: "success",
+      };
     case types.UPDATE_ADDRESS_SUCCESS:
       return {
         ...state,
-        statusAddress: "success"
-      }
+        statusAddress: "success",
+      };
     default:
       return { ...state };
   }

@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
-import './modal.scss'; // นำเข้าไฟล์ CSS ของ Modal
-
-
-
-
+import React, { Component } from "react";
+import "./modal.scss"; // นำเข้าไฟล์ CSS ของ Modal
 
 class Modal extends Component {
   render() {
